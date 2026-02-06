@@ -1,0 +1,14 @@
+{
+  "name": "Deep Vortex AI Hub",
+  "short_name": "DV Hub",
+  "icons": [
+    {
+      "src": "/rings.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#D4AF37",
+  "background_color": "#0a0a0a",
+  "display": "standalone"
+}
