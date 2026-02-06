@@ -113,6 +113,7 @@ const HubPortal = () => {
 
   const handleToolCardClick = (tool: ToolCardData) => {
     if (tool.isActive && tool.targetUrl) {
+      // Navigate to external tool URL (causes full page navigation)
       window.location.href = tool.targetUrl;
     }
   };
