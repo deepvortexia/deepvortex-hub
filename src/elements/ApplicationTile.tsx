@@ -28,7 +28,10 @@ const ApplicationTile: FC<ApplicationTileProps> = ({
   const navigateToApp = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (destinationUrl && availability === 'live') {
-      window.location.href = destinationUrl;
+      const externalLink = window.open(destinationUrl, '_blank', 'noopener,noreferrer');
+      if (externalLink) {
+        externalLink.opener = null;
+      }
     }
   };
 

@@ -60,8 +60,8 @@ const ApplicationShowcase: FC = () => {
         </div>
 
         <div className="dvx-apps-matrix">
-          {registeredApps.map((appData, idx) => (
-            <ApplicationTile key={`app-${idx}`} {...appData} />
+          {registeredApps.map((appData) => (
+            <ApplicationTile key={appData.appName} {...appData} />
           ))}
         </div>
       </div>
