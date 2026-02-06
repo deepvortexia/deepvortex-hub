@@ -1,0 +1,42 @@
+.dvx-bottombar {
+  background: #1a1a1a;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.dvx-bottombar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.dvx-bottom-primary {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: rgba(232, 200, 124, 0.7);
+  margin: 0 0 0.5rem 0;
+}
+
+.dvx-bottom-credits {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(232, 200, 124, 0.5);
+  margin: 0;
+}
+
+.dvx-bottom-credits strong {
+  color: #D4AF37;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .dvx-bottombar {
+    padding: 1.5rem 0;
+  }
+  
+  .dvx-bottom-primary,
+  .dvx-bottom-credits {
+    font-size: 0.85rem;
+  }
+}

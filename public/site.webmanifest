@@ -1,0 +1,21 @@
+{
+  "short_name": "Deep Vortex AI",
+  "name": "Deep Vortex AI - AI Tools Ecosystem",
+  "description": "Professional AI creative tools for modern creators",
+  "icons": [
+    {
+      "src": "rings.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "rings.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0a0a0a",
+  "background_color": "#0a0a0a"
+}

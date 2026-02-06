@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --dvx-gold-base: #D4AF37;
+  --dvx-gold-bright: #E8C87C;
+  --dvx-gold-deep: #B8941F;
+  --dvx-dark-base: #0a0a0a;
+  --dvx-dark-elevated: #1a1a1a;
+  --dvx-overlay: rgba(26, 26, 26, 0.8);
+  --dvx-text-bright: #E8C87C;
+  --dvx-text-muted: rgba(232, 200, 124, 0.7);
+  --dvx-typeface-display: 'Orbitron', sans-serif;
+  --dvx-typeface-regular: 'Inter', sans-serif;
+  --dvx-glow-subtle: 0 4px 20px rgba(212, 175, 55, 0.15);
+  --dvx-glow-intense: 0 6px 25px rgba(212, 175, 55, 0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--dvx-typeface-regular);
+  background: var(--dvx-dark-base);
+  color: var(--dvx-text-bright);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dvx-main-portal {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dvx-dark-elevated);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dvx-gold-base);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dvx-gold-bright);
+}

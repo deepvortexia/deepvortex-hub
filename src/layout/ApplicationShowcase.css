@@ -1,0 +1,52 @@
+.dvx-showcase-area {
+  background: #0a0a0a;
+  padding: 4rem 2rem;
+  min-height: 60vh;
+}
+
+.dvx-showcase-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dvx-showcase-intro {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.dvx-showcase-heading {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #D4AF37;
+  margin: 0 0 1rem 0;
+  letter-spacing: 0.05em;
+}
+
+.dvx-showcase-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(232, 200, 124, 0.7);
+  margin: 0;
+}
+
+.dvx-apps-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .dvx-showcase-area {
+    padding: 3rem 1.5rem;
+  }
+  
+  .dvx-showcase-heading {
+    font-size: 1.8rem;
+  }
+  
+  .dvx-apps-matrix {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
