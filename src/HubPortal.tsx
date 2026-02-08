@@ -114,7 +114,7 @@ const HubPortal = () => {
   const handleToolCardClick = (tool: ToolCardData) => {
     if (tool.isActive && tool.targetUrl) {
       // Navigate to external tool URL (causes full page navigation)
-      window.location.href = tool.targetUrl;
+      window.location.assign(tool.targetUrl);
     }
   };
 
@@ -137,11 +137,17 @@ const HubPortal = () => {
         <p className="secondary-tagline">Access powerful AI creative tools in one place</p>
         
         <div className="action-buttons-row">
-          <button className="action-btn">
+          <button 
+            className="action-btn"
+            onClick={() => window.location.assign('https://emoticons.deepvortexai.art')}
+          >
             <span className="btn-icon">🔒</span>
             <span>Sign In</span>
           </button>
-          <button className="action-btn">
+          <button 
+            className="action-btn"
+            onClick={() => window.location.assign('https://emoticons.deepvortexai.art')}
+          >
             <span className="btn-icon">⭐</span>
             <span>Favorites</span>
           </button>
