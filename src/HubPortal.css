@@ -195,6 +195,14 @@
   gap: 0.5rem;
 }
 
+.section-subheading {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-dim);
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+}
+
 .heading-icon {
   font-size: 2rem;
 }
