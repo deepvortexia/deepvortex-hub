@@ -15,39 +15,6 @@ interface SuggestionChip {
 }
 
 const HubPortal = () => {
-  const mainToolsList: ToolCardData[] = [
-    {
-      iconSymbol: '😀',
-      toolName: 'Emoticon Generator',
-      toolDescription: 'Create custom emoji and emoticons with AI',
-      statusLabel: 'LIVE',
-      isActive: true,
-      targetUrl: 'https://emoticons.deepvortexai.art'
-    },
-    {
-      iconSymbol: '🖼️',
-      toolName: 'Image Generator',
-      toolDescription: 'Generate stunning AI artwork and images',
-      statusLabel: 'LIVE',
-      isActive: true,
-      targetUrl: 'https://images.deepvortexai.art'
-    },
-    {
-      iconSymbol: '💬',
-      toolName: 'AI Chat',
-      toolDescription: 'Intelligent conversation assistant',
-      statusLabel: 'COMING SOON',
-      isActive: false
-    },
-    {
-      iconSymbol: '🎵',
-      toolName: 'Music Generator',
-      toolDescription: 'Compose AI-powered music and melodies',
-      statusLabel: 'COMING SOON',
-      isActive: false
-    }
-  ];
-
   const previewToolsList: ToolCardData[] = [
     {
       iconSymbol: '😀',
@@ -236,31 +203,51 @@ const HubPortal = () => {
       </section>
 
       <section className="main-tools-section">
-        <h2 className="section-heading">
-          <span className="heading-icon">🎨</span>
-          Choose Your Tool
-        </h2>
+        <h2 className="section-heading">How It Works</h2>
+        <p className="section-subheading">Get started in three simple steps</p>
         <div className="main-tools-grid">
-          {mainToolsList.map((tool, idx) => (
-            <div
-              key={idx}
-              className={`main-tool-card ${tool.isActive ? 'tool-available' : 'tool-locked'}`}
-              onClick={() => handleToolCardClick(tool)}
-              style={{ cursor: tool.isActive ? 'pointer' : 'not-allowed' }}
-            >
-              <div className="tool-icon-large">{tool.iconSymbol}</div>
-              <h3 className="tool-name">{tool.toolName}</h3>
-              <p className="tool-description">{tool.toolDescription}</p>
-              <div className="tool-footer">
-                <span className={`tool-status-label ${tool.isActive ? 'status-live' : 'status-soon'}`}>
-                  {tool.statusLabel}
-                </span>
-                {tool.isActive && (
-                  <span className="tool-action-text">Click to launch →</span>
-                )}
-              </div>
-            </div>
-          ))}
+          <div className="main-tool-card">
+            <div className="tool-icon-large">🎯</div>
+            <h3 className="tool-name">Choose Your Tool</h3>
+            <p className="tool-description">Select from our AI-powered creative suite</p>
+          </div>
+          <div className="main-tool-card">
+            <div className="tool-icon-large">✍️</div>
+            <h3 className="tool-name">Enter Your Prompt</h3>
+            <p className="tool-description">Describe what you want to create</p>
+          </div>
+          <div className="main-tool-card">
+            <div className="tool-icon-large">⚡</div>
+            <h3 className="tool-name">Generate Instantly</h3>
+            <p className="tool-description">Get professional results in seconds</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="main-tools-section">
+        <h2 className="section-heading">Why Choose Us</h2>
+        <p className="section-subheading">The best AI creative platform</p>
+        <div className="main-tools-grid">
+          <div className="main-tool-card">
+            <div className="tool-icon-large">⚡</div>
+            <h3 className="tool-name">Lightning Fast</h3>
+            <p className="tool-description">Generate high-quality content in seconds</p>
+          </div>
+          <div className="main-tool-card">
+            <div className="tool-icon-large">🎨</div>
+            <h3 className="tool-name">Professional Quality</h3>
+            <p className="tool-description">Powered by cutting-edge AI models</p>
+          </div>
+          <div className="main-tool-card">
+            <div className="tool-icon-large">💰</div>
+            <h3 className="tool-name">Simple Pricing</h3>
+            <p className="tool-description">Pay only for what you use with credits</p>
+          </div>
+          <div className="main-tool-card">
+            <div className="tool-icon-large">🔒</div>
+            <h3 className="tool-name">Secure & Private</h3>
+            <p className="tool-description">Your data and creations stay protected</p>
+          </div>
         </div>
       </section>
 
