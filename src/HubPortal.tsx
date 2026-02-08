@@ -54,7 +54,8 @@ const HubPortal = () => {
       toolName: 'Emoticons',
       toolDescription: 'Custom emoji creation',
       statusLabel: 'Available Now',
-      isActive: true
+      isActive: true,
+      targetUrl: 'https://emoticons.deepvortexai.art'
     },
     {
       iconSymbol: '💬',
@@ -67,6 +68,27 @@ const HubPortal = () => {
       iconSymbol: '🖼️',
       toolName: 'Image Gen',
       toolDescription: 'AI artwork',
+      statusLabel: 'Coming Soon',
+      isActive: false
+    },
+    {
+      iconSymbol: '🎨',
+      toolName: 'Remove Background',
+      toolDescription: 'Remove backgrounds from images instantly with AI precision',
+      statusLabel: 'Coming Soon',
+      isActive: false
+    },
+    {
+      iconSymbol: '🔍',
+      toolName: 'Upscale Image',
+      toolDescription: 'Enhance image resolution and quality with AI upscaling',
+      statusLabel: 'Coming Soon',
+      isActive: false
+    },
+    {
+      iconSymbol: '🎬',
+      toolName: 'Generate Video',
+      toolDescription: 'Create stunning AI-generated videos from text prompts',
       statusLabel: 'Coming Soon',
       isActive: false
     },
@@ -158,7 +180,12 @@ const HubPortal = () => {
         <h2 className="section-heading">Complete AI Ecosystem</h2>
         <div className="preview-tools-grid">
           {previewToolsList.map((tool, idx) => (
-            <div key={idx} className={`preview-card ${tool.isActive ? 'card-active' : 'card-inactive'}`}>
+            <div 
+              key={idx} 
+              className={`preview-card ${tool.isActive ? 'card-active' : 'card-inactive'}`}
+              onClick={() => handleToolCardClick(tool)}
+              style={{ cursor: tool.isActive ? 'pointer' : 'default' }}
+            >
               <div className="preview-icon">{tool.iconSymbol}</div>
               <h3 className="preview-title">{tool.toolName}</h3>
               <p className="preview-desc">{tool.toolDescription}</p>
