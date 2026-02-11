@@ -136,6 +136,10 @@ const HubPortal = () => {
     setTimeout(() => setShowFavoritesMessage(false), 5000)
   }
 
+  const getUserDisplayName = () => {
+    return profile?.full_name || profile?.email || user?.email || 'User'
+  }
+
   return (
     <div className="hub-portal-container">
       <div className="floating-particles-layer">
@@ -205,7 +209,7 @@ const HubPortal = () => {
                   />
                 )}
                 <span className="user-name">
-                  {profile?.full_name || profile?.email || user.email || 'User'}
+                  {getUserDisplayName()}
                 </span>
                 <button 
                   className="action-btn signout-btn"
