@@ -35,8 +35,9 @@ const HubPortal = () => {
       iconSymbol: '🖼️',
       toolName: 'Image Gen',
       toolDescription: 'AI artwork',
-      statusLabel: 'Coming Soon',
-      isActive: false
+      statusLabel: 'Available Now',
+      isActive: true,
+      targetUrl: 'https://images.deepvortexai.art'
     },
     {
       iconSymbol: '🎨',
