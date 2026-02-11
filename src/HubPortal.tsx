@@ -1,4 +1,8 @@
 import './HubPortal.css'
+import { useState } from 'react'
+import { useAuth } from './context/AuthContext'
+import AuthModal from './components/AuthModal'
+import PricingRedirectModal from './components/PricingRedirectModal'
 
 interface ToolCardData {
   iconSymbol: string;
@@ -15,6 +19,10 @@ interface SuggestionChip {
 }
 
 const HubPortal = () => {
+  const { user, profile, loading, signOut } = useAuth()
+  const [showAuthModal, setShowAuthModal] = useState(false)
+  const [showPricingModal, setShowPricingModal] = useState(false)
+  const [showFavoritesMessage, setShowFavoritesMessage] = useState(false)
   const previewToolsList: ToolCardData[] = [
     {
       iconSymbol: '😀',
@@ -37,7 +45,7 @@ const HubPortal = () => {
       toolDescription: 'AI artwork',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://images.deepvortexai.art'
+      targetUrl: 'https://images.deepvortexai.art/'
     },
     {
       iconSymbol: '🎨',
@@ -108,6 +116,26 @@ const HubPortal = () => {
     }
   };
 
+  const handleSignOut = async () => {
+    try {
+      await signOut()
+    } catch (error) {
+      console.error('Error signing out:', error)
+    }
+  }
+
+  const handleExploreTools = () => {
+    const toolsSection = document.querySelector('.preview-tools-section')
+    if (toolsSection) {
+      toolsSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const handleFavoritesClick = () => {
+    setShowFavoritesMessage(true)
+    setTimeout(() => setShowFavoritesMessage(false), 5000)
+  }
+
   return (
     <div className="hub-portal-container">
       <div className="floating-particles-layer">
@@ -126,22 +154,75 @@ const HubPortal = () => {
         <p className="primary-tagline">Your AI Tools Ecosystem</p>
         <p className="secondary-tagline">Access powerful AI creative tools in one place</p>
         
-        <div className="action-buttons-row">
-          <button 
-            className="action-btn"
-            onClick={() => window.location.assign('https://emoticons.deepvortexai.art')}
-          >
-            <span className="btn-icon">🔒</span>
-            <span>Sign In</span>
-          </button>
-          <button 
-            className="action-btn"
-            onClick={() => window.location.assign('https://emoticons.deepvortexai.art')}
-          >
-            <span className="btn-icon">⭐</span>
-            <span>Favorites</span>
-          </button>
-        </div>
+        {loading ? (
+          <div className="action-buttons-row">
+            <div className="loading-text">Loading...</div>
+          </div>
+        ) : !user ? (
+          <div className="action-buttons-row">
+            <button 
+              className="action-btn"
+              onClick={() => setShowAuthModal(true)}
+            >
+              <span className="btn-icon">🔒</span>
+              <span>Sign In</span>
+            </button>
+            <button 
+              className="action-btn"
+              onClick={handleExploreTools}
+            >
+              <span className="btn-icon">🚀</span>
+              <span>Explore Tools</span>
+            </button>
+          </div>
+        ) : (
+          <div className="action-buttons-row">
+            <div className="user-info-section">
+              <div className="credits-display">
+                <span className="credits-icon">💰</span>
+                <span className="credits-amount">{profile?.credits ?? 0} credits</span>
+              </div>
+              <button 
+                className="action-btn buy-credits-btn"
+                onClick={() => setShowPricingModal(true)}
+              >
+                <span className="btn-icon">💳</span>
+                <span>Buy Credits</span>
+              </button>
+              <button 
+                className="action-btn favorites-btn"
+                onClick={handleFavoritesClick}
+              >
+                <span className="btn-icon">⭐</span>
+                <span>Favorites</span>
+              </button>
+              <div className="user-profile-section">
+                {profile?.avatar_url && (
+                  <img 
+                    src={profile.avatar_url} 
+                    alt="Profile" 
+                    className="user-avatar"
+                  />
+                )}
+                <span className="user-name">
+                  {profile?.full_name || profile?.email || user.email || 'User'}
+                </span>
+                <button 
+                  className="action-btn signout-btn"
+                  onClick={handleSignOut}
+                >
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showFavoritesMessage && (
+          <div className="favorites-placeholder-message">
+            Your favorites from all tools will be available here soon! For now, check your favorites in each tool.
+          </div>
+        )}
       </header>
 
       <section className="preview-tools-section">
@@ -254,8 +335,11 @@ const HubPortal = () => {
 
       <footer className="portal-footer">
         <p className="footer-main-text">Deep Vortex AI - Building the complete AI creative ecosystem</p>
-        <p className="footer-powered-text">Powered by Deep Vortex × SDXL Emoji</p>
+        <p className="footer-powered-text">Powered by Deep Vortex AI</p>
       </footer>
+
+      <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
+      <PricingRedirectModal isOpen={showPricingModal} onClose={() => setShowPricingModal(false)} />
     </div>
   );
 };
