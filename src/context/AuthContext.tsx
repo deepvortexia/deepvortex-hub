@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           // Créer le profil s'il n'existe pas
           const { data: created, error: insertError } = await supabase
             .from('profiles')
-            .insert({ id: userId, credits: 3 })
+                        .insert({ id: userId, credits: 2 })
             .select()
             .single()
           if (insertError) { console.error('createProfile error:', insertError); return null }
