@@ -37,14 +37,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       if (error) {
         if (error.code === 'PGRST116') {
-          // Créer le profil s'il n'existe pas
+          // Create profile if it doesn't exist
           const { data: created, error: insertError } = await supabase
             .from('profiles')
-                        .insert({ id: userId, credits: 2 })
+            .insert({ id: userId, credits: 2 })
             .select()
             .single()
-          if (insertError) { console.error('createProfile error:', insertError); return null }
-          return created
+          if (insertError && insertError.code !== '23505') {
+            console.error('createProfile error:', insertError)
+            return null
+          }
+          if (created) return created
+          // If insert failed due to duplicate, fetch again
+          const { data: refetched } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', userId)
+            .single()
+          return refetched
         }
         console.error('fetchProfile error:', error)
         return null
@@ -73,7 +83,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       return
     }
 
-    // ✅ INITIAL_SESSION comme source de vérité unique
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, currentSession) => {
         console.log('Hub auth event:', event)
@@ -82,7 +91,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           if (currentSession?.user) {
             setUser(currentSession.user)
             setSession(currentSession)
-            await loadProfile(currentSession.user.id)
+            // Use setTimeout to avoid blocking
+            setTimeout(() => loadProfile(currentSession.user.id), 0)
           } else {
             setUser(null)
             setSession(null)
@@ -94,8 +104,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         } else if (event === 'SIGNED_IN' && currentSession?.user) {
           setUser(currentSession.user)
           setSession(currentSession)
-          await loadProfile(currentSession.user.id)
+          setTimeout(() => loadProfile(currentSession.user.id), 0)
           setLoading(false)
+          initialLoadDone.current = true
 
         } else if (event === 'SIGNED_OUT') {
           setUser(null)
@@ -109,12 +120,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     )
 
+    // Shorter timeout - 3 seconds
     const timeout = setTimeout(() => {
       if (!initialLoadDone.current) {
-        console.warn('Hub auth timeout')
-        setLoading(false)
+        console.warn('Hub auth timeout - checking session manually')
+        supabase.auth.getSession().then(({ data }) => {
+          if (data.session?.user) {
+            setUser(data.session.user)
+            setSession(data.session)
+            loadProfile(data.session.user.id)
+          }
+          setLoading(false)
+          initialLoadDone.current = true
+        })
       }
-    }, 5000)
+    }, 3000)
 
     return () => {
       subscription.unsubscribe()
@@ -129,7 +149,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  // ✅ redirectTo = hub lui-même (le hub gère son propre callback)
   const signInWithGoogle = async () => {
     if (!supabase) throw new Error('Supabase not initialized')
     const { error } = await supabase.auth.signInWithOAuth({
