@@ -7,6 +7,8 @@ if (!supabaseUrl || !supabaseAnonKey) {
     console.warn('Supabase configuration missing. Auth features disabled.')
 }
 
+const CHUNK_SIZE = 3000 // Safe size under 4096 limit
+
 // Helper to get cookie value
 const getCookie = (name: string): string | null => {
     if (typeof document === 'undefined') return null
@@ -14,38 +16,91 @@ const getCookie = (name: string): string | null => {
     return match ? decodeURIComponent(match[2]) : null
 }
 
-// Helper to set cookie with cross-domain support
-const setCookie = (name: string, value: string, maxAge: number = 31536000) => {
+// Helper to set cookie
+const setCookieRaw = (name: string, value: string, maxAge: number = 31536000) => {
     if (typeof document === 'undefined') return
     document.cookie = `${name}=${encodeURIComponent(value)}; domain=.deepvortexai.art; path=/; max-age=${maxAge}; secure; samesite=lax`
 }
 
 // Helper to remove cookie
-const removeCookie = (name: string) => {
+const removeCookieRaw = (name: string) => {
     if (typeof document === 'undefined') return
     document.cookie = `${name}=; domain=.deepvortexai.art; path=/; max-age=0; secure; samesite=lax`
 }
 
-// FIXED: Proper storage implementation that handles PKCE code_verifier correctly
+// Chunked cookie storage to handle large JWT tokens
 const customCookieStorage = {
     getItem: (key: string): string | null => {
-        const value = getCookie(key)
-        if (key.includes('code-verifier')) {
-            console.log(`[Hub Auth] Getting ${key}:`, value ? 'found' : 'not found')
+        // First try to get it as a single cookie
+        const singleValue = getCookie(key)
+        if (singleValue) {
+            return singleValue
         }
-        return value
+
+        // Try to get chunked cookies
+        let result = ''
+        let index = 0
+        while (true) {
+            const chunk = getCookie(`${key}.${index}`)
+            if (!chunk) break
+            result += chunk
+            index++
+        }
+
+        if (result) {
+            console.log(`[Hub Auth] Retrieved ${index} chunks for ${key}`)
+            return result
+        }
+
+        if (key.includes('code-verifier')) {
+            console.log(`[Hub Auth] Getting ${key}: not found`)
+        }
+        return null
     },
+
     setItem: (key: string, value: string): void => {
         if (key.includes('code-verifier')) {
             console.log(`[Hub Auth] Setting ${key}`)
         }
-        setCookie(key, value)
+
+        // Remove any existing chunks first
+        let i = 0
+        while (getCookie(`${key}.${i}`)) {
+            removeCookieRaw(`${key}.${i}`)
+            i++
+        }
+        removeCookieRaw(key)
+
+        // If value is small enough, store as single cookie
+        if (value.length <= CHUNK_SIZE) {
+            setCookieRaw(key, value)
+            return
+        }
+
+        // Split into chunks
+        const chunks = Math.ceil(value.length / CHUNK_SIZE)
+        console.log(`[Hub Auth] Splitting ${key} into ${chunks} chunks`)
+        
+        for (let i = 0; i < chunks; i++) {
+            const chunk = value.slice(i * CHUNK_SIZE, (i + 1) * CHUNK_SIZE)
+            setCookieRaw(`${key}.${i}`, chunk)
+        }
     },
+
     removeItem: (key: string): void => {
         if (key.includes('code-verifier')) {
             console.log(`[Hub Auth] Removing ${key}`)
         }
-        removeCookie(key)
+
+        // Remove single cookie
+        removeCookieRaw(key)
+
+        // Remove any chunks
+        let i = 0
+        while (getCookie(`${key}.${i}`)) {
+            removeCookieRaw(`${key}.${i}`)
+            i++
+        }
     }
 }
 
