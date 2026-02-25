@@ -1,4 +1,3 @@
-// src/context/AuthContext.tsx  (Hub — Vite/React)
 import { createContext, useContext, useEffect, useState, useRef } from 'react'
 import type { ReactNode } from 'react'
 import type { User, Session } from '@supabase/supabase-js'
@@ -29,41 +28,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const fetchProfile = async (userId: string): Promise<Profile | null> => {
     if (!supabase) return null
     try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single()
-
+      const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single()
       if (error) {
         if (error.code === 'PGRST116') {
-          // Create profile if it doesn't exist
           const { data: created, error: insertError } = await supabase
-            .from('profiles')
-            .insert({ id: userId, credits: 2 })
-            .select()
-            .single()
-          if (insertError && insertError.code !== '23505') {
-            console.error('createProfile error:', insertError)
-            return null
-          }
+            .from('profiles').insert({ id: userId, credits: 2 }).select().single()
+          if (insertError && insertError.code !== '23505') return null
           if (created) return created
-          // If insert failed due to duplicate, fetch again
-          const { data: refetched } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', userId)
-            .single()
+          const { data: refetched } = await supabase.from('profiles').select('*').eq('id', userId).single()
           return refetched
         }
-        console.error('fetchProfile error:', error)
         return null
       }
       return data
-    } catch (err) {
-      console.error('fetchProfile exception:', err)
-      return null
-    }
+    } catch { return null }
   }
 
   const loadProfile = async (userId: string) => {
@@ -72,124 +50,82 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       const data = await fetchProfile(userId)
       if (data) setProfile(data)
-    } finally {
-      fetchingProfile.current = false
-    }
+    } finally { fetchingProfile.current = false }
   }
 
   useEffect(() => {
-    if (!supabase) {
-      setLoading(false)
-      return
-    }
+    if (!supabase) { setLoading(false); return }
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, currentSession) => {
-        console.log('Hub auth event:', event)
-
-        if (event === 'INITIAL_SESSION') {
-          if (currentSession?.user) {
-            setUser(currentSession.user)
-            setSession(currentSession)
-            // Use setTimeout to avoid blocking
-            setTimeout(() => loadProfile(currentSession.user.id), 0)
-          } else {
-            setUser(null)
-            setSession(null)
-            setProfile(null)
-          }
-          setLoading(false)
-          initialLoadDone.current = true
-
-        } else if (event === 'SIGNED_IN' && currentSession?.user) {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, currentSession) => {
+      if (event === 'INITIAL_SESSION' || event === 'SIGNED_IN') {
+        if (currentSession?.user) {
           setUser(currentSession.user)
           setSession(currentSession)
           setTimeout(() => loadProfile(currentSession.user.id), 0)
-          setLoading(false)
-          initialLoadDone.current = true
-
-        } else if (event === 'SIGNED_OUT') {
-          setUser(null)
-          setSession(null)
-          setProfile(null)
-          setLoading(false)
-
-        } else if (event === 'TOKEN_REFRESHED' && currentSession) {
-          setSession(currentSession)
+        } else {
+          setUser(null); setSession(null); setProfile(null)
         }
+        setLoading(false)
+        initialLoadDone.current = true
+      } else if (event === 'SIGNED_OUT') {
+        setUser(null); setSession(null); setProfile(null); setLoading(false)
+      } else if (event === 'TOKEN_REFRESHED' && currentSession) {
+        setSession(currentSession)
       }
-    )
+    })
 
-    // Shorter timeout - 3 seconds
     const timeout = setTimeout(() => {
-      if (!initialLoadDone.current) {
-        console.warn('Hub auth timeout - checking session manually')
+      if (!initialLoadDone.current && supabase) {
         supabase.auth.getSession().then(({ data }) => {
           if (data.session?.user) {
-            setUser(data.session.user)
-            setSession(data.session)
+            setUser(data.session.user); setSession(data.session)
             loadProfile(data.session.user.id)
           }
-          setLoading(false)
-          initialLoadDone.current = true
+          setLoading(false); initialLoadDone.current = true
         })
       }
     }, 3000)
 
-    return () => {
-      subscription.unsubscribe()
-      clearTimeout(timeout)
-    }
+    return () => { subscription.unsubscribe(); clearTimeout(timeout) }
   }, [])
 
-  const refreshProfile = async () => {
-    if (user) {
+  const refreshProfile = async () => { 
+    if (user) { 
       const data = await fetchProfile(user.id)
-      if (data) setProfile(data)
-    }
+      if (data) setProfile(data) 
+    } 
   }
 
   const signInWithGoogle = async () => {
     if (!supabase) throw new Error('Supabase not initialized')
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-        queryParams: { prompt: 'select_account' },
-      },
+      options: { redirectTo: `${window.location.origin}/auth/callback`, queryParams: { prompt: 'select_account' } },
     })
     if (error) throw error
   }
 
   const signInWithEmail = async (email: string) => {
     if (!supabase) return { error: new Error('Supabase not initialized') }
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
-    })
+    const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: `${window.location.origin}/auth/callback` } })
     return { error: error as Error | null }
   }
 
-  const signOut = async () => {
+  const signOut = async () => { 
     if (!supabase) return
     await supabase.auth.signOut()
-    setUser(null)
-    setProfile(null)
-    setSession(null)
+    setUser(null); setProfile(null); setSession(null) 
   }
 
   return (
-    <AuthContext.Provider value={{
-      user, profile, session, loading,
-      signInWithGoogle, signInWithEmail, signOut, refreshProfile,
-    }}>
+    <AuthContext.Provider value={{ user, profile, session, loading, signInWithGoogle, signInWithEmail, signOut, refreshProfile }}>
       {children}
     </AuthContext.Provider>
   )
 }
 
-export const useAuth = () => {
+export const useAuth = () => { 
   const context = useContext(AuthContext)
   if (!context) throw new Error('useAuth must be used within an AuthProvider')
-  return context
+  return context 
 }
