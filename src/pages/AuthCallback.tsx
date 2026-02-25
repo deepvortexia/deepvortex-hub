@@ -28,60 +28,65 @@ export function AuthCallback() {
             if (code) {
                 console.log('[Hub AuthCallback] Exchanging code for session...')
                 
-                const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
-                
-                if (exchangeError) {
-                    console.error('[Hub AuthCallback] Exchange error:', exchangeError)
+                try {
+                    const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
                     
-                    let userFriendlyError = exchangeError.message
-                    
-                    if (exchangeError.message.includes('code verifier')) {
-                        userFriendlyError = 'Session expired. This can happen if you took too long to sign in or used a different browser. Please try signing in again.'
-                        setDebugInfo('The PKCE code verifier was not found. This usually means the cookie was lost between starting sign-in and completing it.')
+                    if (exchangeError) {
+                        console.error('[Hub AuthCallback] Exchange error:', exchangeError)
+                        
+                        // Check if it's actually a "already used" error (user refreshed)
+                        if (exchangeError.message.includes('code verifier')) {
+                            // Check if we're already logged in
+                            const { data: sessionData } = await supabase.auth.getSession()
+                            if (sessionData?.session) {
+                                console.log('[Hub AuthCallback] Already have session, redirecting...')
+                                window.location.replace('/')
+                                return
+                            }
+                            
+                            setError('Session expired. Please try signing in again.')
+                            setDebugInfo('The PKCE code verifier was not found.')
+                            return
+                        }
+                        
+                        setError(exchangeError.message)
+                        return
                     }
                     
-                    setError(userFriendlyError)
+                    console.log('[Hub AuthCallback] Session established, redirecting NOW')
+                    // Use replace instead of href to avoid back button issues
+                    window.location.replace('/')
+                    return
+                    
+                } catch (err: any) {
+                    console.error('[Hub AuthCallback] Exception:', err)
+                    setError(err.message || 'Unknown error')
                     return
                 }
-                
-                console.log('[Hub AuthCallback] Session established:', data.session ? 'success' : 'no session')
-                window.location.href = '/'
+            }
+
+            // No code - check if we already have a session
+            const { data: sessionData } = await supabase.auth.getSession()
+            if (sessionData?.session) {
+                console.log('[Hub AuthCallback] Already have session, redirecting...')
+                window.location.replace('/')
                 return
             }
 
             // Implicit flow fallback: check hash for access_token
             const hash = window.location.hash
             if (hash && hash.includes('access_token')) {
-                console.log('[Hub AuthCallback] Found access_token in hash, getting session...')
-                const { data, error: sessionError } = await supabase.auth.getSession()
-                if (sessionError) {
-                    setError(sessionError.message)
-                    return
-                }
-                if (data?.session) {
-                    window.location.href = '/'
-                    return
-                }
+                console.log('[Hub AuthCallback] Found access_token in hash')
+                await supabase.auth.getSession()
+                window.location.replace('/')
+                return
             }
 
-            // Fallback: wait for auth state change then redirect
-            console.log('[Hub AuthCallback] No code or token found, waiting for auth state change...')
-            const { data: { subscription } } = supabase.auth.onAuthStateChange(
-                (event, session) => {
-                    console.log('[Hub AuthCallback] Auth state change:', event)
-                    if (event === 'SIGNED_IN' && session) {
-                        subscription.unsubscribe()
-                        window.location.href = '/'
-                    }
-                }
-            )
-
-            // Safety timeout
+            // Last resort: redirect home after short delay
+            console.log('[Hub AuthCallback] No auth data found, redirecting home...')
             setTimeout(() => {
-                subscription.unsubscribe()
-                console.log('[Hub AuthCallback] Timeout reached, redirecting to home')
-                window.location.href = '/'
-            }, 5000)
+                window.location.replace('/')
+            }, 1000)
         }
 
         handleCallback()
