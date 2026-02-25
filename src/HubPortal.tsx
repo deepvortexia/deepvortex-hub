@@ -1,8 +1,8 @@
 import './HubPortal.css'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useAuth } from './context/AuthContext'
 import AuthModal from './components/AuthModal'
-import PricingRedirectModal from './components/PricingRedirectModal'
+import PricingModal from './components/PricingModal'
 
 interface ToolCardData {
   iconSymbol: string;
@@ -18,11 +18,18 @@ interface SuggestionChip {
   label: string;
 }
 
+const cleanUrlParams = () => {
+  window.history.replaceState({}, '', window.location.pathname)
+}
+
 const HubPortal = () => {
-  const { user, profile, loading, signOut } = useAuth()
+  const { user, profile, loading, signOut, refreshProfile } = useAuth()
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [showPricingModal, setShowPricingModal] = useState(false)
   const [showFavoritesMessage, setShowFavoritesMessage] = useState(false)
+  const [showNotification, setShowNotification] = useState(false)
+  const processedSessionIdRef = useRef<string | null>(null)
+
   const previewToolsList: ToolCardData[] = [
     {
       iconSymbol: '😀',
@@ -99,6 +106,43 @@ const HubPortal = () => {
     { emoji: '🌙', label: 'moon' }
   ];
 
+  // Stripe return handler with retry pattern
+  useEffect(() => {
+    const handleStripeReturn = async () => {
+      const params = new URLSearchParams(window.location.search)
+      const sessionId = params.get('session_id')
+      const success = params.get('success')
+      
+      if (!sessionId || !success) return
+      if (processedSessionIdRef.current === sessionId) return
+      if (loading) return
+      
+      processedSessionIdRef.current = sessionId
+
+      if (user) {
+        // Retry pattern: webhook may not have processed yet
+        const refreshWithRetry = async () => {
+          try { await refreshProfile() } catch (e) { console.error('Refresh 1 failed:', e) }
+          setTimeout(async () => {
+            try { await refreshProfile() } catch (e) { console.error('Refresh 2 failed:', e) }
+          }, 2000)
+          setTimeout(async () => {
+            try { await refreshProfile() } catch (e) { console.error('Refresh 3 failed:', e) }
+          }, 5000)
+        }
+        
+        await refreshWithRetry()
+        setShowNotification(true)
+        setTimeout(() => setShowNotification(false), 5000)
+        cleanUrlParams()
+      } else {
+        cleanUrlParams()
+      }
+    }
+    handleStripeReturn()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, user])
+
   const renderFloatingParticles = () => {
     return Array.from({ length: 25 }).map((_, idx) => (
       <div key={idx} className="particle-dot" style={{
@@ -111,7 +155,6 @@ const HubPortal = () => {
 
   const handleToolCardClick = (tool: ToolCardData) => {
     if (tool.isActive && tool.targetUrl) {
-      // Navigate to external tool URL (causes full page navigation)
       window.location.assign(tool.targetUrl);
     }
   };
@@ -145,6 +188,18 @@ const HubPortal = () => {
       <div className="floating-particles-layer">
         {renderFloatingParticles()}
       </div>
+
+      {showNotification && (
+        <div style={{
+          position: 'fixed', top: '1rem', right: '1rem', zIndex: 9999,
+          background: 'linear-gradient(135deg, #D4AF37, #B8960C)',
+          color: '#0a0a0a', padding: '1rem 1.5rem', borderRadius: '12px',
+          fontWeight: 'bold', boxShadow: '0 4px 20px rgba(212, 175, 55, 0.4)',
+          animation: 'fadeIn 0.3s ease'
+        }}>
+          ✅ Credits purchased successfully!
+        </div>
+      )}
 
       <header className="hero-header-section">
         <div className="logo-display-zone">
@@ -343,7 +398,7 @@ const HubPortal = () => {
       </footer>
 
       <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
-      <PricingRedirectModal isOpen={showPricingModal} onClose={() => setShowPricingModal(false)} />
+      <PricingModal isOpen={showPricingModal} onClose={() => setShowPricingModal(false)} />
     </div>
   );
 };
