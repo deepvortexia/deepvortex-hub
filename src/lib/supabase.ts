@@ -28,79 +28,77 @@ const removeCookieRaw = (name: string) => {
     document.cookie = `${name}=; domain=.deepvortexai.art; path=/; max-age=0; secure; samesite=lax`
 }
 
-// Chunked cookie storage to handle large JWT tokens
+// Helper: get chunked cookie value
+const getChunkedCookie = (key: string): string | null => {
+    const singleValue = getCookie(key)
+    if (singleValue) return singleValue
+
+    let result = ''
+    let index = 0
+    while (true) {
+        const chunk = getCookie(`${key}.${index}`)
+        if (!chunk) break
+        result += chunk
+        index++
+    }
+    return result || null
+}
+
+// Helper: set chunked cookie value
+const setChunkedCookie = (key: string, value: string): void => {
+    let i = 0
+    while (getCookie(`${key}.${i}`)) { removeCookieRaw(`${key}.${i}`); i++ }
+    removeCookieRaw(key)
+
+    if (value.length <= CHUNK_SIZE) {
+        setCookieRaw(key, value)
+        return
+    }
+
+    const chunks = Math.ceil(value.length / CHUNK_SIZE)
+    for (let i = 0; i < chunks; i++) {
+        const chunk = value.slice(i * CHUNK_SIZE, (i + 1) * CHUNK_SIZE)
+        setCookieRaw(`${key}.${i}`, chunk)
+    }
+}
+
+// Helper: remove chunked cookie
+const removeChunkedCookie = (key: string): void => {
+    removeCookieRaw(key)
+    let i = 0
+    while (getCookie(`${key}.${i}`)) { removeCookieRaw(`${key}.${i}`); i++ }
+}
+
+// Chunked cookie storage with sessionStorage backup for PKCE code verifier.
+// The code verifier must survive the OAuth redirect chain (app → Google → Supabase → app).
+// Some browsers (Safari ITP, privacy extensions) can drop cross-domain cookies during
+// this redirect chain, so we also store the verifier in sessionStorage as a reliable fallback.
 const customCookieStorage = {
     getItem: (key: string): string | null => {
-        // First try to get it as a single cookie
-        const singleValue = getCookie(key)
-        if (singleValue) {
-            return singleValue
-        }
-
-        // Try to get chunked cookies
-        let result = ''
-        let index = 0
-        while (true) {
-            const chunk = getCookie(`${key}.${index}`)
-            if (!chunk) break
-            result += chunk
-            index++
-        }
-
-        if (result) {
-            console.log(`[Hub Auth] Retrieved ${index} chunks for ${key}`)
-            return result
-        }
-
         if (key.includes('code-verifier')) {
-            console.log(`[Hub Auth] Getting ${key}: not found`)
+            try {
+                const ss = sessionStorage.getItem(key)
+                if (ss) return ss
+            } catch {}
         }
-        return null
+
+        return getChunkedCookie(key)
     },
 
     setItem: (key: string, value: string): void => {
         if (key.includes('code-verifier')) {
-            console.log(`[Hub Auth] Setting ${key}`)
+            try { sessionStorage.setItem(key, value) } catch {}
         }
 
-        // Remove any existing chunks first
-        let i = 0
-        while (getCookie(`${key}.${i}`)) {
-            removeCookieRaw(`${key}.${i}`)
-            i++
-        }
-        removeCookieRaw(key)
-
-        // If value is small enough, store as single cookie
-        if (value.length <= CHUNK_SIZE) {
-            setCookieRaw(key, value)
-            return
-        }
-
-        // Split into chunks
-        const chunks = Math.ceil(value.length / CHUNK_SIZE)
-        console.log(`[Hub Auth] Splitting ${key} into ${chunks} chunks`)
-        
-        for (let i = 0; i < chunks; i++) {
-            const chunk = value.slice(i * CHUNK_SIZE, (i + 1) * CHUNK_SIZE)
-            setCookieRaw(`${key}.${i}`, chunk)
-        }
+        setChunkedCookie(key, value)
     },
 
     removeItem: (key: string): void => {
         if (key.includes('code-verifier')) {
-            console.log(`[Hub Auth] Removing ${key}`)
+            try { sessionStorage.removeItem(key) } catch {}
         }
 
-        // Remove single cookie
-        removeCookieRaw(key)
-
-        // Remove any chunks
-        let i = 0
-        while (getCookie(`${key}.${i}`)) {
-            removeCookieRaw(`${key}.${i}`)
-            i++
-        }
+        removeChunkedCookie(key)
     }
 }
 
