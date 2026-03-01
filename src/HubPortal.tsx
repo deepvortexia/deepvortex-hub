@@ -11,7 +11,6 @@ interface ToolCardData {
   statusLabel: string;
   isActive: boolean;
   targetUrl?: string;
-  embedInHub?: boolean;
 }
 
 interface SuggestionChip {
@@ -29,7 +28,6 @@ const HubPortal = () => {
   const [showPricingModal, setShowPricingModal] = useState(false)
   const [showFavoritesMessage, setShowFavoritesMessage] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
-  const [activeTool, setActiveTool] = useState<{ name: string; url: string } | null>(null)
   const [loadingTimeout, setLoadingTimeout] = useState(false)
   const [showRetry, setShowRetry] = useState(false)
   const processedSessionIdRef = useRef<string | null>(null)
@@ -41,8 +39,7 @@ const HubPortal = () => {
       toolDescription: 'Custom emoji creation',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://emoticons.deepvortexai.art',
-      embedInHub: true
+      targetUrl: 'https://emoticons.deepvortexai.art'
     },
     {
       iconSymbol: '💬',
@@ -57,8 +54,7 @@ const HubPortal = () => {
       toolDescription: 'AI artwork',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://images.deepvortexai.art/',
-      embedInHub: true
+      targetUrl: 'https://images.deepvortexai.art/'
     },
     {
       iconSymbol: '🎨',
@@ -112,40 +108,6 @@ const HubPortal = () => {
     { emoji: '🌙', label: 'moon' }
   ];
 
-  // Listen for credit updates and navigation from embedded tools
-  useEffect(() => {
-    const allowedOrigins = ['https://images.deepvortexai.art', 'https://emoticons.deepvortexai.art'];
-    const embeddableUrls: Record<string, string> = {
-      'https://images.deepvortexai.art/': 'Image Gen',
-      'https://emoticons.deepvortexai.art': 'Emoticons',
-    };
-
-    const handleMessage = (event: MessageEvent) => {
-      if (!allowedOrigins.includes(event.origin)) return;
-
-      if (event.data?.type === 'deepvortex-credits-updated') {
-        refreshProfile();
-      }
-      if (event.data?.type === 'deepvortex-navigate' && event.data?.url) {
-        const url = event.data.url as string;
-        // If navigating back to Hub, close the embedded tool
-        if (url === 'https://deepvortexai.art' || url === 'https://deepvortexai.art/') {
-          setActiveTool(null);
-          refreshProfile();
-          return;
-        }
-        // Find matching embeddable tool, or navigate externally
-        const toolName = embeddableUrls[url];
-        if (toolName) {
-          setActiveTool({ name: toolName, url });
-        } else {
-          window.location.assign(url);
-        }
-      }
-    };
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, [refreshProfile]);
 
   // Stripe return handler with retry pattern
   useEffect(() => {
@@ -196,18 +158,8 @@ const HubPortal = () => {
 
   const handleToolCardClick = (tool: ToolCardData) => {
     if (tool.isActive && tool.targetUrl) {
-      if (tool.embedInHub) {
-        setActiveTool({ name: tool.toolName, url: tool.targetUrl });
-      } else {
-        window.location.assign(tool.targetUrl);
-      }
+      window.location.href = tool.targetUrl;
     }
-  };
-
-  const handleCloseTool = async () => {
-    setActiveTool(null);
-    // Refresh credits in case they were spent in the embedded tool
-    try { await refreshProfile(); } catch (e) { console.error('Failed to refresh profile:', e); }
   };
 
   useEffect(() => {
@@ -276,29 +228,6 @@ const HubPortal = () => {
         </div>
       )}
 
-      {activeTool && (
-        <div className="embedded-tool-overlay">
-          <div className="embedded-tool-header">
-            <button className="back-to-hub-btn" onClick={handleCloseTool}>
-              <span>←</span>
-              <span>Back to Hub</span>
-            </button>
-            <span className="embedded-tool-name">{activeTool.name}</span>
-            {user && (
-              <span className="embedded-credits-display">
-                <span className="credits-icon">💰</span>
-                <span className="credits-amount">{profile?.credits ?? 0} credits</span>
-              </span>
-            )}
-          </div>
-          <iframe
-            src={activeTool.url}
-            className="embedded-tool-iframe"
-            title={activeTool.name}
-            allow="clipboard-write"
-          />
-        </div>
-      )}
 
       <header className="hero-header-section">
         <div className="logo-display-zone">
