@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useAuth } from './context/AuthContext'
 import AuthModal from './components/AuthModal'
 import PricingModal from './components/PricingModal'
+import FavoritesModal from './components/FavoritesModal'
 
 interface ToolCardData {
   iconSymbol: string;
@@ -26,7 +27,7 @@ const HubPortal = () => {
   const { user, profile, loading, signOut, refreshProfile } = useAuth()
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [showPricingModal, setShowPricingModal] = useState(false)
-  const [showFavoritesMessage, setShowFavoritesMessage] = useState(false)
+  const [showFavoritesModal, setShowFavoritesModal] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [loadingTimeout, setLoadingTimeout] = useState(false)
   const [showRetry, setShowRetry] = useState(false)
@@ -202,8 +203,8 @@ const HubPortal = () => {
   }
 
   const handleFavoritesClick = () => {
-    setShowFavoritesMessage(true)
-    setTimeout(() => setShowFavoritesMessage(false), 5000)
+    if (!user) { setShowAuthModal(true); return }
+    setShowFavoritesModal(true)
   }
 
   const getUserDisplayName = () => {
@@ -305,11 +306,6 @@ const HubPortal = () => {
           )}
         </div>
 
-        {showFavoritesMessage && (
-          <div className="favorites-placeholder-message">
-            Your favorites from all tools will be available here soon! For now, check your favorites in each tool.
-          </div>
-        )}
       </header>
 
       <section className="preview-tools-section">
@@ -427,6 +423,7 @@ const HubPortal = () => {
 
       <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
       <PricingModal isOpen={showPricingModal} onClose={() => setShowPricingModal(false)} />
+      <FavoritesModal isOpen={showFavoritesModal} onClose={() => setShowFavoritesModal(false)} />
     </div>
   );
 };
