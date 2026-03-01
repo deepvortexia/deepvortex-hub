@@ -15,11 +15,11 @@ interface PricingPack {
 }
 
 const pricingPacks: PricingPack[] = [
-  { name: 'Starter', credits: 10, price: 3.49 },
-  { name: 'Basic', credits: 30, price: 7.99 },
-  { name: 'Popular', credits: 75, price: 16.99, popular: true },
-  { name: 'Pro', credits: 200, price: 39.99 },
-  { name: 'Ultimate', credits: 500, price: 84.99 },
+  { name: 'Starter', credits: 10, price: 4.99 },
+  { name: 'Basic', credits: 30, price: 9.99 },
+  { name: 'Popular', credits: 75, price: 19.99, popular: true },
+  { name: 'Pro', credits: 200, price: 49.99 },
+  { name: 'Ultimate', credits: 500, price: 99.99 },
 ]
 
 const PricingModal = ({ isOpen, onClose }: PricingModalProps) => {
@@ -57,11 +57,7 @@ const PricingModal = ({ isOpen, onClose }: PricingModalProps) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${session.access_token}`,
         },
-        body: JSON.stringify({
-          packName: pack.name,
-          credits: pack.credits,
-          amountCents: Math.round(pack.price * 100),
-        }),
+        body: JSON.stringify({ packName: pack.name }),
       })
 
       const data = await response.json()
