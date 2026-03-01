@@ -1,5 +1,5 @@
 import './HubPortal.css'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useAuth } from './context/AuthContext'
 import AuthModal from './components/AuthModal'
 import PricingModal from './components/PricingModal'
@@ -11,6 +11,7 @@ interface ToolCardData {
   statusLabel: string;
   isActive: boolean;
   targetUrl?: string;
+  embedInHub?: boolean;
 }
 
 interface SuggestionChip {
@@ -28,6 +29,9 @@ const HubPortal = () => {
   const [showPricingModal, setShowPricingModal] = useState(false)
   const [showFavoritesMessage, setShowFavoritesMessage] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
+  const [activeTool, setActiveTool] = useState<{ name: string; url: string } | null>(null)
+  const [loadingTimeout, setLoadingTimeout] = useState(false)
+  const [showRetry, setShowRetry] = useState(false)
   const processedSessionIdRef = useRef<string | null>(null)
 
   const previewToolsList: ToolCardData[] = [
@@ -37,7 +41,8 @@ const HubPortal = () => {
       toolDescription: 'Custom emoji creation',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://emoticons.deepvortexai.art'
+      targetUrl: 'https://emoticons.deepvortexai.art',
+      embedInHub: true
     },
     {
       iconSymbol: '💬',
@@ -52,7 +57,8 @@ const HubPortal = () => {
       toolDescription: 'AI artwork',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://images.deepvortexai.art/'
+      targetUrl: 'https://images.deepvortexai.art/',
+      embedInHub: true
     },
     {
       iconSymbol: '🎨',
@@ -106,6 +112,41 @@ const HubPortal = () => {
     { emoji: '🌙', label: 'moon' }
   ];
 
+  // Listen for credit updates and navigation from embedded tools
+  useEffect(() => {
+    const allowedOrigins = ['https://images.deepvortexai.art', 'https://emoticons.deepvortexai.art'];
+    const embeddableUrls: Record<string, string> = {
+      'https://images.deepvortexai.art/': 'Image Gen',
+      'https://emoticons.deepvortexai.art': 'Emoticons',
+    };
+
+    const handleMessage = (event: MessageEvent) => {
+      if (!allowedOrigins.includes(event.origin)) return;
+
+      if (event.data?.type === 'deepvortex-credits-updated') {
+        refreshProfile();
+      }
+      if (event.data?.type === 'deepvortex-navigate' && event.data?.url) {
+        const url = event.data.url as string;
+        // If navigating back to Hub, close the embedded tool
+        if (url === 'https://deepvortexai.art' || url === 'https://deepvortexai.art/') {
+          setActiveTool(null);
+          refreshProfile();
+          return;
+        }
+        // Find matching embeddable tool, or navigate externally
+        const toolName = embeddableUrls[url];
+        if (toolName) {
+          setActiveTool({ name: toolName, url });
+        } else {
+          window.location.assign(url);
+        }
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [refreshProfile]);
+
   // Stripe return handler with retry pattern
   useEffect(() => {
     const handleStripeReturn = async () => {
@@ -155,9 +196,50 @@ const HubPortal = () => {
 
   const handleToolCardClick = (tool: ToolCardData) => {
     if (tool.isActive && tool.targetUrl) {
-      window.location.assign(tool.targetUrl);
+      if (tool.embedInHub) {
+        setActiveTool({ name: tool.toolName, url: tool.targetUrl });
+      } else {
+        window.location.assign(tool.targetUrl);
+      }
     }
   };
+
+  const handleCloseTool = async () => {
+    setActiveTool(null);
+    // Refresh credits in case they were spent in the embedded tool
+    try { await refreshProfile(); } catch (e) { console.error('Failed to refresh profile:', e); }
+  };
+
+  useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => {
+        setLoadingTimeout(true)
+        setShowRetry(true)
+      }, 5000)
+      return () => clearTimeout(timer)
+    } else {
+      setLoadingTimeout(false)
+      setShowRetry(false)
+    }
+  }, [loading])
+
+  const handleRetry = useCallback(() => {
+    setShowRetry(false)
+    setLoadingTimeout(false)
+    if (user) refreshProfile()
+  }, [user, refreshProfile])
+
+  const handleBuyCreditsClick = () => {
+    if (!user) setShowAuthModal(true)
+    else setShowPricingModal(true)
+  }
+
+  const getAvatarUrl = () => profile?.avatar_url || null
+
+  const getUserInitials = () => {
+    const name = getUserDisplayName()
+    return name.length >= 2 ? name.substring(0, 2).toUpperCase() : name.toUpperCase() || 'U'
+  }
 
   const handleSignOut = async () => {
     try {
@@ -201,6 +283,30 @@ const HubPortal = () => {
         </div>
       )}
 
+      {activeTool && (
+        <div className="embedded-tool-overlay">
+          <div className="embedded-tool-header">
+            <button className="back-to-hub-btn" onClick={handleCloseTool}>
+              <span>←</span>
+              <span>Back to Hub</span>
+            </button>
+            <span className="embedded-tool-name">{activeTool.name}</span>
+            {user && (
+              <span className="embedded-credits-display">
+                <span className="credits-icon">💰</span>
+                <span className="credits-amount">{profile?.credits ?? 0} credits</span>
+              </span>
+            )}
+          </div>
+          <iframe
+            src={activeTool.url}
+            className="embedded-tool-iframe"
+            title={activeTool.name}
+            allow="clipboard-write"
+          />
+        </div>
+      )}
+
       <header className="hero-header-section">
         <div className="logo-display-zone">
           <div className="orbit-ring-one" />
@@ -213,69 +319,69 @@ const HubPortal = () => {
         <p className="primary-tagline">Your AI Tools Ecosystem</p>
         <p className="secondary-tagline">Access powerful AI creative tools in one place</p>
         
-        {loading ? (
-          <div className="action-buttons-row">
-            <div className="loading-text">Loading...</div>
+        <div className="hub-pills-container">
+          <div className="hub-pill credits-pill">
+            <span className="pill-icon">🏆</span>
+            <span className="pill-text">
+              {user ? `${profile?.credits ?? 0} credits` : 'Sign in for credits'}
+            </span>
           </div>
-        ) : !user ? (
-          <div className="action-buttons-row">
-            <button 
-              className="action-btn"
-              onClick={() => setShowAuthModal(true)}
-            >
-              <span className="btn-icon">🔒</span>
-              <span>Sign In</span>
-            </button>
-            <button 
-              className="action-btn"
-              onClick={handleExploreTools}
-            >
-              <span className="btn-icon">🚀</span>
-              <span>Explore Tools</span>
-            </button>
-          </div>
-        ) : (
-          <div className="action-buttons-row">
-            <div className="user-info-section">
-              <div className="credits-display">
-                <span className="credits-icon">💰</span>
-                <span className="credits-amount">{profile?.credits ?? 0} credits</span>
-              </div>
-              <button 
-                className="action-btn buy-credits-btn"
-                onClick={() => setShowPricingModal(true)}
-              >
-                <span className="btn-icon">💳</span>
-                <span>Buy Credits</span>
+
+          <button
+            className="hub-pill buy-credits-pill"
+            onClick={handleBuyCreditsClick}
+            title="Purchase more credits"
+          >
+            <span className="pill-icon">💳</span>
+            <span className="pill-text">Buy Credits</span>
+          </button>
+
+          <button
+            className="hub-pill favorites-pill"
+            onClick={handleFavoritesClick}
+            title="View your favorites"
+          >
+            <span className="pill-icon">⭐</span>
+            <span className="pill-text">Favorites</span>
+          </button>
+
+          {user ? (
+            <div className="hub-pill profile-pill">
+              {getAvatarUrl() ? (
+                <div className="profile-avatar">
+                  <img src={getAvatarUrl()!} alt={`${getUserDisplayName()}'s avatar`} />
+                </div>
+              ) : (
+                <div className="profile-avatar-fallback">
+                  {getUserInitials()}
+                </div>
+              )}
+              <span className="profile-name">{getUserDisplayName()}</span>
+              <button className="signout-pill-btn" onClick={handleSignOut} title="Sign out">
+                Sign Out
               </button>
-              <button 
-                className="action-btn favorites-btn"
-                onClick={handleFavoritesClick}
-              >
-                <span className="btn-icon">⭐</span>
-                <span>Favorites</span>
-              </button>
-              <div className="user-profile-section">
-                {profile?.avatar_url && (
-                  <img 
-                    src={profile.avatar_url} 
-                    alt="Profile" 
-                    className="user-avatar"
-                  />
-                )}
-                <span className="user-name">
-                  {getUserDisplayName()}
-                </span>
-                <button 
-                  className="action-btn signout-btn"
-                  onClick={handleSignOut}
-                >
-                  <span>Sign Out</span>
-                </button>
-              </div>
             </div>
-          </div>
-        )}
+          ) : (
+            <button
+              className="hub-pill signin-pill"
+              onClick={() => setShowAuthModal(true)}
+              disabled={loading && !loadingTimeout}
+              title="Sign in to get credits"
+            >
+              <span className="pill-icon">🔐</span>
+              <span className="pill-text">
+                {(loading && !loadingTimeout) ? 'Loading...' : 'Sign In'}
+              </span>
+            </button>
+          )}
+
+          {showRetry && (
+            <button className="hub-pill retry-pill" onClick={handleRetry} title="Retry loading">
+              <span className="pill-icon">🔄</span>
+              <span className="pill-text">Retry</span>
+            </button>
+          )}
+        </div>
 
         {showFavoritesMessage && (
           <div className="favorites-placeholder-message">
