@@ -249,13 +249,6 @@ const HubPortal = () => {
     }
   }
 
-  const handleExploreTools = () => {
-    const toolsSection = document.querySelector('.preview-tools-section')
-    if (toolsSection) {
-      toolsSection.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   const handleFavoritesClick = () => {
     setShowFavoritesMessage(true)
     setTimeout(() => setShowFavoritesMessage(false), 5000)
