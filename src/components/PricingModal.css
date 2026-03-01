@@ -140,6 +140,12 @@
   margin-bottom: 1.25rem;
 }
 
+.pack-perunit {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+
 .pack-purchase-btn {
   width: 100%;
   background: linear-gradient(135deg, var(--dark-gold), var(--primary-gold));
@@ -158,9 +164,28 @@
   box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
 }
 
+.pack-purchase-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .pack-popular .pack-purchase-btn {
   background: linear-gradient(135deg, var(--primary-gold), var(--light-gold));
   box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.pricing-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid rgba(255, 68, 68, 0.3);
+  border-radius: 8px;
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: 1rem;
 }
 
 .pricing-modal-footer {

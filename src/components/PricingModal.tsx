@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './PricingRedirectModal.css'
+import './PricingModal.css'
 import { supabase } from '../lib/supabase'
 
 interface PricingModalProps {

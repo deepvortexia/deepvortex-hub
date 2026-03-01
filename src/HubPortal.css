@@ -322,6 +322,11 @@
   }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 
 .action-btn {
   background: rgba(26, 26, 26, 0.8);
