@@ -34,18 +34,28 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
       return
     }
 
+    setLoading(true)
+    setMessage('')
+
+    const timeout = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error('timeout')), 10000)
+    )
+
     try {
-      setLoading(true)
-      const { error } = await signInWithEmail(email)
+      const { error } = await Promise.race([signInWithEmail(email), timeout])
       if (error) {
         setMessage('Failed to send magic link. Please try again.')
       } else {
         setEmailSent(true)
         setMessage('Check your email for the magic link!')
       }
-    } catch (error) {
-      console.error('Error signing in:', error)
-      setMessage('Failed to send magic link. Please try again.')
+    } catch (err: any) {
+      console.error('Error signing in:', err)
+      if (err?.message === 'timeout') {
+        setMessage('Request timed out. Please check your connection and try again.')
+      } else {
+        setMessage('Failed to send magic link. Please try again.')
+      }
     } finally {
       setLoading(false)
     }
