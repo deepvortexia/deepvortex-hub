@@ -5,6 +5,8 @@
   padding: 3rem 1.5rem;
   max-width: 1400px;
   margin: 0 auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .floating-particles-layer {
@@ -270,6 +272,7 @@
   gap: 0.5rem;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  min-height: 44px;
 }
 
 .action-btn:hover {
@@ -365,10 +368,16 @@
   letter-spacing: 0.5px;
 }
 
+@keyframes badgeGoldPulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(212, 175, 55, 0.4); }
+  50% { box-shadow: 0 0 14px rgba(212, 175, 55, 0.9), 0 0 28px rgba(212, 175, 55, 0.4); }
+}
+
 .badge-active {
   background: rgba(46, 204, 113, 0.2);
   color: #2ecc71;
   border: 1px solid #2ecc71;
+  animation: badgeGoldPulse 2s ease-in-out infinite;
 }
 
 .badge-upcoming {
@@ -635,13 +644,21 @@
   }
 
   .preview-tools-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
 
+  .preview-card {
+    padding: 1.25rem;
+  }
+
   .main-tools-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .main-tool-card {
+    padding: 1.5rem;
   }
 
   .desktop-popular-row,
@@ -712,6 +729,24 @@
     font-size: 0.85rem;
     padding: 0.5rem 1rem;
   }
+
+  .preview-tools-grid,
+  .main-tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-card,
+  .main-tool-card {
+    padding: 1rem;
+  }
+
+  .section-heading {
+    font-size: 1.2rem;
+  }
+
+  .section-subheading {
+    font-size: 0.9rem;
+  }
 }
 
 /* ── Pill Header ── */
@@ -739,6 +774,7 @@
   transition: all 0.3s ease;
   white-space: nowrap;
   cursor: default;
+  min-height: 44px;
 }
 
 .pill-icon { font-size: 1.1rem; line-height: 1; }
@@ -837,4 +873,37 @@
   .buy-credits-pill:hover,
   .favorites-pill:hover,
   .signin-pill:hover { transform: none; }
+  .badge-active { animation: none; }
+}
+
+/* ── Global mobile safety ── */
+@media (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px; /* Prevent iOS auto-zoom on focus */
+  }
+
+  .portal-footer {
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+  }
+
+  .footer-main-link {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-info-section {
+    align-items: center;
+  }
+
+  .credits-display {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+
+  .portal-footer {
+    padding: 1.5rem 1rem;
+  }
 }
