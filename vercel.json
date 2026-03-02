@@ -7,11 +7,19 @@
     {
       "source": "/robots.txt",
       "headers": [{ "key": "Content-Type", "value": "text/plain" }]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [{ "key": "Content-Type", "value": "text/plain" }]
+    },
+    {
+      "source": "/ai-plugin.json",
+      "headers": [{ "key": "Content-Type", "value": "application/json" }]
     }
   ],
   "rewrites": [
     {
-      "source": "/((?!api/|sitemap\\.xml|robots\\.txt).*)",
+      "source": "/((?!api/|sitemap\\.xml|robots\\.txt|llms\\.txt|ai-plugin\\.json).*)",
       "destination": "/index.html"
     }
   ]

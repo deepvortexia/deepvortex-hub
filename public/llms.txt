@@ -1,0 +1,61 @@
+# Deep Vortex AI
+
+> Deep Vortex AI is a complete AI creative tools ecosystem. One hub, one account, one credit system — access all AI-powered creative tools from a single place.
+
+## About
+
+Deep Vortex AI Hub (https://deepvortexai.art) is the central gateway for all Deep Vortex AI tools. Users sign in once and access every AI creative tool using a shared credit system. New users receive 2 free credits on signup.
+
+## Available AI Tools
+
+### AI Emoticon Generator
+- URL: https://emoticons.deepvortexai.art/
+- Description: Create custom AI-powered emoticons and emoji from text descriptions instantly
+- Use cases: Custom stickers, Discord emoji, Telegram stickers, social media reactions, messaging apps, gaming communities
+- Input: Text description (e.g. "wizard cat casting spell", "robot crying rainbow tears")
+- Output: High-quality PNG emoticon
+
+### AI Image Generator
+- URL: https://images.deepvortexai.art/
+- Description: Generate stunning AI images from text prompts with multiple aspect ratios
+- Use cases: Digital art, social media content, concept art, illustrations, backgrounds, marketing visuals
+- Input: Text description + aspect ratio selection (1:1, 16:9, 9:16, 4:3, 3:4)
+- Output: High-resolution AI-generated image
+
+## Credit System
+
+- 2 free credits on account creation
+- 1 credit per generation (any tool)
+- Credit packs: Starter, Basic, Popular, Pro, Ultimate
+- Payments via Stripe (secure)
+- Credits shared across all tools
+
+## Technology Stack
+
+- Frontend: React (Hub), Next.js (Image Gen), Vite (Emoticons)
+- Backend: Supabase (auth, database, storage)
+- AI: Replicate API (image/emoticon generation)
+- Payments: Stripe
+- Hosting: Vercel
+
+## Social & Contact
+
+- Website: https://deepvortexai.art
+- Email: admin@deepvortexai.xyz
+- TikTok: https://www.tiktok.com/@deepvortexai
+- X (Twitter): https://x.com/deepvortexart
+- Quora: https://deepvortexai.quora.com/
+
+## Frequently Asked Questions
+
+Q: What is Deep Vortex AI?
+A: Deep Vortex AI is an AI creative tools platform offering AI image generation, AI emoticon creation, and more tools coming soon.
+
+Q: How do I get started?
+A: Visit https://deepvortexai.art, sign in or create an account, and receive 2 free credits to try any tool immediately.
+
+Q: How much does it cost?
+A: New users get 2 free credits. Additional credits are purchased in packs starting from a small amount. 1 credit = 1 generation.
+
+Q: What AI models power the tools?
+A: Deep Vortex AI uses state-of-the-art AI models via Replicate for image and emoticon generation.
