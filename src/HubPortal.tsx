@@ -58,11 +58,12 @@ const HubPortal = () => {
       targetUrl: 'https://images.deepvortexai.art/'
     },
     {
-      iconSymbol: '🎨',
+      iconSymbol: '✂️',
       toolName: 'Remove Background',
       toolDescription: 'Remove backgrounds from images instantly with AI precision',
-      statusLabel: 'Coming Soon',
-      isActive: false
+      statusLabel: 'Available Now',
+      isActive: true,
+      targetUrl: 'https://bgremover.deepvortexai.art'
     },
     {
       iconSymbol: '🔍',
