@@ -69,8 +69,9 @@ const HubPortal = () => {
       iconSymbol: '🔍',
       toolName: 'Upscale Image',
       toolDescription: 'Enhance image resolution and quality with AI upscaling',
-      statusLabel: 'Coming Soon',
-      isActive: false
+      statusLabel: 'Available Now',
+      isActive: true,
+      targetUrl: 'https://upscaler.deepvortexai.art'
     },
     {
       iconSymbol: '🎬',
