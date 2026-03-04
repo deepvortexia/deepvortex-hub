@@ -43,13 +43,6 @@ const HubPortal = () => {
       targetUrl: 'https://emoticons.deepvortexai.art'
     },
     {
-      iconSymbol: '💬',
-      toolName: 'AI Chat',
-      toolDescription: 'Smart conversations',
-      statusLabel: 'Coming Soon',
-      isActive: false
-    },
-    {
       iconSymbol: '🖼️',
       toolName: 'Image Gen',
       toolDescription: 'AI artwork',
