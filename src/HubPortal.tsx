@@ -67,6 +67,14 @@ const HubPortal = () => {
       targetUrl: 'https://upscaler.deepvortexai.art'
     },
     {
+      iconSymbol: '🧊',
+      toolName: '3D Generator',
+      toolDescription: 'Transform images into stunning 3D models instantly',
+      statusLabel: 'Available Now',
+      isActive: true,
+      targetUrl: 'https://3d.deepvortexai.art'
+    },
+    {
       iconSymbol: '🎬',
       toolName: 'Generate Video',
       toolDescription: 'Create stunning AI-generated videos from text prompts',
