@@ -82,11 +82,12 @@ const HubPortal = () => {
       isActive: false
     },
     {
-      iconSymbol: '✨',
-      toolName: 'More Tools',
-      toolDescription: 'Expanding soon',
-      statusLabel: 'In Development',
-      isActive: false
+      iconSymbol: '🎙️',
+      toolName: 'Voice Generator',
+      toolDescription: 'AI text to speech generation',
+      statusLabel: 'Available Now',
+      isActive: true,
+      targetUrl: 'https://voice.deepvortexai.art'
     }
   ];
 
