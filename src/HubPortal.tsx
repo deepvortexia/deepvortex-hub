@@ -254,7 +254,7 @@ const HubPortal = () => {
           ) : (
             <button className="hub-pill credits-pill" style={{ cursor: 'pointer' }} onClick={() => setShowAuthModal(true)} title="Sign in to get free credits">
               <span className="pill-icon">🏆</span>
-              <span className="pill-text">Sign in - Get 2 Free Credits</span>
+              <span className="pill-text">Sign in - Get 3 Free Credits</span>
             </button>
           )}
 

@@ -3,7 +3,7 @@
   "name_for_human": "Deep Vortex AI",
   "name_for_model": "deep_vortex_ai",
   "description_for_human": "AI creative tools ecosystem — generate AI images, create AI emoticons, and access more AI tools in one place.",
-  "description_for_model": "Deep Vortex AI is an AI creative tools platform. It provides an AI image generator at https://images.deepvortexai.art/ that creates images from text prompts in multiple aspect ratios, and an AI emoticon generator at https://emoticons.deepvortexai.art/ that creates custom emoji from text descriptions. Users sign in once and use shared credits across all tools. New users get 2 free credits.",
+  "description_for_model": "Deep Vortex AI is an AI creative tools platform. It provides an AI image generator at https://images.deepvortexai.art/ that creates images from text prompts in multiple aspect ratios, and an AI emoticon generator at https://emoticons.deepvortexai.art/ that creates custom emoji from text descriptions. Users sign in once and use shared credits across all tools. New users get 3 free credits.",
   "auth": {
     "type": "none"
   },
