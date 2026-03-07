@@ -239,7 +239,7 @@ const HubPortal = () => {
           <div className="orbit-ring-one" />
           <div className="orbit-ring-two" />
           <div className="orbit-ring-three" />
-          <img src="/logo.png" alt="Deep Vortex" className="brand-logo-image" width="512" height="512" fetchpriority="high" />
+          <img src="/logo.png" alt="Deep Vortex" className="brand-logo-image" width="512" height="512" fetchPriority="high" />
         </div>
         
         <h1 className="brand-title-text">DΞΞP VORTΞX AI</h1>
