@@ -295,11 +295,19 @@
   }
 
   .fav-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 0.9rem;
   }
 
   .fav-prompt {
     font-size: 0.78rem;
+  }
+
+  .fav-group-heading {
+    font-size: 0.9rem;
+  }
+
+  .fav-audio-wrap {
+    padding: 0.5rem;
   }
 }
