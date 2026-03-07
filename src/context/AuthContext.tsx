@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (error) {
         if (error.code === 'PGRST116') {
           const { data: created, error: insertError } = await supabase
-            .from('profiles').insert({ id: userId, credits: 0 }).select().single()
+            .from('profiles').insert({ id: userId, credits: 2 }).select().single()
           if (insertError && insertError.code !== '23505') return null
           if (created) return created
           const { data: refetched } = await supabase.from('profiles').select('*').eq('id', userId).single()
