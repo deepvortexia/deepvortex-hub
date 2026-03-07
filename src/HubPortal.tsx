@@ -238,7 +238,7 @@ const HubPortal = () => {
           <div className="orbit-ring-one" />
           <div className="orbit-ring-two" />
           <div className="orbit-ring-three" />
-          <img src="/logo.png" alt="Deep Vortex" className="brand-logo-image" />
+          <img src="/logo.png" alt="Deep Vortex" className="brand-logo-image" width="512" height="512" fetchpriority="high" />
         </div>
         
         <h1 className="brand-title-text">DΞΞP VORTΞX AI</h1>
@@ -280,7 +280,7 @@ const HubPortal = () => {
             <div className="hub-pill profile-pill">
               {getAvatarUrl() ? (
                 <div className="profile-avatar">
-                  <img src={getAvatarUrl()!} alt={`${getUserDisplayName()}'s avatar`} />
+                  <img src={getAvatarUrl()!} alt={`${getUserDisplayName()}'s avatar`} width="40" height="40" loading="lazy" />
                 </div>
               ) : (
                 <div className="profile-avatar-fallback">
