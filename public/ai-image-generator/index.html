@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Image Generator - Text to Image in Seconds | Deep Vortex AI</title>
+  <meta name="description" content="Generate stunning AI images from text prompts instantly. Multiple aspect ratios, photorealistic quality, and unlimited creativity. Try Deep Vortex AI Image Generator free." />
+  <meta name="keywords" content="AI image generator, text to image AI, AI art generator, generate images from text, deep vortex AI image" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://deepvortexai.art/ai-image-generator/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://deepvortexai.art/ai-image-generator/" />
+  <meta property="og:title" content="AI Image Generator - Text to Image in Seconds" />
+  <meta property="og:description" content="Generate stunning AI images from text prompts instantly. Photorealistic quality, multiple aspect ratios, free to try." />
+  <meta property="og:image" content="https://deepvortexai.art/logo.png" />
+  <meta property="og:site_name" content="Deep Vortex AI" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@deepvortexart" />
+  <meta name="twitter:title" content="AI Image Generator - Deep Vortex AI" />
+  <meta name="twitter:description" content="Generate stunning AI images from text prompts instantly." />
+  <meta name="twitter:image" content="https://deepvortexai.art/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Deep Vortex AI Image Generator",
+    "url": "https://images.deepvortexai.art/",
+    "description": "Generate stunning AI images from text prompts instantly with multiple aspect ratios and photorealistic quality.",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "creator": { "@type": "Organization", "name": "Deep Vortex AI", "url": "https://deepvortexai.art" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Generate AI Images with Deep Vortex",
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Write Your Prompt", "text": "Describe the image you want in plain English — subject, style, mood, colors." },
+      { "@type": "HowToStep", "position": 2, "name": "Choose Aspect Ratio", "text": "Select from square, landscape, portrait, or cinematic ratios to match your use case." },
+      { "@type": "HowToStep", "position": 3, "name": "Generate & Download", "text": "Hit Generate and your AI image is ready in seconds. Download or save to favorites." }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the AI image generator free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Sign up and get free credits to start generating immediately. Additional credit packs are available for high-volume use." }
+      },
+      {
+        "@type": "Question",
+        "name": "What image styles can I generate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Photorealistic, digital art, oil painting, anime, cinematic, abstract, and more — just describe the style in your prompt." }
+      },
+      {
+        "@type": "Question",
+        "name": "What aspect ratios are supported?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Square (1:1), landscape (16:9), portrait (9:16), and cinematic (21:9) are all supported." }
+      },
+      {
+        "@type": "Question",
+        "name": "Who owns the images I generate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You do. Images you generate are yours to use for personal or commercial projects." }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does generation take?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Most images are ready in under 30 seconds depending on complexity and current server load." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #E8C87C;
+      --bg: #0a0a0a;
+      --bg-card: #141414;
+      --border: rgba(212,175,55,0.2);
+      --text: #ffffff;
+      --text-dim: #aaaaaa;
+    }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { opacity: 0.8; }
+
+    /* NAV */
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(8px); z-index: 100; }
+    .nav-brand { font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--gold); font-size: 1.1rem; }
+    .nav-links { display: flex; gap: 1.5rem; font-size: 0.9rem; }
+    .nav-cta { background: var(--gold); color: #0a0a0a; padding: 0.5rem 1.25rem; border-radius: 6px; font-weight: 700; font-size: 0.9rem; }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* HERO */
+    .hero { text-align: center; padding: 5rem 1.5rem 4rem; max-width: 860px; margin: 0 auto; }
+    .hero-badge { display: inline-block; border: 1px solid var(--border); color: var(--gold); font-size: 0.8rem; padding: 0.3rem 0.9rem; border-radius: 20px; margin-bottom: 1.5rem; letter-spacing: 0.08em; }
+    .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.15; margin-bottom: 1.25rem; }
+    .hero h1 span { color: var(--gold); }
+    .hero p { font-size: 1.15rem; color: var(--text-dim); max-width: 600px; margin: 0 auto 2.5rem; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: #0a0a0a; padding: 0.85rem 2rem; border-radius: 8px; font-weight: 700; font-size: 1rem; display: inline-block; }
+    .btn-secondary { border: 1px solid var(--border); color: var(--text); padding: 0.85rem 2rem; border-radius: 8px; font-size: 1rem; display: inline-block; }
+    .btn-primary:hover, .btn-secondary:hover { opacity: 0.85; }
+
+    /* FEATURES */
+    section { padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+    .section-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .section-title { font-family: 'Orbitron', sans-serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; margin-bottom: 1rem; }
+    .section-sub { color: var(--text-dim); font-size: 1.05rem; max-width: 560px; margin-bottom: 3rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.75rem; transition: border-color 0.2s, transform 0.2s; }
+    .card:hover { border-color: rgba(212,175,55,0.5); transform: translateY(-3px); }
+    .card-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .card h3 { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--gold); margin-bottom: 0.5rem; }
+    .card p { color: var(--text-dim); font-size: 0.92rem; line-height: 1.55; }
+
+    /* STEPS */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; counter-reset: steps; }
+    .step { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.75rem; position: relative; }
+    .step-num { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 900; color: rgba(212,175,55,0.15); line-height: 1; margin-bottom: 0.75rem; }
+    .step h3 { font-family: 'Orbitron', sans-serif; font-size: 0.95rem; color: var(--gold); margin-bottom: 0.5rem; }
+    .step p { color: var(--text-dim); font-size: 0.92rem; }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 1rem; }
+    details { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1.5rem; }
+    details[open] { border-color: rgba(212,175,55,0.4); }
+    summary { font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    summary::after { content: '+'; color: var(--gold); font-size: 1.25rem; }
+    details[open] summary::after { content: '−'; }
+    details p { margin-top: 0.75rem; color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
+
+    /* CTA BANNER */
+    .cta-banner { text-align: center; padding: 4rem 1.5rem; background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(212,175,55,0.03)); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .cta-banner h2 { font-family: 'Orbitron', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 1rem; }
+    .cta-banner p { color: var(--text-dim); margin-bottom: 2rem; }
+
+    /* FOOTER */
+    footer { text-align: center; padding: 2.5rem 1.5rem; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.875rem; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem; }
+
+    @media (max-width: 640px) {
+      nav { padding: 0.85rem 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 3rem 1rem 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://deepvortexai.art" class="nav-brand">DEEP VORTEX AI</a>
+  <div class="nav-links">
+    <a href="https://deepvortexai.art">Hub</a>
+    <a href="https://emoticons.deepvortexai.art">Emoticons</a>
+    <a href="https://voice.deepvortexai.art">Voice</a>
+    <a href="https://bg.deepvortexai.art">BG Remover</a>
+  </div>
+  <a href="https://images.deepvortexai.art" class="nav-cta">Try Free →</a>
+</nav>
+
+<section class="hero" style="max-width:860px;padding:5rem 1.5rem 4rem;">
+  <div class="hero-badge">AI Image Generation</div>
+  <h1>Turn Words Into <span>Stunning Images</span> with AI</h1>
+  <p>Type any description and watch Deep Vortex AI generate photorealistic images, digital art, and illustrations in seconds — no design skills needed.</p>
+  <div class="hero-btns">
+    <a href="https://images.deepvortexai.art" class="btn-primary">Generate an Image Free</a>
+    <a href="https://deepvortexai.art" class="btn-secondary">Explore All Tools</a>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Features</div>
+  <h2 class="section-title">Everything You Need to Create</h2>
+  <p class="section-sub">Powerful AI generation with the flexibility to match any creative vision.</p>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Instant Generation</h3>
+      <p>Most images are ready in under 30 seconds. No waiting, no queue — just describe and generate.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📐</div>
+      <h3>Multiple Aspect Ratios</h3>
+      <p>Square, landscape, portrait, and cinematic — choose the ratio that fits your project.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎨</div>
+      <h3>Any Style</h3>
+      <p>Photorealistic, anime, oil painting, digital art, watercolor — describe the style you want.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">☁️</div>
+      <h3>Cloud Storage</h3>
+      <p>All your generations are saved securely. Access and download them anytime from your account.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⭐</div>
+      <h3>Favorites</h3>
+      <p>Star your best creations and find them instantly in your hub favorites panel.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔒</div>
+      <h3>You Own Your Images</h3>
+      <p>Every image you generate is yours — use them for personal or commercial projects freely.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">Three Steps to Your Image</h2>
+  <p class="section-sub">No technical knowledge required.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">01</div><h3>Write Your Prompt</h3><p>Describe the image in plain English. Include subject, style, mood, lighting, and any specific details.</p></div>
+    <div class="step"><div class="step-num">02</div><h3>Choose Aspect Ratio</h3><p>Pick square for social media, landscape for banners, portrait for mobile, or cinematic for film-style shots.</p></div>
+    <div class="step"><div class="step-num">03</div><h3>Generate & Download</h3><p>Click Generate. Your image is created in seconds. Download in full quality or save it to favorites.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <p class="section-sub">Everything you need to know about our AI image generator.</p>
+  <div class="faq-list">
+    <details><summary>Is the AI image generator free?</summary><p>Yes. Sign up and get free credits to start generating immediately. Additional credit packs are available for high-volume use.</p></details>
+    <details><summary>What image styles can I generate?</summary><p>Photorealistic, digital art, oil painting, anime, cinematic, abstract, and more — just describe the style in your prompt.</p></details>
+    <details><summary>What aspect ratios are supported?</summary><p>Square (1:1), landscape (16:9), portrait (9:16), and cinematic (21:9) are all supported.</p></details>
+    <details><summary>Who owns the images I generate?</summary><p>You do. Images you generate are yours to use for personal or commercial projects without restriction.</p></details>
+    <details><summary>How long does generation take?</summary><p>Most images are ready in under 30 seconds depending on complexity and current server load.</p></details>
+  </div>
+</section>
+
+<div class="cta-banner">
+  <h2>Ready to Create Your First Image?</h2>
+  <p>Sign up free and get credits instantly — no credit card required.</p>
+  <a href="https://images.deepvortexai.art" class="btn-primary">Start Generating Free →</a>
+</div>
+
+<footer>
+  <p>© 2026 Deep Vortex AI. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="https://deepvortexai.art">Hub</a>
+    <a href="https://images.deepvortexai.art">Image Generator</a>
+    <a href="https://emoticons.deepvortexai.art">Emoticon Generator</a>
+    <a href="https://voice.deepvortexai.art">Voice Generator</a>
+    <a href="https://bg.deepvortexai.art">Background Remover</a>
+    <a href="https://3d.deepvortexai.art">3D Generator</a>
+  </div>
+</footer>
+
+</body>
+</html>

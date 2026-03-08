@@ -18,6 +18,16 @@
     }
   ],
   "rewrites": [
+    { "source": "/ai-image-generator",    "destination": "/ai-image-generator/index.html" },
+    { "source": "/ai-image-generator/",   "destination": "/ai-image-generator/index.html" },
+    { "source": "/ai-voice-generator",    "destination": "/ai-voice-generator/index.html" },
+    { "source": "/ai-voice-generator/",   "destination": "/ai-voice-generator/index.html" },
+    { "source": "/ai-emoticon-generator", "destination": "/ai-emoticon-generator/index.html" },
+    { "source": "/ai-emoticon-generator/","destination": "/ai-emoticon-generator/index.html" },
+    { "source": "/ai-background-remover", "destination": "/ai-background-remover/index.html" },
+    { "source": "/ai-background-remover/","destination": "/ai-background-remover/index.html" },
+    { "source": "/ai-3d-model-generator",  "destination": "/ai-3d-model-generator/index.html" },
+    { "source": "/ai-3d-model-generator/", "destination": "/ai-3d-model-generator/index.html" },
     {
       "source": "/((?!api/|sitemap\\.xml|robots\\.txt|llms\\.txt|ai-plugin\\.json).*)",
       "destination": "/index.html"
