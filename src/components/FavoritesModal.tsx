@@ -19,15 +19,17 @@ type GroupedFavorites = {
   upscaler: FavoriteItem[]
   voice: FavoriteItem[]
   '3d': FavoriteItem[]
+  'image-to-video': FavoriteItem[]
 }
 
 const GROUP_META: { key: keyof GroupedFavorites; label: string }[] = [
-  { key: 'image',      label: '🎨 Images' },
-  { key: 'emoticon',   label: '🎭 Emoticons' },
-  { key: 'bg-remover', label: '✂️ Background Removed' },
-  { key: 'upscaler',   label: '⬆️ Upscaled' },
-  { key: 'voice',      label: '🎙️ Voice' },
-  { key: '3d',         label: '🧊 3D Models' },
+  { key: 'image',          label: '🎨 Images' },
+  { key: 'emoticon',       label: '🎭 Emoticons' },
+  { key: 'bg-remover',     label: '✂️ Background Removed' },
+  { key: 'upscaler',       label: '⬆️ Upscaled' },
+  { key: 'image-to-video', label: '🎬 Videos' },
+  { key: 'voice',          label: '🎙️ Voice' },
+  { key: '3d',             label: '🧊 3D Models' },
 ]
 
 interface FavoritesModalProps {
@@ -37,7 +39,7 @@ interface FavoritesModalProps {
 
 export default function FavoritesModal({ isOpen, onClose }: FavoritesModalProps) {
   const [grouped, setGrouped] = useState<GroupedFavorites>({
-    emoticon: [], image: [], 'bg-remover': [], upscaler: [], voice: [], '3d': [],
+    emoticon: [], image: [], 'bg-remover': [], upscaler: [], voice: [], '3d': [], 'image-to-video': [],
   })
   const [totalCount, setTotalCount] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -66,7 +68,7 @@ export default function FavoritesModal({ isOpen, onClose }: FavoritesModalProps)
 
         const items = (data || []) as FavoriteItem[]
         const g: GroupedFavorites = {
-          emoticon: [], image: [], 'bg-remover': [], upscaler: [], voice: [], '3d': [],
+          emoticon: [], image: [], 'bg-remover': [], upscaler: [], voice: [], '3d': [], 'image-to-video': [],
         }
         for (const item of items) {
           if (item.tool_type in g) {
@@ -161,6 +163,16 @@ export default function FavoritesModal({ isOpen, onClose }: FavoritesModalProps)
                                 <span className="fav-glb-badge">GLB</span>
                               )}
                             </>
+                          ) : key === 'image-to-video' ? (
+                            <video
+                              src={item.result_url}
+                              className="fav-img"
+                              muted
+                              loop
+                              playsInline
+                              onMouseEnter={(e) => (e.currentTarget as HTMLVideoElement).play()}
+                              onMouseLeave={(e) => (e.currentTarget as HTMLVideoElement).pause()}
+                            />
                           ) : (
                             <img
                               src={item.result_url}
