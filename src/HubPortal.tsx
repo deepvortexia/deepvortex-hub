@@ -76,10 +76,11 @@ const HubPortal = () => {
     },
     {
       iconSymbol: '🎬',
-      toolName: 'Generate Video',
-      toolDescription: 'Create stunning AI-generated videos from text prompts',
-      statusLabel: 'Coming Soon',
-      isActive: false
+      toolName: 'Image to Video',
+      toolDescription: 'Animate any image into a stunning AI video',
+      statusLabel: 'Available Now',
+      isActive: true,
+      targetUrl: 'https://video.deepvortexai.art'
     },
     {
       iconSymbol: '🎙️',
