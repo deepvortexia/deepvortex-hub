@@ -318,8 +318,8 @@
 
 .preview-tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -328,7 +328,7 @@
   background: rgba(26, 26, 26, 0.6);
   border: 1px solid rgba(212, 175, 55, 0.2);
   border-radius: 16px;
-  padding: 2rem;
+  padding: 1.5rem 1rem;
   text-align: center;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
@@ -341,19 +341,19 @@
 }
 
 .preview-icon {
-  font-size: 3rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
 .preview-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.3rem;
+  font-size: 0.9rem;
   color: var(--text-bright);
   margin-bottom: 0.5rem;
 }
 
 .preview-desc {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: var(--text-dim);
   margin-bottom: 1rem;
 }
@@ -745,7 +745,10 @@
     padding: 0.5rem 1rem;
   }
 
-  .preview-tools-grid,
+  .preview-tools-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
   .main-tools-grid {
     grid-template-columns: 1fr;
   }
