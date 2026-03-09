@@ -248,6 +248,11 @@ const HubPortal = () => {
         <p className="secondary-tagline">Access powerful AI creative tools in one place</p>
         
         <div className="hub-pills-container">
+          <a href="/blog" className="hub-pill blog-pill">
+            <span className="pill-icon">📝</span>
+            <span className="pill-text">Blog</span>
+          </a>
+
           {user ? (
             <div className="hub-pill credits-pill">
               <span className="pill-icon">🏆</span>
