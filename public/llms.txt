@@ -1,61 +1,100 @@
-# Deep Vortex AI
+# Deep Vortex AI Hub
 
-> Deep Vortex AI is a complete AI creative tools ecosystem. One hub, one account, one credit system — access all AI-powered creative tools from a single place.
+> Your central command center for all Deep Vortex AI creative tools — one account, one credit wallet, access to 7 AI creative tools.
+
+## URL
+
+https://deepvortexai.art
 
 ## About
 
-Deep Vortex AI Hub (https://deepvortexai.art) is the central gateway for all Deep Vortex AI tools. Users sign in once and access every AI creative tool using a shared credit system. New users receive 2 free credits on signup.
+Deep Vortex AI Hub is the unified platform that connects all Deep Vortex AI tools under a single account and credit system. Instead of managing separate accounts across multiple AI tools, creators can sign in once and instantly access seven powerful AI creative tools — from image generation and background removal to 3D model creation and voice synthesis. The Hub provides a clean dashboard for tool discovery, a shared credit wallet for seamless purchasing, and a favorites system that works across every tool in the ecosystem.
 
-## Available AI Tools
+Whether you are a solo content creator, a small business owner, a digital artist, or a developer building creative pipelines, the Deep Vortex AI Hub gives you everything you need in one place. New accounts receive 2 free credits to try any tool immediately — no credit card required to get started.
 
-### AI Emoticon Generator
-- URL: https://emoticons.deepvortexai.art/
-- Description: Create custom AI-powered emoticons and emoji from text descriptions instantly
-- Use cases: Custom stickers, Discord emoji, Telegram stickers, social media reactions, messaging apps, gaming communities
-- Input: Text description (e.g. "wizard cat casting spell", "robot crying rainbow tears")
-- Output: High-quality PNG emoticon
+## Features
 
-### AI Image Generator
-- URL: https://images.deepvortexai.art/
-- Description: Generate stunning AI images from text prompts with multiple aspect ratios
-- Use cases: Digital art, social media content, concept art, illustrations, backgrounds, marketing visuals
-- Input: Text description + aspect ratio selection (1:1, 16:9, 9:16, 4:3, 3:4)
-- Output: High-resolution AI-generated image
+- Unified dashboard with access to all 7 Deep Vortex AI creative tools
+- Shared credit wallet — credits purchased once, usable across all tools
+- Single sign-on — one account for the entire Deep Vortex AI ecosystem
+- Intuitive tool navigation and discovery interface
+- Favorites system that persists across tools and sessions
+- Credit purchase interface with multiple plan options
+- Tool usage history and activity tracking
+- Mobile-friendly responsive design
+- Fast, modern interface built for creative professionals
+- Instant access to new tools as they are added to the ecosystem
 
-## Credit System
+## Use Cases
 
-- 2 free credits on account creation
-- 1 credit per generation (any tool)
-- Credit packs: Starter, Basic, Popular, Pro, Ultimate
-- Payments via Stripe (secure)
-- Credits shared across all tools
+- Discovering and comparing all available Deep Vortex AI tools in one place
+- Managing your AI creative workflow from a single dashboard
+- Purchasing credits once and deploying them across multiple tools in a single project
+- Keeping track of your favorite generated assets across image, video, voice, and 3D tools
+- Onboarding a team or community to the Deep Vortex AI ecosystem
+- Monitoring credit usage and planning purchases across ongoing creative projects
+- Quickly switching between AI tools during a multi-format content production session
 
-## Technology Stack
+## Target Audience
 
-- Frontend: React (Hub), Next.js (Image Gen), Vite (Emoticons)
-- Backend: Supabase (auth, database, storage)
-- AI: Replicate API (image/emoticon generation)
-- Payments: Stripe
-- Hosting: Vercel
+- Independent creators managing content across multiple formats and platforms
+- Digital artists who work across 2D, 3D, and multimedia disciplines
+- Social media managers running campaigns that require images, video, and voice assets
+- Marketers who need fast AI-generated visuals, audio, and animations
+- Developers building creative tools or pipelines that leverage multiple AI capabilities
+- Small business owners who produce their own marketing content
+- Educators and e-learning developers producing multi-format course materials
+- Twitch streamers and YouTube creators building branded content ecosystems
 
-## Social & Contact
+## Pricing
 
-- Website: https://deepvortexai.art
+All credits are shared across every Deep Vortex AI tool. New accounts receive 2 free credits on sign-up — no payment required.
+
+- Starter: 10 credits — $4.99
+- Basic: 30 credits — $9.99
+- Popular: 75 credits — $19.99
+- Pro: 200 credits — $49.99
+- Ultimate: 500 credits — $99.99
+
+Credits do not expire. Use them on any tool, at any time.
+
+## FAQ
+
+Q: What is the Deep Vortex AI Hub?
+A: The Deep Vortex AI Hub is the central platform for the entire Deep Vortex AI ecosystem. It provides a single account, a unified credit wallet, and a dashboard that gives you instant access to all seven AI creative tools — image generation, emoticon creation, background removal, image upscaling, 3D model generation, voice generation, and image-to-video animation.
+
+Q: Do I need a separate account for each tool?
+A: No. One Deep Vortex AI account gives you access to all tools. Sign in once at deepvortexai.art and you are authenticated across the entire ecosystem. Your credits and favorites are shared everywhere.
+
+Q: How do credits work?
+A: Credits are a universal currency across all Deep Vortex AI tools. You purchase a credit plan once through the Hub, and those credits can be spent on any tool — generate an image, remove a background, create a 3D model, or synthesize a voice, all from the same wallet.
+
+Q: Can I try the tools before buying credits?
+A: Yes. Every new account receives 2 free credits upon sign-up. No credit card is required to create an account or claim your free credits. You can use them on any tool to evaluate quality before purchasing a plan.
+
+Q: Do credits expire?
+A: No. Credits purchased on any plan never expire. Use them at your own pace across any tool in the Deep Vortex AI ecosystem.
+
+Q: What tools are available through the Hub?
+A: The Hub currently provides access to seven tools: AI Image Generator, AI Emoticon Generator, AI Background Remover, AI Image Upscaler, AI 3D Model Generator, AI Voice Generator, and AI Image to Video. New tools will be added to the ecosystem over time.
+
+Q: Is the Hub mobile-friendly?
+A: Yes. The Deep Vortex AI Hub and all connected tools are built with responsive design and work on desktop, tablet, and mobile browsers without requiring any app installation.
+
+## All Deep Vortex AI Tools
+
+- Deep Vortex AI Hub: https://deepvortexai.art
+- AI Image Generator: https://images.deepvortexai.art
+- AI Emoticon Generator: https://emoticons.deepvortexai.art
+- AI Background Remover: https://bgremover.deepvortexai.art
+- AI Image Upscaler: https://upscaler.deepvortexai.art
+- AI 3D Model Generator: https://3d.deepvortexai.art
+- AI Voice Generator: https://voice.deepvortexai.art
+- AI Image to Video: https://video.deepvortexai.art
+
+## Contact
+
 - Email: admin@deepvortexai.xyz
 - TikTok: https://www.tiktok.com/@deepvortexai
 - X (Twitter): https://x.com/deepvortexart
 - Quora: https://deepvortexai.quora.com/
-
-## Frequently Asked Questions
-
-Q: What is Deep Vortex AI?
-A: Deep Vortex AI is an AI creative tools platform offering AI image generation, AI emoticon creation, and more tools coming soon.
-
-Q: How do I get started?
-A: Visit https://deepvortexai.art, sign in or create an account, and receive 2 free credits to try any tool immediately.
-
-Q: How much does it cost?
-A: New users get 2 free credits. Additional credits are purchased in packs starting from a small amount. 1 credit = 1 generation.
-
-Q: What AI models power the tools?
-A: Deep Vortex AI uses state-of-the-art AI models via Replicate for image and emoticon generation.
