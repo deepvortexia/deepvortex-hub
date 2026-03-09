@@ -5,12 +5,14 @@ import './index.css'
 import HubPortal from './HubPortal'
 import { AuthCallback } from './pages/AuthCallback'
 import { AuthProvider } from './context/AuthContext'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 
 function App() {
   const path = window.location.pathname
   return (
     <AuthProvider>
       {path === '/auth/callback' ? <AuthCallback /> : <HubPortal />}
+      <SpeedInsights />
     </AuthProvider>
   )
 }
