@@ -323,6 +323,36 @@ const HubPortal = () => {
 
       </header>
 
+      {/* ── Featured Chat Card ──────────────────────────────────────── */}
+      <section className="chat-feature-section">
+        <a href="https://chat.deepvortexai.art" className="chat-feature-card">
+          <div className="chat-feature-glow" />
+          <div className="chat-feature-new">✦ NEW</div>
+          <div className="chat-feature-left">
+            <div className="chat-feature-icon">💬</div>
+            <h3 className="chat-feature-title">AI Chat Suite</h3>
+            <p className="chat-feature-desc">
+              Chat with 4 frontier models in one sleek interface. Switch instantly between models — no switching tabs, no extra accounts.
+            </p>
+            <div className="chat-feature-models">
+              <span style={{ color: '#f97316' }}>◆ GPT-5</span>
+              <span style={{ color: '#a855f7' }}>✦ Claude 4.5</span>
+              <span style={{ color: '#06b6d4' }}>⚡ Gemini 2.5</span>
+              <span style={{ color: '#10b981' }}>🧠 DeepSeek v3.1</span>
+            </div>
+            <span className="chat-feature-cta">Start chatting →</span>
+          </div>
+          <div className="chat-feature-right">
+            <div className="chat-feature-preview">
+              <div className="cfp-msg cfp-msg-user">What's the fastest sorting algorithm?</div>
+              <div className="cfp-msg cfp-msg-ai"><span className="cfp-ai-dot" style={{ background: '#10b981' }} />DeepSeek v3.1 is typing…</div>
+              <div className="cfp-msg cfp-msg-user">Write me a poem about the cosmos</div>
+              <div className="cfp-msg cfp-msg-ai"><span className="cfp-ai-dot" style={{ background: '#a855f7' }} />Claude 4.5 is typing…</div>
+            </div>
+          </div>
+        </a>
+      </section>
+
       <section className="preview-tools-section">
         <h2 className="section-heading">Complete AI Ecosystem</h2>
         <div className="preview-tools-grid">
@@ -430,6 +460,18 @@ const HubPortal = () => {
           </div>
         </div>
       </section>
+
+      {/* Industry Solutions — discreet SEO nav, styled like Stripe/Apple footer links */}
+      <nav className="solutions-nav" aria-label="Industry Solutions">
+        <span className="solutions-nav-label">Industry Solutions</span>
+        <ul className="solutions-nav-list">
+          <li><a href="/solutions/digital-artists.html" className="solutions-nav-link">Digital Artists</a></li>
+          <li><a href="/solutions/gamers.html"          className="solutions-nav-link">Gamers</a></li>
+          <li><a href="/solutions/real-estate.html"     className="solutions-nav-link">Real Estate</a></li>
+          <li><a href="/solutions/e-commerce.html"      className="solutions-nav-link">E-commerce</a></li>
+          <li><a href="/solutions/youtubers.html"        className="solutions-nav-link">YouTubers</a></li>
+        </ul>
+      </nav>
 
       <footer className="portal-footer">
         <a href="https://deepvortexai.art" className="footer-main-link">Deep Vortex AI - Building the complete AI creative ecosystem</a>
