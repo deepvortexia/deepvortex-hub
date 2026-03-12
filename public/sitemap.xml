@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://deepvortexai.art/</loc>
-    <lastmod>2026-03-08</lastmod>
+    <loc>https://www.deepvortexai.art/</loc>
+    <lastmod>2026-03-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -49,57 +49,87 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deepvortexai.art/blog/</loc>
+    <loc>https://www.deepvortexai.art/blog/</loc>
     <lastmod>2026-03-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://deepvortexai.art/blog/how-to-remove-image-background-with-ai/</loc>
+    <loc>https://www.deepvortexai.art/blog/how-to-remove-image-background-with-ai/</loc>
     <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deepvortexai.art/blog/best-ai-image-upscaler-2026/</loc>
+    <loc>https://www.deepvortexai.art/blog/best-ai-image-upscaler-2026/</loc>
     <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deepvortexai.art/blog/turn-photo-into-3d-model-online/</loc>
+    <loc>https://www.deepvortexai.art/blog/turn-photo-into-3d-model-online/</loc>
     <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deepvortexai.art/blog/ai-image-to-video-generator-guide/</loc>
+    <loc>https://www.deepvortexai.art/blog/ai-image-to-video-generator-guide/</loc>
     <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deepvortexai.art/blog/ai-voice-generator-text-to-speech/</loc>
+    <loc>https://www.deepvortexai.art/blog/ai-voice-generator-text-to-speech/</loc>
     <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deepvortexai.art/blog/best-ai-image-generator-2026/</loc>
+    <loc>https://www.deepvortexai.art/blog/best-ai-image-generator-2026/</loc>
     <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deepvortexai.art/blog/custom-ai-emoticon-generator/</loc>
+    <loc>https://www.deepvortexai.art/blog/custom-ai-emoticon-generator/</loc>
     <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://deepvortexai.art/blog/deep-vortex-ai-all-tools-guide/</loc>
+    <loc>https://www.deepvortexai.art/blog/deep-vortex-ai-all-tools-guide/</loc>
     <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.deepvortexai.art/solutions/digital-artists.html</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.deepvortexai.art/solutions/e-commerce.html</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.deepvortexai.art/solutions/gamers.html</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.deepvortexai.art/solutions/real-estate.html</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.deepvortexai.art/solutions/youtubers.html</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

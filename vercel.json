@@ -33,7 +33,7 @@
     { "source": "/blog/:slug",             "destination": "/blog/:slug/index.html" },
     { "source": "/blog/:slug/",            "destination": "/blog/:slug/index.html" },
     {
-      "source": "/((?!api/|sitemap\\.xml|robots\\.txt|llms\\.txt|ai-plugin\\.json).*)",
+      "source": "/((?!api/|sitemap\\.xml|robots\\.txt|llms\\.txt|ai-plugin\\.json|solutions/).*)",
       "destination": "/index.html"
     }
   ]
