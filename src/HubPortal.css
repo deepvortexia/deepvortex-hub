@@ -18,7 +18,7 @@
 }
 
 .logo-display-zone {
-  height: 120px;
+  height: 120px !important;
   width: auto;
   margin: 0 auto 2rem;
   display: flex;
@@ -27,7 +27,7 @@
 }
 
 .brand-logo-image {
-  height: 120px;
+  height: 120px !important;
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 6px rgba(0,0,0,0.7)) drop-shadow(0 0 2px rgba(0,0,0,1));
