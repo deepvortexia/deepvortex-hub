@@ -152,16 +152,6 @@ const HubPortal = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, user])
 
-  const renderFloatingParticles = () => {
-    return Array.from({ length: 25 }).map((_, idx) => (
-      <div key={idx} className="particle-dot" style={{
-        left: `${Math.random() * 100}%`,
-        animationDelay: `${Math.random() * 8}s`,
-        animationDuration: `${6 + Math.random() * 6}s`
-      }} />
-    ));
-  };
-
   const handleToolCardClick = (tool: ToolCardData) => {
     if (tool.isActive && tool.targetUrl) {
       window.location.href = tool.targetUrl;
@@ -218,10 +208,6 @@ const HubPortal = () => {
 
   return (
     <div className="hub-portal-container">
-      <div className="floating-particles-layer">
-        {renderFloatingParticles()}
-      </div>
-
       {showNotification && (
         <div style={{
           position: 'fixed', top: '1rem', right: '1rem', zIndex: 9999,
@@ -237,7 +223,7 @@ const HubPortal = () => {
 
       <header className="hero-header-section">
         <div className="logo-display-zone">
-          <img src="/real.png" alt="Deep Vortex" className="brand-logo-image" loading="eager" fetchPriority="high" style={{ width: '140px', height: '140px', filter: 'drop-shadow(0 0 18px rgba(255,215,100,0.45)) drop-shadow(0 0 36px rgba(255,215,100,0.2))' }} />
+          <img src="/reallitylogoreal.webp" alt="Deep Vortex" className="brand-logo-image" loading="eager" fetchPriority="high" />
         </div>
         
         <h1 className="brand-title-text">DΞΞP VORTΞX AI</h1>
