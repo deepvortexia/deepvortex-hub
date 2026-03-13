@@ -1,9 +1,9 @@
 {
   "schema_version": "v1",
-  "name_for_human": "Deep Vortex AI",
+  "name_for_human": "Deep Vortex AI Hub",
   "name_for_model": "deep_vortex_ai",
-  "description_for_human": "AI creative tools ecosystem — generate AI images, create AI emoticons, and access more AI tools in one place.",
-  "description_for_model": "Deep Vortex AI is an AI creative tools platform. It provides an AI image generator at https://images.deepvortexai.art/ that creates images from text prompts in multiple aspect ratios, and an AI emoticon generator at https://emoticons.deepvortexai.art/ that creates custom emoji from text descriptions. Users sign in once and use shared credits across all tools. New users get 2 free credits.",
+  "description_for_human": "The complete AI creative tools ecosystem — 8 specialized AI tools in one place.",
+  "description_for_model": "Deep Vortex AI is a full AI creative platform with 8 tools: AI Image Generator at https://images.deepvortexai.art/ (text-to-image, multiple aspect ratios), AI Image-to-Video at https://video.deepvortexai.art/ (animate any image), AI 3D Generator at https://3d.deepvortexai.art/ (image-to-3D model), AI Voice Generator at https://voice.deepvortexai.art/ (text-to-speech), AI Chat at https://chat.deepvortexai.art/ (GPT-5, Claude 4.5, Gemini 2.5, DeepSeek v3), AI Image Upscaler at https://upscaler.deepvortexai.art/ (enhance image resolution), AI Background Remover at https://bgremover.deepvortexai.art/ (remove backgrounds instantly), AI Emoticon Generator at https://emoticons.deepvortexai.art/ (custom emoji from text). Users sign in once and share credits across all tools. New users get 2 free credits. Hub at https://deepvortexai.art/",
   "auth": {
     "type": "none"
   },
