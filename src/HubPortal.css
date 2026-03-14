@@ -496,57 +496,57 @@
   border: 1px solid #f1c40f;
 }
 
-.suggestions-section {
+.why-section {
   position: relative;
   z-index: 1;
-  margin: 4rem 0;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.suggestions-row {
-  margin-bottom: 2rem;
-}
-
-.mobile-combined-row {
-  display: none;
-}
-
-.suggestions-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.2rem;
-  color: var(--light-gold);
-  margin-bottom: 1rem;
+  margin: 3rem auto;
+  padding: 0 1rem;
   text-align: center;
 }
 
-.suggestion-chips-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  justify-content: center;
+.why-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-top: 2rem;
 }
 
-.suggestion-chip {
-  background: rgba(26, 26, 26, 0.7);
+.why-card {
+  background: rgba(20, 18, 10, 0.85);
   border: 1px solid rgba(212, 175, 55, 0.3);
-  color: var(--text-bright);
-  padding: 0.6rem 1.2rem;
-  border-radius: 25px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 1.6rem 1.2rem;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.suggestion-chip:hover {
-  background: rgba(212, 175, 55, 0.15);
-  border-color: var(--primary-gold);
-  transform: scale(1.05);
+.why-card:hover {
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
+}
+
+.why-icon {
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.why-stat {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--light-gold);
+  margin-bottom: 0.4rem;
+}
+
+.why-desc {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.45;
+}
+
+@media (max-width: 600px) {
+  .why-cards { grid-template-columns: 1fr; }
 }
 
 .main-tools-section {
@@ -819,14 +819,6 @@
     padding: 1.5rem;
   }
 
-  .desktop-popular-row,
-  .desktop-ideas-row {
-    display: none;
-  }
-
-  .mobile-combined-row {
-    display: block;
-  }
 
   .logo-display-zone {
     width: 72px;
@@ -869,10 +861,6 @@
     margin: 1.5rem 0;
   }
 
-  .suggestions-section {
-    margin: 1.5rem auto;
-  }
-
   .main-tools-section {
     margin: 1.5rem 0;
   }
@@ -883,12 +871,7 @@
     font-size: 1.5rem;
   }
 
-  .suggestion-chip {
-    font-size: 0.85rem;
-    padding: 0.5rem 1rem;
-  }
-
-  .preview-tools-grid {
+.preview-tools-grid {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 

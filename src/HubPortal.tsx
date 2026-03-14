@@ -370,40 +370,23 @@ const HubPortal = () => {
         </div>
       </section>
 
-      <section className="suggestions-section">
-        <div className="suggestions-row desktop-popular-row">
-          <h3 className="suggestions-title">Popular Styles</h3>
-          <div className="suggestion-chips-container">
-            {popularStyles.map((item, idx) => (
-              <button key={idx} className="suggestion-chip">
-                <span>{item.emoji}</span>
-                <span>{item.label}</span>
-              </button>
-            ))}
+      <section className="why-section">
+        <h2 className="section-heading">Why Deep Vortex AI?</h2>
+        <div className="why-cards">
+          <div className="why-card">
+            <div className="why-icon">⚡</div>
+            <div className="why-stat">All AI Tools</div>
+            <div className="why-desc">One platform, everything you need</div>
           </div>
-        </div>
-        
-        <div className="suggestions-row desktop-ideas-row">
-          <h3 className="suggestions-title">Quick Ideas</h3>
-          <div className="suggestion-chips-container">
-            {quickIdeas.map((item, idx) => (
-              <button key={idx} className="suggestion-chip">
-                <span>{item.emoji}</span>
-                <span>{item.label}</span>
-              </button>
-            ))}
+          <div className="why-card">
+            <div className="why-icon">🎯</div>
+            <div className="why-stat">Pay Per Use</div>
+            <div className="why-desc">No $40/mo subscriptions</div>
           </div>
-        </div>
-
-        <div className="suggestions-row mobile-combined-row">
-          <h3 className="suggestions-title">Popular</h3>
-          <div className="suggestion-chips-container">
-            {[...popularStyles, ...quickIdeas].map((item, idx) => (
-              <button key={idx} className="suggestion-chip">
-                <span>{item.emoji}</span>
-                <span>{item.label}</span>
-              </button>
-            ))}
+          <div className="why-card">
+            <div className="why-icon">💰</div>
+            <div className="why-stat">Always Updated</div>
+            <div className="why-desc">Latest AI models, always</div>
           </div>
         </div>
       </section>
