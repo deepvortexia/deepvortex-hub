@@ -14,10 +14,6 @@ interface ToolCardData {
   targetUrl?: string;
 }
 
-interface SuggestionChip {
-  emoji: string;
-  label: string;
-}
 
 const cleanUrlParams = () => {
   window.history.replaceState({}, '', window.location.pathname)
@@ -92,27 +88,6 @@ const HubPortal = () => {
     }
   ];
 
-  const popularStyles: SuggestionChip[] = [
-    { emoji: '✨', label: 'sparkle' },
-    { emoji: '🌈', label: 'neon' },
-    { emoji: '🔮', label: 'mystical' },
-    { emoji: '⚡', label: 'electric' },
-    { emoji: '🌈', label: 'rainbow' },
-    { emoji: '💎', label: 'crystal' },
-    { emoji: '✨', label: 'glowing' },
-    { emoji: '🔥', label: 'fire' }
-  ];
-
-  const quickIdeas: SuggestionChip[] = [
-    { emoji: '🍕', label: 'pizza' },
-    { emoji: '🚀', label: 'rocket' },
-    { emoji: '❤️', label: 'heart' },
-    { emoji: '⭐', label: 'star' },
-    { emoji: '☕', label: 'coffee' },
-    { emoji: '🐱', label: 'cat' },
-    { emoji: '🎮', label: 'gaming' },
-    { emoji: '🌙', label: 'moon' }
-  ];
 
 
   // Stripe return handler with retry pattern
