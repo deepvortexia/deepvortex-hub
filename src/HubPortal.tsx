@@ -338,10 +338,12 @@ const HubPortal = () => {
           </div>
           <div className="chat-feature-right">
             <div className="chat-feature-preview">
-              <div className="cfp-msg cfp-msg-user">C'est quoi les nouvelles du jour ?</div>
-              <div className="cfp-msg cfp-msg-ai"><span className="cfp-ai-dot" style={{ background: '#10b981' }} />DeepSeek v3 répond…</div>
-              <div className="cfp-msg cfp-msg-user">Rédige-moi un email professionnel</div>
-              <div className="cfp-msg cfp-msg-ai"><span className="cfp-ai-dot" style={{ background: '#a855f7' }} />Claude 4.5 répond…</div>
+              <div className="cfp-msg cfp-msg-user">What's happening in the world right now?</div>
+              <div className="cfp-msg cfp-msg-ai"><span className="cfp-ai-dot" style={{ background: '#06b6d4' }} />Gemini 2.5 is typing…</div>
+              <div className="cfp-msg cfp-msg-user">Will Bitcoin rise this week?</div>
+              <div className="cfp-msg cfp-msg-user">Write me a killer sales pitch</div>
+              <div className="cfp-msg cfp-msg-ai"><span className="cfp-ai-dot" style={{ background: '#a855f7' }} />Claude 4.5 is typing…</div>
+              <div className="cfp-msg cfp-msg-user">Explain quantum AI simply</div>
             </div>
           </div>
         </a>
