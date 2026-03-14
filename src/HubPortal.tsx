@@ -223,7 +223,7 @@ const HubPortal = () => {
 
       <header className="hero-header-section">
         <div className="logo-display-zone">
-          <img src="/reallitylogoreal.webp" alt="Deep Vortex" className="brand-logo-image" loading="eager" fetchPriority="high" />
+          <img src="/logotinyreal.webp" alt="Deep Vortex" className="brand-logo-image" loading="eager" fetchPriority="high" />
         </div>
         
         <h1 className="brand-title-text">DΞΞP VORTΞX AI</h1>
