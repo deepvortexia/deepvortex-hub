@@ -224,11 +224,11 @@
 .chat-feature-card {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2rem;
   position: relative;
   overflow: hidden;
   border-radius: 20px;
-  padding: 2.2rem 2.5rem;
+  padding: 1.6rem 2rem;
   background: rgba(20, 18, 10, 0.85);
   border: 1px solid rgba(212, 175, 55, 0.45);
   box-shadow: 0 0 40px rgba(212, 175, 55, 0.08), inset 0 1px 0 rgba(212, 175, 55, 0.12);
@@ -270,38 +270,66 @@
 .chat-feature-left { flex: 1; min-width: 0; }
 
 .chat-feature-icon {
-  font-size: 2.6rem;
-  margin-bottom: 0.7rem;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
   filter: drop-shadow(0 0 12px rgba(212,175,55,0.5));
 }
 
 .chat-feature-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 900;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   background: linear-gradient(135deg, var(--light-gold) 0%, var(--primary-gold) 60%, var(--dark-gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.3rem;
 }
 
-.chat-feature-desc {
-  font-size: 0.9rem;
-  color: var(--text-dim);
-  line-height: 1.55;
-  margin-bottom: 1.1rem;
-  max-width: 420px;
-}
-
-.chat-feature-models {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.4rem;
+.chat-feature-subtitle {
   font-size: 0.82rem;
-  font-weight: 600;
-  margin-bottom: 1.4rem;
+  color: var(--text-dim);
+  margin-bottom: 0.6rem;
+}
+
+.chat-feature-price-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #0a0a0a;
+  background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 0 10px rgba(212,175,55,0.4);
+}
+
+.chat-model-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.chat-model-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.4rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid;
+}
+
+.tab-name {
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.tab-skill {
+  font-size: 0.66rem;
+  color: var(--text-dim);
 }
 
 .chat-feature-cta {
@@ -362,7 +390,9 @@
 }
 @media (max-width: 480px) {
   .chat-feature-right { display: none; }
-  .chat-feature-models { gap: 0.5rem 1rem; font-size: 0.78rem; }
+  .chat-model-tabs { grid-template-columns: 1fr 1fr; gap: 0.3rem; }
+  .tab-name { font-size: 0.7rem; }
+  .tab-skill { font-size: 0.62rem; }
 }
 
 /* ── Tool Grid ────────────────────────────────────────────────────────────── */
