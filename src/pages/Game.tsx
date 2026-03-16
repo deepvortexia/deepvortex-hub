@@ -76,9 +76,14 @@ export function Game() {
     if (!supabase) { setGameState('idle'); return }
     ;(async () => {
       try {
-        const { data } = await supabase.from('profiles').select('last_game_date').eq('id', user.id).single()
-        if (data?.last_game_date && isOnCooldown(data.last_game_date)) {
-          setCountdown(getSecondsUntilNextPlay(data.last_game_date))
+        const { data, error } = await supabase.from('profiles').select('last_game_played_at').eq('id', user.id).single()
+        // If column missing (error code 42703) treat as no cooldown
+        if (error && error.code !== 'PGRST116' && !error.message?.includes('last_game_played_at')) {
+          setGameState('idle'); return
+        }
+        const ts: string | null = data?.last_game_played_at ?? null
+        if (ts && isOnCooldown(ts)) {
+          setCountdown(getSecondsUntilNextPlay(ts))
           setGameState('already_played')
         } else {
           setGameState('idle')
@@ -104,7 +109,7 @@ export function Game() {
     try {
       const { data: current } = await supabase.from('profiles').select('credits').eq('id', user.id).single()
       await supabase.from('profiles')
-        .update({ credits: (current?.credits ?? 0) + earned, last_game_date: new Date().toISOString() })
+        .update({ credits: (current?.credits ?? 0) + earned, last_game_played_at: new Date().toISOString() })
         .eq('id', user.id)
       await refreshProfile()
     } catch (e) { console.error('Game save failed:', e) }
@@ -159,8 +164,8 @@ export function Game() {
     <div style={S.page}>
       <a href="/" style={S.back}>← Back to Hub</a>
       <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⏳</div>
-      <h1 style={S.title}>Already Played Today</h1>
-      <p style={S.sub}>Come back tomorrow to earn more credits!</p>
+      <h1 style={S.title}>On Cooldown</h1>
+      <p style={S.sub}>You can play again in:</p>
       <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '2.5rem', color: '#D4AF37', fontWeight: 900, letterSpacing: '3px' }}>
         {formatCountdown(countdown)}
       </div>
