@@ -221,6 +221,11 @@ const HubPortal = () => {
             <span className="pill-text">Blog</span>
           </a>
 
+          <a href="/game" className="hub-pill game-pill">
+            <span className="pill-icon">🎯</span>
+            <span className="pill-text">Game</span>
+          </a>
+
           {user ? (
             <div className="hub-pill credits-pill">
               <span className="pill-icon">🏆</span>

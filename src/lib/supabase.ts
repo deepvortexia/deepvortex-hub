@@ -121,6 +121,7 @@ export interface Profile {
     full_name: string | null
     avatar_url: string | null
     credits: number
+    last_game_date: string | null
     created_at: string
     updated_at: string
 }
