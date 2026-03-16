@@ -74,16 +74,17 @@ export function Game() {
   useEffect(() => {
     if (!user) { setGameState('idle'); return }
     if (!supabase) { setGameState('idle'); return }
-    supabase.from('profiles').select('last_game_date').eq('id', user.id).single()
-      .then(({ data }) => {
+    ;(async () => {
+      try {
+        const { data } = await supabase.from('profiles').select('last_game_date').eq('id', user.id).single()
         if (data?.last_game_date && isToday(data.last_game_date)) {
           setCountdown(getSecondsUntilMidnight())
           setGameState('already_played')
         } else {
           setGameState('idle')
         }
-      })
-      .catch(() => setGameState('idle'))
+      } catch { setGameState('idle') }
+    })()
   }, [user])
 
   useEffect(() => {
@@ -97,7 +98,7 @@ export function Game() {
     return () => clearInterval(countdownRef.current!)
   }, [gameState])
 
-  const saveResult = useCallback(async (finalScore: number, earned: number) => {
+  const saveResult = useCallback(async (_finalScore: number, earned: number) => {
     if (!supabase || !user) return
     setSaving(true)
     try {
