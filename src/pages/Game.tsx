@@ -3,7 +3,6 @@ import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
 
 const GAME_DURATION = 10
-const COOLDOWN_MS = 12 * 60 * 60 * 1000
 
 function getCreditsEarned(score: number): number {
   if (score >= 61) return 3
@@ -12,10 +11,6 @@ function getCreditsEarned(score: number): number {
   return 0
 }
 
-function getSecondsUntilNextPlay(lastPlayedAt: string): number {
-  const next = new Date(lastPlayedAt).getTime() + COOLDOWN_MS
-  return Math.max(0, Math.floor((next - Date.now()) / 1000))
-}
 
 function formatCountdown(s: number): string {
   const h = Math.floor(s / 3600)
