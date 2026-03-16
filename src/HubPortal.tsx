@@ -47,6 +47,14 @@ const HubPortal = () => {
       targetUrl: 'https://images.deepvortexai.art/'
     },
     {
+      iconSymbol: '🎭',
+      toolName: 'Avatar Generator',
+      toolDescription: 'AI portrait styles',
+      statusLabel: 'Available Now',
+      isActive: true,
+      targetUrl: 'https://avatar.deepvortexai.art'
+    },
+    {
       iconSymbol: '✂️',
       toolName: 'Remove Background',
       toolDescription: 'Remove backgrounds from images instantly with AI precision',
