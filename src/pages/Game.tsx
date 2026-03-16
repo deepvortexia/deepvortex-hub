@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useAuth } from '../context/AuthContext'
-import { supabase } from '../lib/supabase'
 
 const GAME_DURATION = 10
 
@@ -11,7 +10,6 @@ function getCreditsEarned(score: number): number {
   return 0
 }
 
-
 function formatCountdown(s: number): string {
   const h = Math.floor(s / 3600)
   const m = Math.floor((s % 3600) / 60)
@@ -19,12 +17,6 @@ function formatCountdown(s: number): string {
   return `${h}h ${m.toString().padStart(2, '0')}m ${sec.toString().padStart(2, '0')}s`
 }
 
-// 'loading'  = Supabase check in progress — show nothing interactive
-// 'cooldown' = within 12h window — show countdown
-// 'idle'     = ready to play
-// 'playing'  = game in progress
-// 'saving'   = game ended, writing to Supabase
-// 'finished' = save complete, show result
 type GameState = 'loading' | 'cooldown' | 'idle' | 'playing' | 'saving' | 'finished'
 
 const S = {
@@ -55,7 +47,7 @@ const S = {
 }
 
 export function Game() {
-  const { user, refreshProfile } = useAuth()
+  const { user, session, refreshProfile } = useAuth()
   const [gameState, setGameState] = useState<GameState>('loading')
   const [score, setScore] = useState(0)
   const [timeLeft, setTimeLeft] = useState(GAME_DURATION)
@@ -65,76 +57,66 @@ export function Game() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  // ── Step 1: On mount, fetch last_game_played_at and gate access ──
+  // ── On mount: GET /api/game-check — never show game until this resolves ──
   useEffect(() => {
-    if (!user || !supabase) {
-      setGameState('idle')
+    if (!user || !session?.access_token) {
+      setGameState('cooldown') // no token = block
       return
     }
     ;(async () => {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('last_game_played_at, credits')
-        .eq('id', user.id)
-        .single()
-
-      if (error) { setGameState('idle'); return }
-
-      const last = data?.last_game_played_at
-      if (last) {
-        const diff = Date.now() - new Date(last).getTime()
-        if (diff < 12 * 60 * 60 * 1000) {
-          const next = new Date(new Date(last).getTime() + 12 * 60 * 60 * 1000)
-          setCountdown(Math.max(0, Math.floor((next.getTime() - Date.now()) / 1000)))
+      try {
+        const res = await fetch('/api/game-check', {
+          headers: { Authorization: `Bearer ${session.access_token}` },
+        })
+        if (!res.ok) { setGameState('cooldown'); return }
+        const json = await res.json()
+        if (!json.canPlay) {
+          const secsLeft = json.nextPlayAt
+            ? Math.max(0, Math.floor((new Date(json.nextPlayAt).getTime() - Date.now()) / 1000))
+            : 0
+          setCountdown(secsLeft)
           setGameState('cooldown')
-          return
+        } else {
+          setGameState('idle')
         }
+      } catch {
+        setGameState('cooldown') // on error, never allow play
       }
-      setGameState('idle')
     })()
-  }, [user])
+  }, [user, session])
 
   // ── Countdown tick ──
   useEffect(() => {
-    if (gameState !== 'cooldown') return
+    if (gameState !== 'cooldown' || countdown <= 0) return
     countdownRef.current = setInterval(() => {
       setCountdown(s => {
-        if (s <= 1) {
-          clearInterval(countdownRef.current!)
-          setGameState('idle')
-          return 0
-        }
+        if (s <= 1) { clearInterval(countdownRef.current!); setGameState('idle'); return 0 }
         return s - 1
       })
     }, 1000)
     return () => clearInterval(countdownRef.current!)
-  }, [gameState])
+  }, [gameState, countdown])
 
-  // ── Step 4: Save result THEN show finished ──
+  // ── POST /api/game-check to save result ──
   const saveResult = useCallback(async (finalScore: number) => {
-    if (!supabase || !user) { setGameState('finished'); return }
     setGameState('saving')
     const earned = getCreditsEarned(finalScore)
     setCreditsEarned(earned)
     try {
-      const { data } = await supabase
-        .from('profiles')
-        .select('last_game_played_at, credits')
-        .eq('id', user.id)
-        .single()
-      await supabase
-        .from('profiles')
-        .update({
-          credits: (data?.credits ?? 0) + earned,
-          last_game_played_at: new Date().toISOString(),
-        })
-        .eq('id', user.id)
+      await fetch('/api/game-check', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${session?.access_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ earned }),
+      })
       await refreshProfile()
     } catch (e) {
       console.error('Game save failed:', e)
     }
     setGameState('finished')
-  }, [user, refreshProfile])
+  }, [session, refreshProfile])
 
   const startGame = useCallback(() => {
     scoreRef.current = 0
@@ -170,7 +152,6 @@ export function Game() {
     </div>
   )
 
-  // ── Checking Supabase ──
   if (gameState === 'loading') return (
     <div style={S.page}>
       <a href="/" style={S.back}>← Back to Hub</a>
@@ -178,7 +159,6 @@ export function Game() {
     </div>
   )
 
-  // ── On cooldown ──
   if (gameState === 'cooldown') return (
     <div style={S.page}>
       <a href="/" style={S.back}>← Back to Hub</a>
@@ -186,14 +166,13 @@ export function Game() {
       <h1 style={S.title}>On Cooldown</h1>
       <p style={S.sub}>You can play again in:</p>
       <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '2.5rem', color: '#D4AF37', fontWeight: 900, letterSpacing: '3px' }}>
-        {formatCountdown(countdown)}
+        {countdown > 0 ? formatCountdown(countdown) : '—'}
       </div>
-      <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.82rem', marginTop: '0.75rem' }}>next game available in 12h</p>
+      <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.82rem', marginTop: '0.75rem' }}>next game available after 12h cooldown</p>
       <a href="/" style={{ ...S.ctaBtn, marginTop: '2.5rem' }}>Back to Hub →</a>
     </div>
   )
 
-  // ── Saving to Supabase ──
   if (gameState === 'saving') return (
     <div style={S.page}>
       <a href="/" style={S.back}>← Back to Hub</a>
@@ -201,7 +180,6 @@ export function Game() {
     </div>
   )
 
-  // ── Result screen ──
   if (gameState === 'finished') return (
     <div style={S.page}>
       <a href="/" style={S.back}>← Back to Hub</a>
@@ -225,7 +203,6 @@ export function Game() {
     </div>
   )
 
-  // ── Idle / Playing ──
   return (
     <div style={S.page}>
       <a href="/" style={S.back}>← Back to Hub</a>
