@@ -191,6 +191,7 @@ const HubPortal = () => {
 
   return (
     <div className="hub-portal-container">
+      <div className="particles">{[10,20,30,40,50,60,70,80,90].map((left,i)=><div key={i} className="particle" style={{left:`${left}%`,animationDelay:`${i*0.5}s`}}/>)}</div>
       {showNotification && (
         <div style={{
           position: 'fixed', top: '1rem', right: '1rem', zIndex: 9999,
