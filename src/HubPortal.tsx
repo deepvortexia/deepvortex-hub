@@ -471,6 +471,7 @@ const HubPortal = () => {
       <PricingModal isOpen={showPricingModal} onClose={() => setShowPricingModal(false)} />
       <FavoritesModal isOpen={showFavoritesModal} onClose={() => setShowFavoritesModal(false)} />
     </div>
+    <a href="https://deepvortexai.art/game" target="_blank" rel="noopener noreferrer" className="play-earn-fab">⚡ Play & Earn</a>
     </>
   );
 };
