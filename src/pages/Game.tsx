@@ -77,25 +77,25 @@ export function Game() {
       return
     }
     ;(async () => {
-      try {
-        const { data } = await supabase
-          .from('profiles')
-          .select('last_game_played_at')
-          .eq('id', user.id)
-          .single()
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('last_game_played_at, credits')
+        .eq('id', user.id)
+        .single()
 
-        const lastPlayed: string | null = data?.last_game_played_at ?? null
+      if (error) { setGameState('idle'); return }
 
-        if (lastPlayed && Date.now() - new Date(lastPlayed).getTime() < COOLDOWN_MS) {
-          setCountdown(getSecondsUntilNextPlay(lastPlayed))
+      const last = data?.last_game_played_at
+      if (last) {
+        const diff = Date.now() - new Date(last).getTime()
+        if (diff < 12 * 60 * 60 * 1000) {
+          const next = new Date(new Date(last).getTime() + 12 * 60 * 60 * 1000)
+          setCountdown(Math.max(0, Math.floor((next.getTime() - Date.now()) / 1000)))
           setGameState('cooldown')
-        } else {
-          setGameState('idle')
+          return
         }
-      } catch {
-        // Column may not exist yet — allow play
-        setGameState('idle')
       }
+      setGameState('idle')
     })()
   }, [user])
 
@@ -122,12 +122,15 @@ export function Game() {
     const earned = getCreditsEarned(finalScore)
     setCreditsEarned(earned)
     try {
-      const { data: current } = await supabase
-        .from('profiles').select('credits').eq('id', user.id).single()
+      const { data } = await supabase
+        .from('profiles')
+        .select('last_game_played_at, credits')
+        .eq('id', user.id)
+        .single()
       await supabase
         .from('profiles')
         .update({
-          credits: (current?.credits ?? 0) + earned,
+          credits: (data?.credits ?? 0) + earned,
           last_game_played_at: new Date().toISOString(),
         })
         .eq('id', user.id)
