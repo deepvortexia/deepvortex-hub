@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
 
 const GAME_DURATION = 10
+const COOLDOWN_MS = 12 * 60 * 60 * 1000
 
 function getCreditsEarned(score: number): number {
   if (score >= 61) return 3
@@ -11,16 +12,9 @@ function getCreditsEarned(score: number): number {
   return 0
 }
 
-const COOLDOWN_MS = 12 * 60 * 60 * 1000 // 12 hours
-
-function isOnCooldown(dateStr: string | null): boolean {
-  if (!dateStr) return false
-  return Date.now() - new Date(dateStr).getTime() < COOLDOWN_MS
-}
-
-function getSecondsUntilNextPlay(dateStr: string): number {
-  const nextPlay = new Date(dateStr).getTime() + COOLDOWN_MS
-  return Math.max(0, Math.floor((nextPlay - Date.now()) / 1000))
+function getSecondsUntilNextPlay(lastPlayedAt: string): number {
+  const next = new Date(lastPlayedAt).getTime() + COOLDOWN_MS
+  return Math.max(0, Math.floor((next - Date.now()) / 1000))
 }
 
 function formatCountdown(s: number): string {
@@ -30,7 +24,13 @@ function formatCountdown(s: number): string {
   return `${h}h ${m.toString().padStart(2, '0')}m ${sec.toString().padStart(2, '0')}s`
 }
 
-type GameState = 'loading' | 'idle' | 'playing' | 'finished' | 'already_played'
+// 'loading'  = Supabase check in progress — show nothing interactive
+// 'cooldown' = within 12h window — show countdown
+// 'idle'     = ready to play
+// 'playing'  = game in progress
+// 'saving'   = game ended, writing to Supabase
+// 'finished' = save complete, show result
+type GameState = 'loading' | 'cooldown' | 'idle' | 'playing' | 'saving' | 'finished'
 
 const S = {
   page: {
@@ -50,7 +50,7 @@ const S = {
     WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
     textAlign: 'center' as const, marginBottom: '0.5rem', letterSpacing: '2px',
   },
-  sub: { color: 'rgba(255,255,255,0.55)', fontSize: '1rem', textAlign: 'center' as const, marginBottom: '2.5rem' },
+  sub: { color: 'rgba(255,255,255,0.55)', fontSize: '1rem', textAlign: 'center' as const, marginBottom: '2rem' },
   ctaBtn: {
     display: 'inline-block', padding: '0.75rem 2rem',
     background: 'linear-gradient(135deg, #B8860B, #D4AF37)',
@@ -66,54 +66,76 @@ export function Game() {
   const [timeLeft, setTimeLeft] = useState(GAME_DURATION)
   const [creditsEarned, setCreditsEarned] = useState(0)
   const [countdown, setCountdown] = useState(0)
-  const [saving, setSaving] = useState(false)
   const scoreRef = useRef(0)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
+  // ── Step 1: On mount, fetch last_game_played_at and gate access ──
   useEffect(() => {
-    if (!user) { setGameState('idle'); return }
-    if (!supabase) { setGameState('idle'); return }
+    if (!user || !supabase) {
+      setGameState('idle')
+      return
+    }
     ;(async () => {
       try {
-        const { data, error } = await supabase.from('profiles').select('last_game_played_at').eq('id', user.id).single()
-        // If column missing (error code 42703) treat as no cooldown
-        if (error && error.code !== 'PGRST116' && !error.message?.includes('last_game_played_at')) {
-          setGameState('idle'); return
-        }
-        const ts: string | null = data?.last_game_played_at ?? null
-        if (ts && isOnCooldown(ts)) {
-          setCountdown(getSecondsUntilNextPlay(ts))
-          setGameState('already_played')
+        const { data } = await supabase
+          .from('profiles')
+          .select('last_game_played_at')
+          .eq('id', user.id)
+          .single()
+
+        const lastPlayed: string | null = data?.last_game_played_at ?? null
+
+        if (lastPlayed && Date.now() - new Date(lastPlayed).getTime() < COOLDOWN_MS) {
+          setCountdown(getSecondsUntilNextPlay(lastPlayed))
+          setGameState('cooldown')
         } else {
           setGameState('idle')
         }
-      } catch { setGameState('idle') }
+      } catch {
+        // Column may not exist yet — allow play
+        setGameState('idle')
+      }
     })()
   }, [user])
 
+  // ── Countdown tick ──
   useEffect(() => {
-    if (gameState !== 'already_played') return
+    if (gameState !== 'cooldown') return
     countdownRef.current = setInterval(() => {
       setCountdown(s => {
-        if (s <= 1) { clearInterval(countdownRef.current!); setGameState('idle'); return 0 }
+        if (s <= 1) {
+          clearInterval(countdownRef.current!)
+          setGameState('idle')
+          return 0
+        }
         return s - 1
       })
     }, 1000)
     return () => clearInterval(countdownRef.current!)
   }, [gameState])
 
-  const saveResult = useCallback(async (_finalScore: number, earned: number) => {
-    if (!supabase || !user) return
-    setSaving(true)
+  // ── Step 4: Save result THEN show finished ──
+  const saveResult = useCallback(async (finalScore: number) => {
+    if (!supabase || !user) { setGameState('finished'); return }
+    setGameState('saving')
+    const earned = getCreditsEarned(finalScore)
+    setCreditsEarned(earned)
     try {
-      const { data: current } = await supabase.from('profiles').select('credits').eq('id', user.id).single()
-      await supabase.from('profiles')
-        .update({ credits: (current?.credits ?? 0) + earned, last_game_played_at: new Date().toISOString() })
+      const { data: current } = await supabase
+        .from('profiles').select('credits').eq('id', user.id).single()
+      await supabase
+        .from('profiles')
+        .update({
+          credits: (current?.credits ?? 0) + earned,
+          last_game_played_at: new Date().toISOString(),
+        })
         .eq('id', user.id)
       await refreshProfile()
-    } catch (e) { console.error('Game save failed:', e) }
-    finally { setSaving(false) }
+    } catch (e) {
+      console.error('Game save failed:', e)
+    }
+    setGameState('finished')
   }, [user, refreshProfile])
 
   const startGame = useCallback(() => {
@@ -125,11 +147,7 @@ export function Game() {
       setTimeLeft(t => {
         if (t <= 1) {
           clearInterval(timerRef.current!)
-          const final = scoreRef.current
-          const earned = getCreditsEarned(final)
-          setCreditsEarned(earned)
-          setGameState('finished')
-          saveResult(final, earned)
+          saveResult(scoreRef.current)
           return 0
         }
         return t - 1
@@ -143,6 +161,7 @@ export function Game() {
     setScore(s => s + 1)
   }, [gameState])
 
+  // ── Not signed in ──
   if (!user) return (
     <div style={S.page}>
       <a href="/" style={S.back}>← Back to Hub</a>
@@ -153,14 +172,16 @@ export function Game() {
     </div>
   )
 
+  // ── Checking Supabase ──
   if (gameState === 'loading') return (
     <div style={S.page}>
       <a href="/" style={S.back}>← Back to Hub</a>
-      <div style={{ color: '#D4AF37', fontFamily: "'Orbitron', sans-serif" }}>Loading...</div>
+      <div style={{ color: '#D4AF37', fontFamily: "'Orbitron', sans-serif", letterSpacing: '2px' }}>Checking eligibility...</div>
     </div>
   )
 
-  if (gameState === 'already_played') return (
+  // ── On cooldown ──
+  if (gameState === 'cooldown') return (
     <div style={S.page}>
       <a href="/" style={S.back}>← Back to Hub</a>
       <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⏳</div>
@@ -169,11 +190,20 @@ export function Game() {
       <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '2.5rem', color: '#D4AF37', fontWeight: 900, letterSpacing: '3px' }}>
         {formatCountdown(countdown)}
       </div>
-      <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.85rem', marginTop: '0.75rem' }}>until next game</p>
-      <a href="/" style={{ ...S.ctaBtn, marginTop: '2rem' }}>Back to Hub →</a>
+      <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.82rem', marginTop: '0.75rem' }}>next game available in 12h</p>
+      <a href="/" style={{ ...S.ctaBtn, marginTop: '2.5rem' }}>Back to Hub →</a>
     </div>
   )
 
+  // ── Saving to Supabase ──
+  if (gameState === 'saving') return (
+    <div style={S.page}>
+      <a href="/" style={S.back}>← Back to Hub</a>
+      <div style={{ color: '#D4AF37', fontFamily: "'Orbitron', sans-serif", letterSpacing: '2px' }}>Saving result...</div>
+    </div>
+  )
+
+  // ── Result screen ──
   if (gameState === 'finished') return (
     <div style={S.page}>
       <a href="/" style={S.back}>← Back to Hub</a>
@@ -181,14 +211,13 @@ export function Game() {
         {creditsEarned >= 3 ? '🏆' : creditsEarned >= 2 ? '🥈' : creditsEarned >= 1 ? '🥉' : '💪'}
       </div>
       <h1 style={S.title}>Game Over!</h1>
-      <p style={S.sub}>You clicked <strong style={{ color: '#D4AF37' }}>{score} times</strong> in {GAME_DURATION} seconds</p>
+      <p style={S.sub}>You clicked <strong style={{ color: '#D4AF37' }}>{score} times</strong> in {GAME_DURATION}s</p>
       <div style={{
         background: 'rgba(212,175,55,0.1)', border: '2px solid rgba(212,175,55,0.4)',
         borderRadius: '20px', padding: '2rem 3rem', textAlign: 'center', marginBottom: '2rem',
       }}>
         <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)', letterSpacing: '2px', marginBottom: '0.5rem' }}>CREDITS EARNED</div>
         <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '4rem', fontWeight: 900, color: '#D4AF37', lineHeight: 1 }}>+{creditsEarned}</div>
-        {saving && <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem', marginTop: '0.75rem' }}>Saving...</div>}
       </div>
       <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.82rem', textAlign: 'center', lineHeight: 2, marginBottom: '2rem' }}>
         <div>0–20 clicks = 0 credits &nbsp;·&nbsp; 21–40 = 1 credit</div>
@@ -198,6 +227,7 @@ export function Game() {
     </div>
   )
 
+  // ── Idle / Playing ──
   return (
     <div style={S.page}>
       <a href="/" style={S.back}>← Back to Hub</a>
