@@ -10,11 +10,13 @@ function getCreditsEarned(score: number): number {
   return 0
 }
 
-function formatCountdown(s: number): string {
-  const h = Math.floor(s / 3600)
-  const m = Math.floor((s % 3600) / 60)
-  const sec = s % 60
-  return `${h}h ${m.toString().padStart(2, '0')}m ${sec.toString().padStart(2, '0')}s`
+function formatCountdown(ms: number): string {
+  if (ms <= 0) return '00:00:00'
+  const totalSec = Math.floor(ms / 1000)
+  const h = Math.floor(totalSec / 3600)
+  const m = Math.floor((totalSec % 3600) / 60)
+  const s = totalSec % 60
+  return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`
 }
 
 type GameState = 'loading' | 'cooldown' | 'idle' | 'playing' | 'saving' | 'finished'
@@ -52,7 +54,8 @@ export function Game() {
   const [score, setScore] = useState(0)
   const [timeLeft, setTimeLeft] = useState(GAME_DURATION)
   const [creditsEarned, setCreditsEarned] = useState(0)
-  const [countdown, setCountdown] = useState(0)
+  const [nextPlayTime, setNextPlayTime] = useState<Date | null>(null)
+  const [countdownDisplay, setCountdownDisplay] = useState('00:00:00')
   const scoreRef = useRef(0)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -71,10 +74,7 @@ export function Game() {
         if (!res.ok) { setGameState('cooldown'); return }
         const json = await res.json()
         if (!json.canPlay) {
-          const secsLeft = json.nextPlayAt
-            ? Math.max(0, Math.floor((new Date(json.nextPlayAt).getTime() - Date.now()) / 1000))
-            : 0
-          setCountdown(secsLeft)
+          if (json.nextPlayAt) setNextPlayTime(new Date(json.nextPlayAt))
           setGameState('cooldown')
         } else {
           setGameState('idle')
@@ -87,15 +87,21 @@ export function Game() {
 
   // ── Countdown tick ──
   useEffect(() => {
-    if (gameState !== 'cooldown' || countdown <= 0) return
-    countdownRef.current = setInterval(() => {
-      setCountdown(s => {
-        if (s <= 1) { clearInterval(countdownRef.current!); setGameState('idle'); return 0 }
-        return s - 1
-      })
-    }, 1000)
+    if (gameState !== 'cooldown' || !nextPlayTime) return
+    const tick = () => {
+      const diff = nextPlayTime.getTime() - Date.now()
+      if (diff <= 0) {
+        clearInterval(countdownRef.current!)
+        setCountdownDisplay('00:00:00')
+        setGameState('idle')
+        return
+      }
+      setCountdownDisplay(formatCountdown(diff))
+    }
+    tick() // run immediately so display isn't blank for first second
+    countdownRef.current = setInterval(tick, 1000)
     return () => clearInterval(countdownRef.current!)
-  }, [gameState, countdown])
+  }, [gameState, nextPlayTime])
 
   // ── POST /api/game-check to save result ──
   const saveResult = useCallback(async (finalScore: number) => {
@@ -166,7 +172,7 @@ export function Game() {
       <h1 style={S.title}>On Cooldown</h1>
       <p style={S.sub}>You can play again in:</p>
       <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '2.5rem', color: '#D4AF37', fontWeight: 900, letterSpacing: '3px' }}>
-        {countdown > 0 ? formatCountdown(countdown) : '—'}
+        {nextPlayTime ? countdownDisplay : '—'}
       </div>
       <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.82rem', marginTop: '0.75rem' }}>next game available after 12h cooldown</p>
       <a href="/" style={{ ...S.ctaBtn, marginTop: '2.5rem' }}>Back to Hub →</a>
