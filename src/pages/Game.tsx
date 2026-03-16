@@ -11,16 +11,16 @@ function getCreditsEarned(score: number): number {
   return 0
 }
 
-function isToday(dateStr: string | null): boolean {
+const COOLDOWN_MS = 12 * 60 * 60 * 1000 // 12 hours
+
+function isOnCooldown(dateStr: string | null): boolean {
   if (!dateStr) return false
-  return dateStr.startsWith(new Date().toISOString().split('T')[0])
+  return Date.now() - new Date(dateStr).getTime() < COOLDOWN_MS
 }
 
-function getSecondsUntilMidnight(): number {
-  const now = new Date()
-  const midnight = new Date(now)
-  midnight.setHours(24, 0, 0, 0)
-  return Math.floor((midnight.getTime() - now.getTime()) / 1000)
+function getSecondsUntilNextPlay(dateStr: string): number {
+  const nextPlay = new Date(dateStr).getTime() + COOLDOWN_MS
+  return Math.max(0, Math.floor((nextPlay - Date.now()) / 1000))
 }
 
 function formatCountdown(s: number): string {
@@ -77,8 +77,8 @@ export function Game() {
     ;(async () => {
       try {
         const { data } = await supabase.from('profiles').select('last_game_date').eq('id', user.id).single()
-        if (data?.last_game_date && isToday(data.last_game_date)) {
-          setCountdown(getSecondsUntilMidnight())
+        if (data?.last_game_date && isOnCooldown(data.last_game_date)) {
+          setCountdown(getSecondsUntilNextPlay(data.last_game_date))
           setGameState('already_played')
         } else {
           setGameState('idle')
@@ -102,10 +102,9 @@ export function Game() {
     if (!supabase || !user) return
     setSaving(true)
     try {
-      const today = new Date().toISOString().split('T')[0]
       const { data: current } = await supabase.from('profiles').select('credits').eq('id', user.id).single()
       await supabase.from('profiles')
-        .update({ credits: (current?.credits ?? 0) + earned, last_game_date: today })
+        .update({ credits: (current?.credits ?? 0) + earned, last_game_date: new Date().toISOString() })
         .eq('id', user.id)
       await refreshProfile()
     } catch (e) { console.error('Game save failed:', e) }
