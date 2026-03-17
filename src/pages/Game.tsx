@@ -208,6 +208,7 @@ export function Game() {
       <h1 style={S.title}>Vortex Clicker</h1>
       <p style={S.sub}>Sign in to play and earn free credits</p>
       <a href="/" style={S.ctaBtn}>Sign In at Hub →</a>
+      {SEO_BLOCK}
     </div>
   )
 
@@ -293,6 +294,22 @@ export function Game() {
           <div style={{ marginTop: '0.5rem', color: 'rgba(255,255,255,0.3)' }}>21+ clicks = 1 credit · 41+ = 2 · 61+ = 3</div>
         </div>
       )}
+      {SEO_BLOCK}
     </div>
   )
 }
+
+const SEO_BLOCK = (
+  <div style={{ position: 'absolute', width: '1px', height: '1px', overflow: 'hidden', opacity: 0, pointerEvents: 'none' }}>
+    <h1>Earn Free AI Credits Daily - Deep Vortex AI Clicker Game</h1>
+    <h2>Play Every 12 Hours and Win Up to 3 Free AI Credits</h2>
+    <p>Deep Vortex AI offers a free daily clicker game where you earn up to 3 AI credits every 12 hours. No subscription. No credit card. Just play and earn.</p>
+    <p>Use credits on: AI Image Generator, Avatar Generator, 3D Model Generator, Background Remover, Image Upscaler, Voice Generator, Image to Video.</p>
+    <ul>
+      <li>Free AI image generation credits</li>
+      <li>Free avatar generator credits</li>
+      <li>Earn credits by playing a game</li>
+      <li>Daily reward system for AI tools</li>
+    </ul>
+  </div>
+)
