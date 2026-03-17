@@ -221,7 +221,7 @@ const HubPortal = () => {
             <span className="pill-text">Blog</span>
           </a>
 
-          <a href="/game" className="hub-pill game-pill">
+          <a href="/game" className="hub-pill game-pill" style={{ display: 'none' }}>
             <span className="pill-icon">🎯</span>
             <span className="pill-text">Game</span>
           </a>
