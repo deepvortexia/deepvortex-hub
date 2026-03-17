@@ -37,6 +37,10 @@ const staticEntries = [
   { loc: 'https://3d.deepvortexai.art/',       priority: '0.7', changefreq: 'weekly',  lastmod: '2026-03-08' },
   { loc: 'https://voice.deepvortexai.art/',    priority: '0.7', changefreq: 'weekly',  lastmod: '2026-03-08' },
   { loc: 'https://video.deepvortexai.art/',    priority: '0.7', changefreq: 'weekly',  lastmod: '2026-03-08' },
+  { loc: 'https://avatar.deepvortexai.art/',  priority: '0.7', changefreq: 'weekly',  lastmod: today },
+
+  // Game page
+  { loc: 'https://deepvortexai.art/game',     priority: '0.9', changefreq: 'weekly',  lastmod: today },
 
   // Blog index
   { loc: 'https://www.deepvortexai.art/blog/',     priority: '0.8', changefreq: 'weekly',  lastmod: '2026-03-09' },
