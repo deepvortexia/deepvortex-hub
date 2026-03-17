@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "https://www.deepvortexai.art/:path*",
+      "destination": "https://deepvortexai.art/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/sitemap.xml",
