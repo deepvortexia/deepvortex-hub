@@ -430,7 +430,36 @@ const HubPortal = () => {
         </div>
       </section>
 
-      {/* Industry Solutions — discreet SEO nav, styled like Stripe/Apple footer links */}
+      {/* All AI Tools Grid */}
+      <section className="preview-tools-section" style={{ paddingTop: '2rem' }}>
+        <h2 className="section-heading">All AI Tools</h2>
+        <div className="preview-tools-grid">
+          {[
+            { icon: '🖼️', name: 'Image Generator',    desc: 'Generate stunning AI artwork from text',          url: 'https://images.deepvortexai.art' },
+            { icon: '😀', name: 'Emoticon Generator',  desc: 'Create custom AI-powered emoji and stickers',    url: 'https://emoticons.deepvortexai.art' },
+            { icon: '✂️', name: 'Background Remover',  desc: 'Remove image backgrounds instantly with AI',     url: 'https://bgremover.deepvortexai.art' },
+            { icon: '🔍', name: 'Image Upscaler',      desc: 'Enhance and upscale images with AI precision',   url: 'https://upscaler.deepvortexai.art' },
+            { icon: '🧊', name: '3D Generator',        desc: 'Transform images into stunning 3D models',       url: 'https://3d.deepvortexai.art' },
+            { icon: '🎙️', name: 'Voice Generator',    desc: 'Convert text to natural AI voices instantly',    url: 'https://voice.deepvortexai.art' },
+            { icon: '🎬', name: 'Image to Video',      desc: 'Animate any image into an AI-generated video',   url: 'https://video.deepvortexai.art' },
+            { icon: '🎭', name: 'Avatar Generator',    desc: 'Transform photos into AI portrait styles',       url: 'https://avatar.deepvortexai.art' },
+            { icon: '💬', name: 'AI Chat',             desc: 'Chat with Claude, GPT-5, Gemini & DeepSeek',    url: 'https://chat.deepvortexai.art' },
+          ].map((tool) => (
+            <a
+              key={tool.name}
+              href={tool.url}
+              className="preview-card card-active"
+              style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
+            >
+              <div className="preview-icon">{tool.icon}</div>
+              <h3 className="preview-title">{tool.name}</h3>
+              <p className="preview-desc">{tool.desc}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* Industry Solutions — discreet SEO nav */}
       <nav className="solutions-nav" aria-label="Industry Solutions">
         <span className="solutions-nav-label">Industry Solutions</span>
         <ul className="solutions-nav-list">
