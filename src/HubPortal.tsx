@@ -47,6 +47,14 @@ const HubPortal = () => {
       targetUrl: 'https://images.deepvortexai.art/'
     },
     {
+      iconSymbol: '🛡️',
+      toolName: 'Logo Gen',
+      toolDescription: 'AI logo creation',
+      statusLabel: 'Available Now',
+      isActive: true,
+      targetUrl: 'https://logo.deepvortexai.art'
+    },
+    {
       iconSymbol: '🎭',
       toolName: 'Avatar Generator',
       toolDescription: 'AI portrait styles',
