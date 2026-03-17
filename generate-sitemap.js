@@ -27,7 +27,7 @@ const today = new Date().toISOString().split('T')[0];
 
 const staticEntries = [
   // Hub root — always priority 1.0, always updated to today
-  { loc: 'https://www.deepvortexai.art/',      priority: '1.0', changefreq: 'weekly',  lastmod: today },
+  { loc: 'https://deepvortexai.art/',      priority: '1.0', changefreq: 'weekly',  lastmod: today },
 
   // Subdomain AI tools
   { loc: 'https://images.deepvortexai.art/',  priority: '0.7', changefreq: 'weekly',  lastmod: '2026-03-08' },
@@ -43,17 +43,17 @@ const staticEntries = [
   { loc: 'https://deepvortexai.art/game',     priority: '0.9', changefreq: 'weekly',  lastmod: today },
 
   // Blog index
-  { loc: 'https://www.deepvortexai.art/blog/',     priority: '0.8', changefreq: 'weekly',  lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.art/blog/',     priority: '0.8', changefreq: 'weekly',  lastmod: '2026-03-09' },
 
   // Blog posts
-  { loc: 'https://www.deepvortexai.art/blog/how-to-remove-image-background-with-ai/', priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://www.deepvortexai.art/blog/best-ai-image-upscaler-2026/',            priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://www.deepvortexai.art/blog/turn-photo-into-3d-model-online/',        priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://www.deepvortexai.art/blog/ai-image-to-video-generator-guide/',      priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://www.deepvortexai.art/blog/ai-voice-generator-text-to-speech/',      priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://www.deepvortexai.art/blog/best-ai-image-generator-2026/',           priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://www.deepvortexai.art/blog/custom-ai-emoticon-generator/',           priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://www.deepvortexai.art/blog/deep-vortex-ai-all-tools-guide/',         priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.art/blog/how-to-remove-image-background-with-ai/', priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.art/blog/best-ai-image-upscaler-2026/',            priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.art/blog/turn-photo-into-3d-model-online/',        priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.art/blog/ai-image-to-video-generator-guide/',      priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.art/blog/ai-voice-generator-text-to-speech/',      priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.art/blog/best-ai-image-generator-2026/',           priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.art/blog/custom-ai-emoticon-generator/',           priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.art/blog/deep-vortex-ai-all-tools-guide/',         priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
 ];
 
 // ── Dynamic: scan public/solutions/ ──────────────────────────────────────────
@@ -68,7 +68,7 @@ if (fs.existsSync(solutionsDir)) {
   for (const file of files) {
     const slug = file.replace('.html', '');
     solutionEntries.push({
-      loc:        `https://www.deepvortexai.art/solutions/${file}`,
+      loc:        `https://deepvortexai.art/solutions/${file}`,
       priority:   '0.8',
       changefreq: 'monthly',
       lastmod:    today,
