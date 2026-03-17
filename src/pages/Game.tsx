@@ -83,6 +83,36 @@ export function Game() {
     }
   }, [])
 
+  // ── JSON-LD structured data ──
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.type = 'application/ld+json'
+    script.id = 'game-jsonld'
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Game',
+      name: 'Vortex Clicker – Daily Game',
+      description: 'A free daily clicker game on Deep Vortex AI. Click the vortex as fast as you can in 10 seconds to earn free AI credits.',
+      url: 'https://deepvortexai.art/game',
+      gamePlatform: 'Web Browser',
+      applicationCategory: 'Game',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+        description: 'Earn up to 3 free AI credits per day by playing the Vortex Clicker game.',
+        availability: 'https://schema.org/InStock',
+      },
+      provider: {
+        '@type': 'Organization',
+        name: 'Deep Vortex AI',
+        url: 'https://deepvortexai.art',
+      },
+    })
+    document.head.appendChild(script)
+    return () => { document.getElementById('game-jsonld')?.remove() }
+  }, [])
+
   // ── On mount: GET /api/game-check — never show game until this resolves ──
   useEffect(() => {
     if (!user || !session?.access_token) {
