@@ -60,6 +60,29 @@ export function Game() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
+  // ── SEO meta tags ──
+  useEffect(() => {
+    const prev = document.title
+    document.title = 'Daily Game – Earn Free AI Credits | Deep Vortex AI'
+    const metas: [string, string, string][] = [
+      ['name', 'description', 'Play the free daily Vortex Clicker game on Deep Vortex AI. Click fast, earn free AI credits, and use them across all our AI tools.'],
+      ['name', 'keywords', 'free AI credits, daily game, earn credits, Deep Vortex AI, vortex clicker, AI tools'],
+      ['property', 'og:title', 'Daily Game – Earn Free AI Credits | Deep Vortex AI'],
+      ['property', 'og:description', 'Play the free daily Vortex Clicker and earn credits for AI image generation, avatar creation, voice synthesis and more.'],
+      ['property', 'og:url', 'https://deepvortexai.art/game'],
+    ]
+    const added: HTMLMetaElement[] = []
+    for (const [attr, key, content] of metas) {
+      let el = document.querySelector(`meta[${attr}="${key}"]`) as HTMLMetaElement | null
+      if (!el) { el = document.createElement('meta'); el.setAttribute(attr, key); document.head.appendChild(el); added.push(el) }
+      el.setAttribute('content', content)
+    }
+    return () => {
+      document.title = prev
+      added.forEach(el => el.remove())
+    }
+  }, [])
+
   // ── On mount: GET /api/game-check — never show game until this resolves ──
   useEffect(() => {
     if (!user || !session?.access_token) {
