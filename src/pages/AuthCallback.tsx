@@ -5,41 +5,40 @@ export function AuthCallback() {
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
-        const handleCallback = async () => {
-            if (!supabase) {
-                setError('Supabase not initialized')
-                return
-            }
-
-            const url = new URL(window.location.href)
-            const errorParam = url.searchParams.get('error')
-            const errorDescription = url.searchParams.get('error_description')
-
-            if (errorParam) {
-                setError(errorDescription || errorParam)
-                return
-            }
-
-            // With implicit flow the session arrives in the URL hash.
-            // detectSessionInUrl: true means Supabase has already parsed it
-            // by the time this component mounts — getSession() just confirms it.
-            const { data, error: sessionError } = await supabase.auth.getSession()
-
-            if (sessionError) {
-                setError(sessionError.message)
-                return
-            }
-
-            if (data.session) {
-                window.location.replace('/')
-                return
-            }
-
-            // No session and no error — redirect home anyway
-            window.location.replace('/')
+        if (!supabase) {
+            setError('Supabase not initialized')
+            return
         }
 
-        handleCallback()
+        const url = new URL(window.location.href)
+        const errorParam = url.searchParams.get('error')
+        const errorDescription = url.searchParams.get('error_description')
+
+        if (errorParam) {
+            setError(errorDescription || errorParam)
+            return
+        }
+
+        // With implicit flow the session arrives in the URL hash.
+        // Wait for Supabase to parse the hash and fire SIGNED_IN before
+        // redirecting — ensures the session cookie is written first.
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+            if (event === 'SIGNED_IN' && session) {
+                subscription.unsubscribe()
+                window.location.replace('/')
+            }
+        })
+
+        // Fallback: if SIGNED_IN never fires within 3s, redirect anyway
+        const fallback = setTimeout(() => {
+            subscription.unsubscribe()
+            window.location.replace('/')
+        }, 3000)
+
+        return () => {
+            subscription.unsubscribe()
+            clearTimeout(fallback)
+        }
     }, [])
 
     if (error) {
