@@ -69,37 +69,12 @@ const removeChunkedCookie = (key: string): void => {
     while (getCookie(`${key}.${i}`)) { removeCookieRaw(`${key}.${i}`); i++ }
 }
 
-// Chunked cookie storage with sessionStorage backup for PKCE code verifier.
-// The code verifier must survive the OAuth redirect chain (app → Google → Supabase → app).
-// Some browsers (Safari ITP, privacy extensions) can drop cross-domain cookies during
-// this redirect chain, so we also store the verifier in sessionStorage as a reliable fallback.
+// Chunked cookie storage — splits values >3000 chars across key.0, key.1, etc.
+// to stay under the 4KB browser cookie limit.
 const customCookieStorage = {
-    getItem: (key: string): string | null => {
-        if (key.includes('code-verifier')) {
-            try {
-                const ss = sessionStorage.getItem(key)
-                if (ss) return ss
-            } catch {}
-        }
-
-        return getChunkedCookie(key)
-    },
-
-    setItem: (key: string, value: string): void => {
-        if (key.includes('code-verifier')) {
-            try { sessionStorage.setItem(key, value) } catch {}
-        }
-
-        setChunkedCookie(key, value)
-    },
-
-    removeItem: (key: string): void => {
-        if (key.includes('code-verifier')) {
-            try { sessionStorage.removeItem(key) } catch {}
-        }
-
-        removeChunkedCookie(key)
-    }
+    getItem: (key: string): string | null => getChunkedCookie(key),
+    setItem: (key: string, value: string): void => setChunkedCookie(key, value),
+    removeItem: (key: string): void => removeChunkedCookie(key),
 }
 
 export const supabase = supabaseUrl && supabaseAnonKey
@@ -108,7 +83,7 @@ export const supabase = supabaseUrl && supabaseAnonKey
             autoRefreshToken: true,
             persistSession: true,
             detectSessionInUrl: true,
-            flowType: 'pkce',
+            flowType: 'implicit',
             storageKey: 'deepvortex-auth',
             storage: customCookieStorage,
         }

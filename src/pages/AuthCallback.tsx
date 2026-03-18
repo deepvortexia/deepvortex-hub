@@ -3,7 +3,6 @@ import { supabase } from '../lib/supabase'
 
 export function AuthCallback() {
     const [error, setError] = useState<string | null>(null)
-    const [debugInfo, setDebugInfo] = useState<string>('')
 
     useEffect(() => {
         const handleCallback = async () => {
@@ -13,7 +12,6 @@ export function AuthCallback() {
             }
 
             const url = new URL(window.location.href)
-            const code = url.searchParams.get('code')
             const errorParam = url.searchParams.get('error')
             const errorDescription = url.searchParams.get('error_description')
 
@@ -22,49 +20,23 @@ export function AuthCallback() {
                 return
             }
 
-            if (code) {
-                try {
-                    const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
-                    
-                    if (exchangeError) {
-                        if (exchangeError.message.includes('code verifier')) {
-                            const { data: sessionData } = await supabase.auth.getSession()
-                            if (sessionData?.session) {
-                                window.location.replace('/')
-                                return
-                            }
-                            setError('Session expired. Please try signing in again.')
-                            setDebugInfo('The PKCE code verifier was not found.')
-                            return
-                        }
-                        setError(exchangeError.message)
-                        return
-                    }
-                    
-                    window.location.replace('/')
-                    return
-                } catch (err: any) {
-                    setError(err.message || 'Unknown error')
-                    return
-                }
+            // With implicit flow the session arrives in the URL hash.
+            // detectSessionInUrl: true means Supabase has already parsed it
+            // by the time this component mounts — getSession() just confirms it.
+            const { data, error: sessionError } = await supabase.auth.getSession()
+
+            if (sessionError) {
+                setError(sessionError.message)
+                return
             }
 
-            const { data: sessionData } = await supabase.auth.getSession()
-            if (sessionData?.session) {
+            if (data.session) {
                 window.location.replace('/')
                 return
             }
 
-            const hash = window.location.hash
-            if (hash && hash.includes('access_token')) {
-                await supabase.auth.getSession()
-                window.location.replace('/')
-                return
-            }
-
-            setTimeout(() => {
-                window.location.replace('/')
-            }, 1000)
+            // No session and no error — redirect home anyway
+            window.location.replace('/')
         }
 
         handleCallback()
@@ -80,9 +52,6 @@ export function AuthCallback() {
             }}>
                 <div style={{ fontSize: '2rem' }}>⚠️</div>
                 <p style={{ maxWidth: '400px' }}>Sign in failed: {error}</p>
-                {debugInfo && (
-                    <p style={{ fontSize: '0.8rem', color: '#888', maxWidth: '400px' }}>{debugInfo}</p>
-                )}
                 <a href="/" style={{ color: '#D4AF37', textDecoration: 'underline', marginTop: '1rem' }}>Return to Home</a>
                 <button onClick={() => window.location.href = '/'} style={{
                     marginTop: '0.5rem', padding: '0.75rem 1.5rem',
