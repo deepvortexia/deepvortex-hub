@@ -19,13 +19,13 @@ const getCookie = (name: string): string | null => {
 // Helper to set cookie
 const setCookieRaw = (name: string, value: string, maxAge: number = 31536000) => {
     if (typeof document === 'undefined') return
-    document.cookie = `${name}=${encodeURIComponent(value)}; domain=${process.env.NEXT_PUBLIC_COOKIE_DOMAIN || '.deepvortexai.com'}; path=/; max-age=${maxAge}; secure; samesite=lax`
+    document.cookie = `${name}=${encodeURIComponent(value)}; domain=${import.meta.env.VITE_COOKIE_DOMAIN || '.deepvortexai.com'}; path=/; max-age=${maxAge}; secure; samesite=lax`
 }
 
 // Helper to remove cookie
 const removeCookieRaw = (name: string) => {
     if (typeof document === 'undefined') return
-    document.cookie = `${name}=; domain=${process.env.NEXT_PUBLIC_COOKIE_DOMAIN || '.deepvortexai.com'}; path=/; max-age=0; secure; samesite=lax`
+    document.cookie = `${name}=; domain=${import.meta.env.VITE_COOKIE_DOMAIN || '.deepvortexai.com'}; path=/; max-age=0; secure; samesite=lax`
 }
 
 // Helper: get chunked cookie value
