@@ -1,6 +1,6 @@
 # Deep Vortex AI Hub
 
-> Your central command center for all Deep Vortex AI creative tools — one account, one credit wallet, access to 9 AI creative tools.
+> Deep Vortex AI is a unified platform of 10 AI creative tools — image generation, logo creation, avatar styling, background removal, image upscaling, 3D model generation, voice synthesis, image-to-video animation, custom emoticons, and multi-model AI chat — all accessible under a single account and shared credit wallet. New users receive 2 free credits on sign-up with no credit card required. Every tool is web-based, mobile-friendly, and built for creators, marketers, and developers who need fast, professional-quality AI outputs across multiple formats.
 
 ## URL
 
