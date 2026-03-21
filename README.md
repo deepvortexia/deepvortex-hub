@@ -59,6 +59,6 @@ src/
 
 ## Live Tools
 
-- Emoticons: https://emoticons.deepvortexai.art
-- Images: https://images.deepvortexai.art
+- Emoticons: https://emoticons.deepvortexai.com
+- Images: https://images.deepvortexai.com
 

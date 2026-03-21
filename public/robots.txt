@@ -34,4 +34,4 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
-Sitemap: https://deepvortexai.art/sitemap.xml
+Sitemap: https://deepvortexai.com/sitemap.xml
