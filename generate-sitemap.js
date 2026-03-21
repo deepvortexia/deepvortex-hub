@@ -27,33 +27,33 @@ const today = new Date().toISOString().split('T')[0];
 
 const staticEntries = [
   // Hub root — always priority 1.0, always updated to today
-  { loc: 'https://deepvortexai.art/',      priority: '1.0', changefreq: 'weekly',  lastmod: today },
+  { loc: 'https://deepvortexai.com/',      priority: '1.0', changefreq: 'weekly',  lastmod: today },
 
   // Subdomain AI tools
-  { loc: 'https://images.deepvortexai.art/',  priority: '0.7', changefreq: 'weekly',  lastmod: '2026-03-08' },
-  { loc: 'https://emoticons.deepvortexai.art/', priority: '0.7', changefreq: 'weekly', lastmod: '2026-03-08' },
-  { loc: 'https://bgremover.deepvortexai.art/', priority: '0.7', changefreq: 'weekly', lastmod: '2026-03-08' },
-  { loc: 'https://upscaler.deepvortexai.art/', priority: '0.7', changefreq: 'weekly', lastmod: '2026-03-08' },
-  { loc: 'https://3d.deepvortexai.art/',       priority: '0.7', changefreq: 'weekly',  lastmod: '2026-03-08' },
-  { loc: 'https://voice.deepvortexai.art/',    priority: '0.7', changefreq: 'weekly',  lastmod: '2026-03-08' },
-  { loc: 'https://video.deepvortexai.art/',    priority: '0.7', changefreq: 'weekly',  lastmod: '2026-03-08' },
-  { loc: 'https://avatar.deepvortexai.art/',  priority: '0.7', changefreq: 'weekly',  lastmod: today },
+  { loc: 'https://images.deepvortexai.com/',  priority: '0.7', changefreq: 'weekly',  lastmod: '2026-03-08' },
+  { loc: 'https://emoticons.deepvortexai.com/', priority: '0.7', changefreq: 'weekly', lastmod: '2026-03-08' },
+  { loc: 'https://bgremover.deepvortexai.com/', priority: '0.7', changefreq: 'weekly', lastmod: '2026-03-08' },
+  { loc: 'https://upscaler.deepvortexai.com/', priority: '0.7', changefreq: 'weekly', lastmod: '2026-03-08' },
+  { loc: 'https://3d.deepvortexai.com/',       priority: '0.7', changefreq: 'weekly',  lastmod: '2026-03-08' },
+  { loc: 'https://voice.deepvortexai.com/',    priority: '0.7', changefreq: 'weekly',  lastmod: '2026-03-08' },
+  { loc: 'https://video.deepvortexai.com/',    priority: '0.7', changefreq: 'weekly',  lastmod: '2026-03-08' },
+  { loc: 'https://avatar.deepvortexai.com/',  priority: '0.7', changefreq: 'weekly',  lastmod: today },
 
   // Game page
-  { loc: 'https://deepvortexai.art/game',     priority: '0.9', changefreq: 'weekly',  lastmod: today },
+  { loc: 'https://deepvortexai.com/game',     priority: '0.9', changefreq: 'weekly',  lastmod: today },
 
   // Blog index
-  { loc: 'https://deepvortexai.art/blog/',     priority: '0.8', changefreq: 'weekly',  lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.com/blog/',     priority: '0.8', changefreq: 'weekly',  lastmod: '2026-03-09' },
 
   // Blog posts
-  { loc: 'https://deepvortexai.art/blog/how-to-remove-image-background-with-ai/', priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://deepvortexai.art/blog/best-ai-image-upscaler-2026/',            priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://deepvortexai.art/blog/turn-photo-into-3d-model-online/',        priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://deepvortexai.art/blog/ai-image-to-video-generator-guide/',      priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://deepvortexai.art/blog/ai-voice-generator-text-to-speech/',      priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://deepvortexai.art/blog/best-ai-image-generator-2026/',           priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://deepvortexai.art/blog/custom-ai-emoticon-generator/',           priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
-  { loc: 'https://deepvortexai.art/blog/deep-vortex-ai-all-tools-guide/',         priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.com/blog/how-to-remove-image-background-with-ai/', priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.com/blog/best-ai-image-upscaler-2026/',            priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.com/blog/turn-photo-into-3d-model-online/',        priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.com/blog/ai-image-to-video-generator-guide/',      priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.com/blog/ai-voice-generator-text-to-speech/',      priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.com/blog/best-ai-image-generator-2026/',           priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.com/blog/custom-ai-emoticon-generator/',           priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
+  { loc: 'https://deepvortexai.com/blog/deep-vortex-ai-all-tools-guide/',         priority: '0.7', changefreq: 'monthly', lastmod: '2026-03-09' },
 ];
 
 // ── Dynamic: scan public/solutions/ ──────────────────────────────────────────
@@ -68,7 +68,7 @@ if (fs.existsSync(solutionsDir)) {
   for (const file of files) {
     const slug = file.replace('.html', '');
     solutionEntries.push({
-      loc:        `https://deepvortexai.art/solutions/${file}`,
+      loc:        `https://deepvortexai.com/solutions/${file}`,
       priority:   '0.8',
       changefreq: 'monthly',
       lastmod:    today,

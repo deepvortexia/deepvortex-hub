@@ -36,7 +36,7 @@ const HubPortal = () => {
       toolDescription: 'Custom emoji creation',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://emoticons.deepvortexai.art'
+      targetUrl: 'https://emoticons.deepvortexai.com'
     },
     {
       iconSymbol: '🖼️',
@@ -44,7 +44,7 @@ const HubPortal = () => {
       toolDescription: 'AI artwork',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://images.deepvortexai.art/'
+      targetUrl: 'https://images.deepvortexai.com/'
     },
     {
       iconSymbol: '🛡️',
@@ -52,7 +52,7 @@ const HubPortal = () => {
       toolDescription: 'AI logo creation',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://logo.deepvortexai.art'
+      targetUrl: 'https://logo.deepvortexai.com'
     },
     {
       iconSymbol: '🎭',
@@ -60,7 +60,7 @@ const HubPortal = () => {
       toolDescription: 'AI portrait styles',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://avatar.deepvortexai.art'
+      targetUrl: 'https://avatar.deepvortexai.com'
     },
     {
       iconSymbol: '✂️',
@@ -68,7 +68,7 @@ const HubPortal = () => {
       toolDescription: 'Remove backgrounds from images instantly with AI precision',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://bgremover.deepvortexai.art'
+      targetUrl: 'https://bgremover.deepvortexai.com'
     },
     {
       iconSymbol: '🔍',
@@ -76,7 +76,7 @@ const HubPortal = () => {
       toolDescription: 'Enhance image resolution and quality with AI upscaling',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://upscaler.deepvortexai.art'
+      targetUrl: 'https://upscaler.deepvortexai.com'
     },
     {
       iconSymbol: '🧊',
@@ -84,7 +84,7 @@ const HubPortal = () => {
       toolDescription: 'Transform images into stunning 3D models instantly',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://3d.deepvortexai.art'
+      targetUrl: 'https://3d.deepvortexai.com'
     },
     {
       iconSymbol: '🎬',
@@ -92,7 +92,7 @@ const HubPortal = () => {
       toolDescription: 'Animate any image into a stunning AI video',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://video.deepvortexai.art'
+      targetUrl: 'https://video.deepvortexai.com'
     },
     {
       iconSymbol: '🎙️',
@@ -100,7 +100,7 @@ const HubPortal = () => {
       toolDescription: 'AI text to speech generation',
       statusLabel: 'Available Now',
       isActive: true,
-      targetUrl: 'https://voice.deepvortexai.art'
+      targetUrl: 'https://voice.deepvortexai.com'
     }
   ];
 
@@ -306,7 +306,7 @@ const HubPortal = () => {
 
       {/* ── Featured Chat Card ──────────────────────────────────────── */}
       <section className="chat-feature-section">
-        <a href="https://chat.deepvortexai.art" className="chat-feature-card">
+        <a href="https://chat.deepvortexai.com" className="chat-feature-card">
           <div className="chat-feature-glow" />
           <div className="chat-feature-new">✦ NEW</div>
           <div className="chat-feature-left">
@@ -443,15 +443,15 @@ const HubPortal = () => {
         <h2 className="section-heading">All AI Tools</h2>
         <div className="preview-tools-grid">
           {[
-            { icon: '🖼️', name: 'Image Generator',    desc: 'Generate stunning AI artwork from text',          url: 'https://images.deepvortexai.art' },
-            { icon: '😀', name: 'Emoticon Generator',  desc: 'Create custom AI-powered emoji and stickers',    url: 'https://emoticons.deepvortexai.art' },
-            { icon: '✂️', name: 'Background Remover',  desc: 'Remove image backgrounds instantly with AI',     url: 'https://bgremover.deepvortexai.art' },
-            { icon: '🔍', name: 'Image Upscaler',      desc: 'Enhance and upscale images with AI precision',   url: 'https://upscaler.deepvortexai.art' },
-            { icon: '🧊', name: '3D Generator',        desc: 'Transform images into stunning 3D models',       url: 'https://3d.deepvortexai.art' },
-            { icon: '🎙️', name: 'Voice Generator',    desc: 'Convert text to natural AI voices instantly',    url: 'https://voice.deepvortexai.art' },
-            { icon: '🎬', name: 'Image to Video',      desc: 'Animate any image into an AI-generated video',   url: 'https://video.deepvortexai.art' },
-            { icon: '🎭', name: 'Avatar Generator',    desc: 'Transform photos into AI portrait styles',       url: 'https://avatar.deepvortexai.art' },
-            { icon: '💬', name: 'AI Chat',             desc: 'Chat with Claude, GPT-5, Gemini & DeepSeek',    url: 'https://chat.deepvortexai.art' },
+            { icon: '🖼️', name: 'Image Generator',    desc: 'Generate stunning AI artwork from text',          url: 'https://images.deepvortexai.com' },
+            { icon: '😀', name: 'Emoticon Generator',  desc: 'Create custom AI-powered emoji and stickers',    url: 'https://emoticons.deepvortexai.com' },
+            { icon: '✂️', name: 'Background Remover',  desc: 'Remove image backgrounds instantly with AI',     url: 'https://bgremover.deepvortexai.com' },
+            { icon: '🔍', name: 'Image Upscaler',      desc: 'Enhance and upscale images with AI precision',   url: 'https://upscaler.deepvortexai.com' },
+            { icon: '🧊', name: '3D Generator',        desc: 'Transform images into stunning 3D models',       url: 'https://3d.deepvortexai.com' },
+            { icon: '🎙️', name: 'Voice Generator',    desc: 'Convert text to natural AI voices instantly',    url: 'https://voice.deepvortexai.com' },
+            { icon: '🎬', name: 'Image to Video',      desc: 'Animate any image into an AI-generated video',   url: 'https://video.deepvortexai.com' },
+            { icon: '🎭', name: 'Avatar Generator',    desc: 'Transform photos into AI portrait styles',       url: 'https://avatar.deepvortexai.com' },
+            { icon: '💬', name: 'AI Chat',             desc: 'Chat with Claude, GPT-5, Gemini & DeepSeek',    url: 'https://chat.deepvortexai.com' },
           ].map((tool) => (
             <a
               key={tool.name}
@@ -480,7 +480,7 @@ const HubPortal = () => {
       </nav>
 
       <footer className="portal-footer">
-        <a href="https://deepvortexai.art" className="footer-main-link">Deep Vortex AI - Building the complete AI creative ecosystem</a>
+        <a href="https://deepvortexai.com" className="footer-main-link">Deep Vortex AI - Building the complete AI creative ecosystem</a>
         <a href="/ai" className="footer-main-link" style={{ fontSize: '0.85rem', opacity: 0.7 }}>All AI Tools</a>
         <div className="footer-social">
           <a href="https://www.tiktok.com/@deepvortexai" target="_blank" rel="noopener noreferrer" className="footer-social-link">
@@ -509,7 +509,7 @@ const HubPortal = () => {
       <PricingModal isOpen={showPricingModal} onClose={() => setShowPricingModal(false)} />
       <FavoritesModal isOpen={showFavoritesModal} onClose={() => setShowFavoritesModal(false)} />
     </div>
-    <a href="https://deepvortexai.art/game" target="_blank" rel="noopener noreferrer" className="play-earn-fab">⚡ Play & Earn</a>
+    <a href="https://deepvortexai.com/game" target="_blank" rel="noopener noreferrer" className="play-earn-fab">⚡ Play & Earn</a>
     </>
   );
 };

@@ -61,8 +61,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         },
       ],
       mode: 'payment',
-      success_url: `${req.headers.origin || 'https://deepvortexai.art'}?success=true&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.origin || 'https://deepvortexai.art'}`,
+      success_url: `${req.headers.origin || 'https://deepvortexai.com'}?success=true&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${req.headers.origin || 'https://deepvortexai.com'}`,
       metadata: {
         packName,
         credits: validPack.credits.toString(),

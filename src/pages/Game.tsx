@@ -69,7 +69,7 @@ export function Game() {
       ['name', 'keywords', 'free AI credits, daily game, earn credits, Deep Vortex AI, vortex clicker, AI tools'],
       ['property', 'og:title', 'Daily Game – Earn Free AI Credits | Deep Vortex AI'],
       ['property', 'og:description', 'Play the free daily Vortex Clicker and earn credits for AI image generation, avatar creation, voice synthesis and more.'],
-      ['property', 'og:url', 'https://deepvortexai.art/game'],
+      ['property', 'og:url', 'https://deepvortexai.com/game'],
     ]
     const added: HTMLMetaElement[] = []
     for (const [attr, key, content] of metas) {
@@ -93,7 +93,7 @@ export function Game() {
       '@type': 'Game',
       name: 'Vortex Clicker – Daily Game',
       description: 'A free daily clicker game on Deep Vortex AI. Click the vortex as fast as you can in 10 seconds to earn free AI credits.',
-      url: 'https://deepvortexai.art/game',
+      url: 'https://deepvortexai.com/game',
       gamePlatform: 'Web Browser',
       applicationCategory: 'Game',
       offers: {
@@ -106,7 +106,7 @@ export function Game() {
       provider: {
         '@type': 'Organization',
         name: 'Deep Vortex AI',
-        url: 'https://deepvortexai.art',
+        url: 'https://deepvortexai.com',
       },
     })
     document.head.appendChild(script)
