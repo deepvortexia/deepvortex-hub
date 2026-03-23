@@ -230,7 +230,7 @@ const HubPortal = () => {
           </a>
 
           <a href="/portal" className="hub-pill blog-pill">
-            <span className="pill-icon">🌀</span>
+            <span className="pill-icon">🏛️</span>
             <span className="pill-text">Portal</span>
           </a>
 
