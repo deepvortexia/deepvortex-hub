@@ -374,7 +374,7 @@ const HubPortal = () => {
       </section>
 
       <section className="why-section">
-        <h2 className="section-heading">Why Deep Vortex AI?</h2>
+        <h2 className="section-heading">Why DΞΞP VORTΞX AI?</h2>
         <div className="why-cards">
           <div className="why-card">
             <div className="why-icon">⚡</div>
@@ -485,7 +485,7 @@ const HubPortal = () => {
       </nav>
 
       <footer className="portal-footer">
-        <a href="https://deepvortexai.com" className="footer-main-link">Deep Vortex AI - Building the complete AI creative ecosystem</a>
+        <a href="https://deepvortexai.com" className="footer-main-link">DΞΞP VORTΞX AI - Building the complete AI creative ecosystem</a>
         <a href="/ai" className="footer-main-link" style={{ fontSize: '0.85rem', opacity: 0.7 }}>All AI Tools</a>
         <div className="footer-social">
           <a href="https://www.tiktok.com/@deepvortexai" target="_blank" rel="noopener noreferrer" className="footer-social-link">
