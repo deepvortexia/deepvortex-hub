@@ -42,6 +42,8 @@
     { "source": "/blog/best-ai-chat-multiple-models-2026",     "destination": "/blog/best-ai-chat-multiple-models-2026.html" },
     { "source": "/blog/:slug",             "destination": "/blog/:slug/index.html" },
     { "source": "/blog/:slug/",            "destination": "/blog/:slug/index.html" },
+    { "source": "/portal",                 "destination": "/portal.html" },
+    { "source": "/portal/",               "destination": "/portal.html" },
     {
       "source": "/((?!api/|sitemap\\.xml|robots\\.txt|llms\\.txt|ai-plugin\\.json|solutions/|blog/best-|blog/how-to-).*)",
       "destination": "/index.html"
