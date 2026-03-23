@@ -200,7 +200,50 @@
       object-fit: contain;
       display: block;
       background: #0d0d0d;
+      cursor: zoom-in;
+      transition: opacity 0.2s ease;
     }
+    .img-grid-item img:hover { opacity: 0.85; }
+
+    /* Image lightbox */
+    .img-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+    }
+    .img-lightbox.open { display: flex; }
+    .img-lightbox img {
+      max-width: 90vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid rgba(212,175,55,0.3);
+      box-shadow: 0 0 60px rgba(212,175,55,0.12);
+    }
+    .img-lightbox-close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      background: none;
+      border: 1px solid rgba(212,175,55,0.5);
+      color: var(--gold);
+      font-size: 1.1rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+      z-index: 1001;
+    }
+    .img-lightbox-close:hover { background: rgba(212,175,55,0.15); }
     .section-divider {
       width: 60px;
       height: 2px;
@@ -389,6 +432,36 @@
     <p class="footer-copy">© 2026 Deep Vortex AI. All rights reserved.</p>
   </div>
 </footer>
+
+<!-- Image Lightbox -->
+<div class="img-lightbox" id="imgLightbox">
+  <button class="img-lightbox-close" id="imgLightboxClose">✕</button>
+  <img id="imgLightboxImg" src="" alt="">
+</div>
+
+<script>
+  const ilb = document.getElementById('imgLightbox');
+  const ilbImg = document.getElementById('imgLightboxImg');
+
+  document.querySelectorAll('.img-grid-item img').forEach(img => {
+    img.addEventListener('click', () => {
+      ilbImg.src = img.src;
+      ilbImg.alt = img.alt;
+      ilb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeImgLightbox() {
+    ilb.classList.remove('open');
+    ilbImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('imgLightboxClose').addEventListener('click', closeImgLightbox);
+  ilb.addEventListener('click', e => { if (e.target === ilb) closeImgLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeImgLightbox(); });
+</script>
 
 </body>
 </html>
