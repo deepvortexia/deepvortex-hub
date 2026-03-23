@@ -38,7 +38,7 @@
 }
 
 .brand-logo-image {
-  height: 90px !important;
+  height: 140px !important;
   width: auto;
   object-fit: contain;
   animation: logoVortex 5s ease-in-out infinite;
