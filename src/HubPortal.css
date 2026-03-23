@@ -38,12 +38,18 @@
 }
 
 .brand-logo-image {
-  height: 120px !important;
+  height: 90px !important;
   width: auto;
   object-fit: contain;
   animation: logoVortex 5s ease-in-out infinite;
   will-change: transform, filter;
   transform-origin: center center;
+}
+
+@media (min-width: 1024px) {
+  .brand-logo-image {
+    height: 140px !important;
+  }
 }
 
 .brand-title-text {
