@@ -224,21 +224,6 @@ const HubPortal = () => {
         <p className="secondary-tagline">Access powerful AI creative tools in one place</p>
         
         <div className="hub-pills-container">
-          <a href="/blog" className="hub-pill blog-pill">
-            <span className="pill-icon">📝</span>
-            <span className="pill-text">Blog</span>
-          </a>
-
-          <a href="/portal" className="hub-pill blog-pill">
-            <span className="pill-icon">🏛️</span>
-            <span className="pill-text">Portal</span>
-          </a>
-
-          <a href="/game" className="hub-pill game-pill" style={{ display: 'none' }}>
-            <span className="pill-icon">🎯</span>
-            <span className="pill-text">Game</span>
-          </a>
-
           {user ? (
             <div className="hub-pill credits-pill">
               <span className="pill-icon">🏆</span>
@@ -258,15 +243,6 @@ const HubPortal = () => {
           >
             <span className="pill-icon">💳</span>
             <span className="pill-text">Buy Credits</span>
-          </button>
-
-          <button
-            className="hub-pill favorites-pill"
-            onClick={handleFavoritesClick}
-            title="View your favorites"
-          >
-            <span className="pill-icon">⭐</span>
-            <span className="pill-text">Favorites</span>
           </button>
 
           {user ? (
@@ -298,6 +274,30 @@ const HubPortal = () => {
               </span>
             </button>
           )}
+
+          <button
+            className="hub-pill favorites-pill"
+            onClick={handleFavoritesClick}
+            title="View your favorites"
+          >
+            <span className="pill-icon">⭐</span>
+            <span className="pill-text">Favorites</span>
+          </button>
+
+          <a href="/portal" className="hub-pill blog-pill">
+            <span className="pill-icon">🏛️</span>
+            <span className="pill-text">Portal</span>
+          </a>
+
+          <a href="/blog" className="hub-pill blog-pill">
+            <span className="pill-icon">📝</span>
+            <span className="pill-text">Blog</span>
+          </a>
+
+          <a href="/game" className="hub-pill game-pill" style={{ display: 'none' }}>
+            <span className="pill-icon">🎯</span>
+            <span className="pill-text">Game</span>
+          </a>
 
           {showRetry && (
             <button className="hub-pill retry-pill" onClick={handleRetry} title="Retry loading">
