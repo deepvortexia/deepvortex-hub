@@ -219,7 +219,10 @@ const HubPortal = () => {
           <img src="/logotinyreal.webp" alt="Deep Vortex" className="brand-logo-image" loading="eager" fetchPriority="high" width="220" height="220" />
         </div>
         
-        <h1 className="brand-title-text">DΞΞP VORTΞX AI</h1>
+        <h1 className="brand-title-text">
+          <span className="sr-only">Deep Vortex AI</span>
+          <span aria-hidden="true">DΞΞP VORTΞX AI</span>
+        </h1>
         <p className="primary-tagline">Your AI Tools Ecosystem</p>
         <p className="secondary-tagline">Access powerful AI creative tools in one place</p>
         
