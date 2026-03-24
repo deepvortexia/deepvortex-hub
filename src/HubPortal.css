@@ -38,7 +38,7 @@
 }
 
 .brand-logo-image {
-  height: 140px !important;
+  height: 220px !important;
   width: auto;
   object-fit: contain;
   animation: logoVortex 5s ease-in-out infinite;
@@ -48,7 +48,7 @@
 
 @media (min-width: 1024px) {
   .brand-logo-image {
-    height: 140px !important;
+    height: 220px !important;
   }
 }
 
@@ -837,7 +837,7 @@
     height: 100px;
   }
 
-  .brand-logo-image { height: 80px !important; }
+  .brand-logo-image { height: 180px !important; }
 
   .user-info-section {
     flex-direction: column;
