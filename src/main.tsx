@@ -9,6 +9,7 @@ import { AuthProvider } from './context/AuthContext'
 
 function App() {
   const path = window.location.pathname
+  if (path === '/chaos') return <div style={{ backgroundColor: '#000', width: '100vw', height: '100vh' }} />
   return (
     <AuthProvider>
       {path === '/auth/callback' ? <AuthCallback />
