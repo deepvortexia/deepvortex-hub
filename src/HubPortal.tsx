@@ -319,9 +319,9 @@ const HubPortal = () => {
           <div className="chat-feature-new">✦ NEW</div>
           <div className="chat-feature-left">
             <div className="chat-feature-icon">💬</div>
-            <h3 className="chat-feature-title">AI Chat Suite — $6.99/mo</h3>
+            <h3 className="chat-feature-title">AI Chat Suite — $9.99/mo</h3>
             <p className="chat-feature-subtitle">Unlimited messages · 4 frontier models</p>
-            <span className="chat-feature-price-badge">ONLY $6.99/mo</span>
+            <span className="chat-feature-price-badge">ONLY $9.99/mo</span>
             <div className="chat-model-tabs">
               <div className="chat-model-tab" style={{ borderColor: 'rgba(249,115,22,0.35)', background: 'rgba(249,115,22,0.08)' }}>
                 <span className="tab-name" style={{ color: '#f97316' }}>◆ GPT-5</span>
