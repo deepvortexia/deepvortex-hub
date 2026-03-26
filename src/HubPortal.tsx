@@ -31,6 +31,14 @@ const HubPortal = () => {
 
   const previewToolsList: ToolCardData[] = [
     {
+      iconSymbol: '✏️',
+      toolName: 'AI Image Editor',
+      toolDescription: 'Edit any image with AI',
+      statusLabel: 'Available Now',
+      isActive: true,
+      targetUrl: 'https://image-editor.deepvortexai.com'
+    },
+    {
       iconSymbol: '😀',
       toolName: 'Emoticons',
       toolDescription: 'Custom emoji creation',
@@ -451,6 +459,7 @@ const HubPortal = () => {
         <h2 className="section-heading">All AI Tools</h2>
         <div className="preview-tools-grid">
           {[
+            { icon: '✏️', name: 'AI Image Editor',     desc: 'Edit any image with AI',                         url: 'https://image-editor.deepvortexai.com' },
             { icon: '🖼️', name: 'Image Generator',    desc: 'Generate stunning AI artwork from text',          url: 'https://images.deepvortexai.com' },
             { icon: '😀', name: 'Emoticon Generator',  desc: 'Create custom AI-powered emoji and stickers',    url: 'https://emoticons.deepvortexai.com' },
             { icon: '✂️', name: 'Background Remover',  desc: 'Remove image backgrounds instantly with AI',     url: 'https://bgremover.deepvortexai.com' },
