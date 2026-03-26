@@ -5,6 +5,7 @@ import './index.css'
 import HubPortal from './HubPortal'
 import { AuthCallback } from './pages/AuthCallback'
 import { Game } from './pages/Game'
+import { Chaos } from './pages/Chaos'
 import { AuthProvider } from './context/AuthContext'
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
   return (
     <AuthProvider>
       {path === '/auth/callback' ? <AuthCallback />
-        : path === '/game' ? <Game />
+        : path === '/game'  ? <Game />
+        : path === '/chaos' ? <Chaos />
         : <HubPortal />}
     </AuthProvider>
   )
