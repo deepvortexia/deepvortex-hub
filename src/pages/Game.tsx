@@ -98,7 +98,7 @@ export function Game() {
       applicationCategory: 'Game',
       offers: {
         '@type': 'Offer',
-        price: '0',
+        price: 0,
         priceCurrency: 'USD',
         description: 'Earn up to 3 free AI credits per day by playing the Vortex Clicker game.',
         availability: 'https://schema.org/InStock',
