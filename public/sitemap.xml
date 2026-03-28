@@ -163,6 +163,56 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- ── Blog articles (directory-style, added 2026-03-28) ── -->
+  <url>
+    <loc>https://deepvortexai.com/blog/ai-image-editor-vs-photoshop-2026/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://deepvortexai.com/blog/best-ai-creative-tools-2026/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://deepvortexai.com/blog/best-ai-image-editor-2026/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://deepvortexai.com/blog/can-ai-predict-the-next-war/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://deepvortexai.com/blog/can-deepfakes-start-a-war/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://deepvortexai.com/blog/how-to-edit-photos-with-ai-free/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://deepvortexai.com/blog/usa-vs-china-ai-race/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://deepvortexai.com/blog/will-ai-replace-soldiers/</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- ── Blog articles (flat .html) ── -->
   <url>
     <loc>https://deepvortexai.com/blog/best-free-ai-avatar-generator-2026</loc>
