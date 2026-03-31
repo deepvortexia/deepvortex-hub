@@ -1,443 +1,173 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep Vortex AI for E-Commerce | AI Product Photo Tools</title>
+  <meta name="description" content="AI tools for e-commerce sellers. Remove backgrounds, upscale product photos, generate lifestyle images — start free.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://deepvortexai.com/solutions/e-commerce.html">
+  <meta property="og:title" content="Deep Vortex AI for E-Commerce | AI Product Photo Tools">
+  <meta property="og:description" content="AI tools for e-commerce sellers. Remove backgrounds, upscale product photos, generate lifestyle images — start free.">
+  <meta property="og:url" content="https://deepvortexai.com/solutions/e-commerce.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Deep Vortex AI for E-Commerce | AI Product Photo Tools">
+  <meta name="twitter:description" content="AI tools for e-commerce sellers. Remove backgrounds, upscale product photos, generate lifestyle images — start free.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Deep Vortex AI for E-Commerce",
+    "description": "AI tools for e-commerce sellers. Remove backgrounds, upscale product photos, generate lifestyle images — start free.",
+    "url": "https://deepvortexai.com/solutions/e-commerce.html",
+    "publisher": { "@type": "Organization", "name": "Deep Vortex AI", "url": "https://deepvortexai.com", "logo": { "@type": "ImageObject", "url": "https://deepvortexai.com/logotinyreal.webp" } }
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --gold: #D4AF37; --gold-light: #E8C87C; --bg: #0a0a0a; --bg-card: #141414; --border: rgba(212,175,55,0.2); --text: #ffffff; --text-dim: #aaaaaa; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; }
+    a { color: var(--gold); text-decoration: none; } a:hover { opacity: 0.8; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(10,10,10,0.96); backdrop-filter: blur(8px); z-index: 100; }
+    .nav-brand { font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--gold); font-size: 1.1rem; }
+    .nav-links { display: flex; gap: 1.5rem; font-size: 0.9rem; align-items: center; }
+    .nav-cta { background: var(--gold); color: #0a0a0a; padding: 0.5rem 1.25rem; border-radius: 6px; font-weight: 700; font-size: 0.9rem; }
+    .article-hero { text-align: center; padding: 5rem 1.5rem 3rem; max-width: 860px; margin: 0 auto; }
+    .article-badge { display: inline-block; border: 1px solid var(--border); color: var(--gold); font-size: 0.8rem; padding: 0.3rem 0.9rem; border-radius: 20px; margin-bottom: 1.5rem; letter-spacing: 0.08em; }
+    .article-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.2; margin-bottom: 1.25rem; }
+    .article-hero h1 span { color: var(--gold); }
+    .article-hero .meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem; }
+    .article-hero .lead { font-size: 1.1rem; color: var(--text-dim); max-width: 680px; margin: 0 auto 2rem; }
+    .btn { display: inline-block; padding: 0.85rem 2rem; border-radius: 8px; font-weight: 700; font-size: 1rem; transition: opacity 0.2s; }
+    .btn-primary { background: var(--gold); color: #0a0a0a; }
+    .btn-primary:hover { opacity: 0.85; }
+    .article-body { max-width: 780px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .article-body h2 { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: var(--gold); margin: 2.5rem 0 1rem; }
+    .article-body p { color: var(--text-dim); margin-bottom: 1.2rem; }
+    .article-body ul, .article-body ol { color: var(--text-dim); padding-left: 1.5rem; margin-bottom: 1.2rem; }
+    .article-body li { margin-bottom: 0.4rem; }
+    .article-body strong { color: var(--text); }
+    .steps { display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; }
+    .step { display: flex; gap: 1rem; align-items: flex-start; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; }
+    .step-num { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; color: var(--gold); min-width: 2rem; }
+    .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .step p { color: var(--text-dim); margin: 0; font-size: 0.95rem; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .feature-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--gold-light); }
+    .feature-card p { font-size: 0.9rem; color: var(--text-dim); margin: 0; }
+    .faq { margin: 1.5rem 0; }
+    .faq details { border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 0.75rem; background: var(--bg-card); }
+    .faq summary { font-weight: 700; cursor: pointer; color: var(--text); list-style: none; }
+    .faq summary::after { content: ' +'; color: var(--gold); }
+    .faq details[open] summary::after { content: ' −'; }
+    .faq details p { color: var(--text-dim); margin: 0.75rem 0 0; font-size: 0.95rem; }
+    .cta-banner { text-align: center; background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(212,175,55,0.04)); border: 1px solid var(--border); border-radius: 16px; padding: 3rem 2rem; margin: 3rem 0; max-width: 780px; margin-left: auto; margin-right: auto; }
+    .cta-banner h2 { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; margin-bottom: 1rem; }
+    .cta-banner p { color: var(--text-dim); margin-bottom: 1.75rem; }
+    footer { border-top: 1px solid var(--border); padding: 3rem 2rem 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+    .footer-brand { font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--gold); font-size: 1rem; margin-bottom: 1.5rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .footer-copy { font-size: 0.8rem; color: var(--text-dim); }
+    .back-link { display: inline-block; margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--gold); }
+    @media (max-width: 600px) { .nav-links { gap: 0.75rem; } nav { padding: 0.75rem 1rem; } }
+  </style>
+</head>
+<body>
 
-    <!-- Primary SEO -->
-    <title>AI Tools for E-commerce Brands | Deep Vortex AI</title>
-    <meta name="description" content="Scale your e-commerce visuals with Deep Vortex AI. Generate product images, create custom brand emoticons, and produce AI-powered product videos that convert browsers into buyers." />
-    <meta name="keywords" content="AI tools for e-commerce, AI product images, e-commerce AI content, AI brand visuals, product video AI, AI marketing tools" />
-    <meta name="author" content="Deep Vortex AI" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
-    <link rel="canonical" href="https://deepvortexai.com/solutions/e-commerce.html" />
+<nav>
+  <a class="nav-brand" href="https://deepvortexai.com">DEEP VORTEX AI</a>
+  <div class="nav-links">
+    <a href="https://deepvortexai.com">Hub</a>
+    <a href="https://deepvortexai.com/blog/">Blog</a>
+    <a href="https://images.deepvortexai.com" class="nav-cta">Try Free</a>
+  </div>
+</nav>
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://deepvortexai.com/solutions/e-commerce.html" />
-    <meta property="og:title" content="AI Tools for E-commerce Brands | Deep Vortex AI" />
-    <meta property="og:description" content="Scale your e-commerce visuals with Deep Vortex AI. Generate product images, create custom brand emoticons, and produce AI-powered product videos that convert browsers into buyers." />
-    <meta property="og:image" content="https://deepvortexai.com/logotinyreal.webp" />
-    <meta property="og:image:width" content="512" />
-    <meta property="og:image:height" content="512" />
-    <meta property="og:site_name" content="Deep Vortex AI" />
-    <meta property="og:locale" content="en_US" />
+<div class="article-hero">
+  <span class="article-badge">FOR SELLERS</span>
+  <h1>AI Tools Built for <span>E-Commerce Sellers</span></h1>
+  <p class="lead">Clean product photos, high-resolution images, and professional lifestyle visuals — without a photography studio or design agency. One platform, shared credits, no subscriptions.</p>
+  <a href="https://deepvortexai.com" class="btn btn-primary">Start For Free →</a>
+</div>
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@deepvortexart" />
-    <meta name="twitter:title" content="AI Tools for E-commerce Brands | Deep Vortex AI" />
-    <meta name="twitter:description" content="Scale your e-commerce visuals with Deep Vortex AI. Generate product images, create custom brand emoticons, and produce AI-powered product videos that convert browsers into buyers." />
-    <meta name="twitter:image" content="https://deepvortexai.com/logotinyreal.webp" />
+<div class="article-body">
 
-    <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
+  <h2>Your Product Photos Are Costing You Conversions</h2>
+  <p>On every major e-commerce platform — Amazon, Etsy, Shopify, eBay — product photography is the single biggest lever for conversion rate. Buyers cannot touch or try your product, so the image has to do all of the selling. A cluttered background, a low-resolution photo, or a missing lifestyle image is not just an aesthetic problem — it is a direct drag on your click-through rate, add-to-cart rate, and ultimately your revenue.</p>
+  <p>Professional product photography solves the problem but costs hundreds of dollars per session, requires scheduling, and produces a fixed set of shots. Every time you add a product or change a variation, you are back at square one. Deep Vortex AI gives you the same output — clean backgrounds, high-resolution images, and lifestyle visuals — on demand, for a fraction of the cost, with <strong>2 free credits to start</strong> and no payment required.</p>
 
-    <!-- Theme -->
-    <meta name="theme-color" content="#D4AF37" />
-
-    <!-- LCP preload -->
-    <link rel="preload" href="https://deepvortexai.com/logotinyreal.webp" as="image" fetchpriority="high" />
-
-    <!-- Fonts: async to avoid render-blocking -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet" /></noscript>
-
-    <!-- Schema.org JSON-LD: SoftwareApplication (niche-specific) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Deep Vortex AI — E-commerce Suite",
-      "url": "https://deepvortexai.com/solutions/e-commerce.html",
-      "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "Web",
-      "description": "Scale your e-commerce visuals with Deep Vortex AI. Generate product images, create custom brand emoticons, and produce AI-powered product videos that convert browsers into buyers.",
-      "offers": {
-        "@type": "Offer",
-        "price": 0,
-        "priceCurrency": "USD"
-      }
-    }
-    </script>
-
-    <!-- Schema.org JSON-LD: BreadcrumbList -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://deepvortexai.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Solutions", "item": "https://deepvortexai.com/solutions/" },
-        { "@type": "ListItem", "position": 3, "name": "E-commerce", "item": "https://deepvortexai.com/solutions/e-commerce.html" }
-      ]
-    }
-    </script>
-
-    <style>
-      /* ── Reset & Variables ── */
-      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-      :root {
-        --primary-gold: #D4AF37;
-        --light-gold:   #E8C87C;
-        --dark-gold:    #B8860B;
-        --bg-deep:      #0a0a0a;
-        --bg-card:      #1a1a1a;
-        --bg-card-hover:#222222;
-        --text-bright:  #ffffff;
-        --text-dim:     #cccccc;
-        --border-gold:  rgba(212, 175, 55, 0.3);
-      }
-
-      /* ── Base ── */
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
-        background: var(--bg-deep);
-        background-image: radial-gradient(rgba(212, 175, 55, 0.07) 1px, transparent 1px);
-        background-size: 28px 28px;
-        color: var(--text-bright);
-        min-height: 100vh;
-        overflow-x: hidden;
-        line-height: 1.6;
-      }
-
-      /* ── Layout ── */
-      .page-wrapper {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 3rem 1.5rem 5rem;
-      }
-
-      /* ── Nav ── */
-      .top-nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1.2rem 0 2rem;
-        border-bottom: 1px solid var(--border-gold);
-        margin-bottom: 3rem;
-      }
-      .nav-logo {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        text-decoration: none;
-      }
-      .nav-logo img {
-        width: 36px;
-        height: 36px;
-        object-fit: contain;
-      }
-      .nav-logo-text {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 0.95rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        letter-spacing: 1px;
-      }
-      .nav-back {
-        font-size: 0.85rem;
-        color: var(--text-dim);
-        text-decoration: none;
-        border: 1px solid var(--border-gold);
-        padding: 0.45rem 1rem;
-        border-radius: 20px;
-        transition: color 0.2s, border-color 0.2s;
-      }
-      .nav-back:hover { color: var(--primary-gold); border-color: var(--primary-gold); }
-
-      /* ── Hero ── */
-      .hero-section {
-        text-align: center;
-        padding: 2rem 0 3.5rem;
-      }
-      .hero-badge {
-        display: inline-block;
-        font-size: 0.78rem;
-        font-weight: 600;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--primary-gold);
-        border: 1px solid var(--border-gold);
-        padding: 0.35rem 1rem;
-        border-radius: 20px;
-        margin-bottom: 1.5rem;
-        background: rgba(212, 175, 55, 0.06);
-      }
-      .hero-h1 {
-        font-family: 'Orbitron', -apple-system, sans-serif;
-        font-size: 2.8rem;
-        font-weight: 900;
-        line-height: 1.15;
-        margin-bottom: 1.25rem;
-        background: linear-gradient(135deg, var(--light-gold) 0%, var(--primary-gold) 50%, var(--dark-gold) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        letter-spacing: 2px;
-      }
-      .hero-tagline {
-        font-family: 'Orbitron', -apple-system, sans-serif;
-        font-size: 1.1rem;
-        font-weight: 500;
-        color: var(--light-gold);
-        margin-bottom: 1rem;
-      }
-      .hero-description {
-        font-size: 1rem;
-        color: var(--text-dim);
-        max-width: 640px;
-        margin: 0 auto 2.5rem;
-      }
-      .hero-cta {
-        display: inline-block;
-        background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
-        color: #0a0a0a;
-        font-family: 'Orbitron', sans-serif;
-        font-weight: 700;
-        font-size: 0.9rem;
-        letter-spacing: 1px;
-        padding: 0.85rem 2rem;
-        border-radius: 8px;
-        text-decoration: none;
-        transition: opacity 0.2s, transform 0.2s;
-      }
-      .hero-cta:hover { opacity: 0.88; transform: translateY(-2px); }
-
-      /* ── Section headings ── */
-      .section-title {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--primary-gold);
-        margin-bottom: 2rem;
-        text-align: center;
-        letter-spacing: 1px;
-      }
-      .section-title::after {
-        content: '';
-        display: block;
-        width: 48px;
-        height: 2px;
-        background: var(--primary-gold);
-        margin: 0.6rem auto 0;
-        border-radius: 2px;
-      }
-
-      /* ── Use-cases grid ── */
-      .usecases-section { margin-bottom: 4rem; }
-      .usecases-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
-      }
-      .usecase-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border-gold);
-        border-radius: 12px;
-        padding: 1.5rem;
-        transition: border-color 0.2s, background 0.2s;
-      }
-      .usecase-card:hover { border-color: var(--primary-gold); background: var(--bg-card-hover); }
-      .usecase-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
-      .usecase-title {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: var(--light-gold);
-        margin-bottom: 0.5rem;
-        letter-spacing: 0.5px;
-      }
-      .usecase-text { font-size: 0.88rem; color: var(--text-dim); line-height: 1.55; }
-
-      /* ── Tools grid ── */
-      .tools-section { margin-bottom: 4rem; }
-      .tools-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
-      }
-      .tool-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border-gold);
-        border-radius: 12px;
-        padding: 1.75rem 1.5rem;
-        text-align: center;
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.75rem;
-        transition: border-color 0.2s, background 0.2s, transform 0.2s;
-      }
-      .tool-card:hover { border-color: var(--primary-gold); background: var(--bg-card-hover); transform: translateY(-3px); }
-      .tool-icon { font-size: 2.2rem; }
-      .tool-name {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 0.88rem;
-        font-weight: 700;
-        color: var(--primary-gold);
-        letter-spacing: 0.5px;
-      }
-      .tool-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
-      .tool-link-label {
-        font-size: 0.8rem;
-        color: var(--light-gold);
-        margin-top: auto;
-        opacity: 0.8;
-      }
-
-      /* ── CTA banner ── */
-      .cta-section {
-        background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(184,134,11,0.06));
-        border: 1px solid var(--border-gold);
-        border-radius: 16px;
-        padding: 3rem 2rem;
-        text-align: center;
-      }
-      .cta-title {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 900;
-        color: var(--light-gold);
-        margin-bottom: 0.75rem;
-        letter-spacing: 1px;
-      }
-      .cta-subtitle { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 1.75rem; }
-      .cta-button {
-        display: inline-block;
-        background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
-        color: #0a0a0a;
-        font-family: 'Orbitron', sans-serif;
-        font-weight: 700;
-        font-size: 0.9rem;
-        letter-spacing: 1px;
-        padding: 0.9rem 2.2rem;
-        border-radius: 8px;
-        text-decoration: none;
-        transition: opacity 0.2s, transform 0.2s;
-      }
-      .cta-button:hover { opacity: 0.88; transform: translateY(-2px); }
-
-      /* ── Footer ── */
-      .page-footer {
-        margin-top: 4rem;
-        padding-top: 2rem;
-        border-top: 1px solid var(--border-gold);
-        text-align: center;
-        font-size: 0.82rem;
-        color: var(--text-dim);
-      }
-      .page-footer a { color: var(--primary-gold); text-decoration: none; }
-      .page-footer a:hover { text-decoration: underline; }
-
-      /* ── Responsive ── */
-      @media (max-width: 768px) {
-        .page-wrapper { padding: 2rem 1rem 4rem; }
-        .hero-h1 { font-size: 1.9rem; }
-        .usecases-grid, .tools-grid { grid-template-columns: 1fr; }
-        .top-nav { flex-wrap: wrap; gap: 1rem; }
-      }
-      @media (max-width: 480px) {
-        .hero-h1 { font-size: 1.5rem; }
-        .cta-title { font-size: 1.15rem; }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="page-wrapper">
-
-      <!-- Navigation -->
-      <nav class="top-nav">
-        <a href="https://deepvortexai.com/" class="nav-logo">
-          <img src="https://deepvortexai.com/logotinyreal.webp" alt="Deep Vortex AI" width="36" height="36" fetchpriority="high" />
-          <span class="nav-logo-text">DΞΞP VORTΞX AI</span>
-        </a>
-        <a href="https://deepvortexai.com/" class="nav-back">← Back to Hub</a>
-      </nav>
-
-      <!-- Hero -->
-      <section class="hero-section">
-        <div class="hero-badge">AI Tools for E-commerce</div>
-        <h1 class="hero-h1">AI Creative Suite for E-commerce Brands</h1>
-        <p class="hero-tagline">Create content that sells — powered by AI.</p>
-        <p class="hero-description">Deep Vortex AI lets e-commerce brands produce high-converting visuals at scale. Generate product imagery, build branded emoticon packs for customer engagement, and animate products into captivating video ads.</p>
-        <a href="https://deepvortexai.com/" class="hero-cta">Explore the Hub — Free</a>
-      </section>
-
-      <!-- Use Cases -->
-      <section class="usecases-section">
-        <h2 class="section-title">Why E-commerce Choose Deep Vortex AI</h2>
-        <div class="usecases-grid">
-          <div class="usecase-card">
-            <div class="usecase-icon">📦</div>
-            <div class="usecase-title">AI Product Imagery</div>
-            <p class="usecase-text">Generate lifestyle and studio-quality product images without a photo shoot — perfect for ads, listings, and landing pages.</p>
-          </div>
-          <div class="usecase-card">
-            <div class="usecase-icon">💬</div>
-            <div class="usecase-title">Brand Emoticons</div>
-            <p class="usecase-text">Build a set of branded emoticons for customer support chats, loyalty programs, and social media engagement.</p>
-          </div>
-          <div class="usecase-card">
-            <div class="usecase-icon">🛒</div>
-            <div class="usecase-title">Product Video Ads</div>
-            <p class="usecase-text">Turn static product images into dynamic AI video ads that perform better on Instagram, TikTok, and Facebook.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- AI Tools -->
-      <section class="tools-section">
-        <h2 class="section-title">AI Tools Made for You</h2>
-        <div class="tools-grid">
-          <a href="https://images.deepvortexai.com/" class="tool-card">
-            <div class="tool-icon">🎨</div>
-            <div class="tool-name">AI Image Generator</div>
-            <p class="tool-desc">Generate on-brand product images, lifestyle photos, and promotional visuals in seconds — no photo shoot needed.</p>
-            <span class="tool-link-label">Launch Tool →</span>
-          </a>
-          <a href="https://emoticons.deepvortexai.com/" class="tool-card">
-            <div class="tool-icon">😄</div>
-            <div class="tool-name">AI Emoticon Creator</div>
-            <p class="tool-desc">Create a branded emoticon pack for customer communication, loyalty campaigns, and social engagement.</p>
-            <span class="tool-link-label">Launch Tool →</span>
-          </a>
-          <a href="https://video.deepvortexai.com/" class="tool-card">
-            <div class="tool-icon">🎬</div>
-            <div class="tool-name">AI Image to Video</div>
-            <p class="tool-desc">Animate product photos into high-converting video ads for social media and paid campaigns.</p>
-            <span class="tool-link-label">Launch Tool →</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- CTA -->
-      <section class="cta-section">
-        <h2 class="cta-title">Start Creating for Free</h2>
-        <p class="cta-subtitle">No subscription required. Sign in and get 2 free credits instantly.</p>
-        <a href="https://deepvortexai.com/" class="cta-button">Go to Deep Vortex AI Hub</a>
-      </section>
-
-      <!-- Footer -->
-      <footer class="page-footer">
-        <p>
-          &copy; 2025 <a href="https://deepvortexai.com/">Deep Vortex AI</a> &mdash;
-          <a href="https://deepvortexai.com/">Hub</a> &middot;
-          <a href="https://images.deepvortexai.com/">Image Generator</a> &middot;
-          <a href="https://emoticons.deepvortexai.com/">Emoticon Creator</a> &middot;
-          <a href="https://video.deepvortexai.com/">Image to Video</a>
-        </p>
-      </footer>
-
+  <h2>Tools That Solve the Biggest Product Photo Problems</h2>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <h3>AI Background Remover</h3>
+      <p>Remove cluttered or inconsistent backgrounds from product photos instantly. Download transparent PNGs ready for white-background marketplace listings or composite into any scene.</p>
     </div>
-  </body>
+    <div class="feature-card">
+      <h3>AI Image Upscaler</h3>
+      <p>Upscale low-resolution product photos 2x or 4x with AI super-resolution. Meet Amazon and Shopify minimum image requirements without reshooting — enlarge without blurriness or pixelation.</p>
+    </div>
+    <div class="feature-card">
+      <h3>AI Image Generator</h3>
+      <p>Generate lifestyle and context imagery to accompany your product listings. Describe the scene you need — kitchen countertop, outdoor setting, studio flat-lay — and receive it in seconds.</p>
+    </div>
+    <div class="feature-card">
+      <h3>AI Emoticon Generator</h3>
+      <p>Create branded emoticon packs for your store's Discord community, loyalty program, or social media presence — build brand identity beyond the product listing itself.</p>
+    </div>
+  </div>
+
+  <h2>How E-Commerce Sellers Use These Tools in Production</h2>
+  <p>The most common workflow for sellers using Deep Vortex AI starts with the <strong>Background Remover</strong>. You photograph your product on any surface — a table, a piece of cardboard, a bedsheet — and the AI strips the background in seconds, delivering a clean transparent PNG. That isolated product image then becomes the base for every other use: white-background marketplace listings, composite lifestyle scenes, promotional banners, and social media posts.</p>
+  <p>For sellers with older product photos that fall below platform resolution requirements, the <strong>Image Upscaler</strong> is the fastest fix available. Rather than scheduling a reshoot for every low-resolution SKU in a catalog, you run each image through the upscaler and receive a high-resolution version that meets Amazon's 1000px minimum zoom requirement and Shopify's recommended 2048px threshold — in seconds per image.</p>
+  <p>The <strong>Image Generator</strong> addresses the most expensive photography gap: lifestyle imagery. A white-background product shot tells buyers what the item looks like. A lifestyle image — the same product in a real-world context — tells them how it fits into their life. Generating lifestyle scenes on demand means you can test different contexts, seasonal settings, and audience-specific scenarios without committing to expensive staged shoots for each variation.</p>
+
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq">
+    <details>
+      <summary>Can I use generated and edited images in my product listings?</summary>
+      <p>Yes. Images produced with Deep Vortex AI tools — whether generated from a prompt or processed through the Background Remover or Upscaler — are yours to use in commercial contexts, including marketplace listings on Amazon, Etsy, Shopify, and other platforms. There are no additional licensing fees for commercial use.</p>
+    </details>
+    <details>
+      <summary>Will background-removed images meet Amazon and Shopify requirements?</summary>
+      <p>Yes. The Background Remover outputs transparent PNG files, which you can place on a pure white background to meet Amazon's main image requirements. For resolution requirements, pair the Background Remover with the Image Upscaler to ensure the final PNG meets the 1000px minimum (Amazon) or 2048px recommended (Shopify) thresholds before uploading.</p>
+    </details>
+    <details>
+      <summary>What file formats do the tools output?</summary>
+      <p>The Background Remover outputs transparent PNG — the standard format for product listings and compositing workflows. The Image Upscaler outputs high-resolution PNG. The Image Generator outputs PNG. All outputs are ready to upload directly to marketplace platforms or import into design tools like Canva, Photoshop, or Figma without conversion.</p>
+    </details>
+  </div>
+
+</div>
+
+<div class="cta-banner">
+  <h2>Start Improving Your Product Photos</h2>
+  <p>One account. Eight tools. 2 free credits to start — no payment required.</p>
+  <a href="https://deepvortexai.com" class="btn btn-primary">Explore All Tools Free →</a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <p class="footer-brand">DEEP VORTEX AI</p>
+    <div class="footer-links">
+      <a href="https://deepvortexai.com">Hub</a>
+      <a href="https://deepvortexai.com/blog/">Blog</a>
+      <a href="https://images.deepvortexai.com">Image Generator</a>
+      <a href="https://bgremover.deepvortexai.com">Background Remover</a>
+      <a href="https://upscaler.deepvortexai.com">Image Upscaler</a>
+      <a href="https://3d.deepvortexai.com">3D Generator</a>
+      <a href="https://voice.deepvortexai.com">Voice Generator</a>
+      <a href="https://video.deepvortexai.com">Image to Video</a>
+      <a href="https://emoticons.deepvortexai.com">Emoticon Generator</a>
+    </div>
+    <p class="footer-copy">© 2026 Deep Vortex AI. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
 </html>

@@ -18,6 +18,11 @@
     }
   ],
   "rewrites": [
+    { "source": "/solutions/digital-artists", "destination": "/solutions/digital-artists.html" },
+    { "source": "/solutions/e-commerce",      "destination": "/solutions/e-commerce.html" },
+    { "source": "/solutions/gamers",          "destination": "/solutions/gamers.html" },
+    { "source": "/solutions/real-estate",     "destination": "/solutions/real-estate.html" },
+    { "source": "/solutions/youtubers",       "destination": "/solutions/youtubers.html" },
     { "source": "/ai-image-generator",    "destination": "/ai-image-generator/index.html" },
     { "source": "/ai-image-generator/",   "destination": "/ai-image-generator/index.html" },
     { "source": "/ai-voice-generator",    "destination": "/ai-voice-generator/index.html" },
