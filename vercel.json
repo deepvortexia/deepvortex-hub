@@ -1,4 +1,8 @@
 {
+  "redirects": [
+    { "source": "/:path*", "has": [{"type": "host", "value": "www.deepvortexai.com"}], "destination": "https://deepvortexai.com/:path*", "permanent": true },
+    { "source": "/:path*", "has": [{"type": "header", "key": "x-forwarded-proto", "value": "http"}], "destination": "https://deepvortexai.com/:path*", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/sitemap.xml",
