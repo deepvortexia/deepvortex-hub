@@ -499,6 +499,7 @@ const HubPortal = () => {
       <footer className="portal-footer">
         <a href="https://deepvortexai.com" className="footer-main-link">DΞΞP VORTΞX AI - Building the complete AI creative ecosystem</a>
         <a href="/ai" className="footer-main-link" style={{ fontSize: '0.85rem', opacity: 0.7 }}>All AI Tools</a>
+        <a href="/ai" style={{ color: '#888', fontSize: '13px' }}>All AI Tools — Complete Platform Guide</a>
         <div className="footer-social">
           <a href="https://www.tiktok.com/@deepvortexai" target="_blank" rel="noopener noreferrer" className="footer-social-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
