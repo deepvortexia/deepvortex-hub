@@ -52,4 +52,3 @@ User-agent: Bytespider
 Allow: /
 
 Sitemap: https://deepvortexai.com/sitemap.xml
-Sitemap: https://deepvortexai.com/llms.txt
