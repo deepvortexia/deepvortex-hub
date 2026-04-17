@@ -9,9 +9,13 @@
     "prebuild": "node generate-pages.js && node generate-sitemap.js",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cap:sync": "vite build && npx cap sync",
+    "cap:open": "npx cap open android"
   },
   "dependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
     "@supabase/supabase-js": "^2.95.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -22,6 +26,7 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
+    "@capacitor/cli": "^7.0.0",
     "@vercel/node": "^3.0.12",
     "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^9.39.1",

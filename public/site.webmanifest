@@ -1,11 +1,6 @@
 {
-  "name": "Deep Vortex AI",
-  "short_name": "Deep Vortex",
-  "description": "Your complete AI creative tools ecosystem — AI image generator, AI emoticon creator, and more powerful AI tools.",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#0a0a0a",
-  "theme_color": "#D4AF37",
+  "name": "MyWebSite",
+  "short_name": "MySite",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -19,5 +14,8 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
 }

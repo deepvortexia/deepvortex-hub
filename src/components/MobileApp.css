@@ -1,0 +1,494 @@
+/* ── MobileApp — Capacitor-only mobile UI ─────────────────────────── */
+
+/* Root shell */
+.ma-root {
+  position: fixed;
+  inset: 0;
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* Scrollable content area above nav */
+.ma-content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding-bottom: calc(62px + env(safe-area-inset-bottom));
+}
+
+/* ── Home Tab ────────────────────────────────────────────────────── */
+.ma-home {
+  display: flex;
+  flex-direction: column;
+}
+
+.ma-home-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 20px 28px;
+  overflow: hidden;
+}
+
+.ma-hero-glow {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ma-hero-logo {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.35));
+}
+
+.ma-hero-title {
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #D4AF37;
+  margin: 14px 0 4px;
+  text-align: center;
+}
+
+.ma-hero-tagline {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+  text-align: center;
+}
+
+.ma-hero-actions {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.ma-credits-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 40px;
+  padding: 8px 10px 8px 14px;
+}
+
+.ma-credits-icon {
+  font-size: 1rem;
+}
+
+.ma-credits-text {
+  color: #D4AF37;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.ma-buy-btn {
+  background: rgba(212, 175, 55, 0.18);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #D4AF37;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ma-signin-cta {
+  background: linear-gradient(135deg, #D4AF37 0%, #B8960C 100%);
+  border: none;
+  color: #0a0a0a;
+  border-radius: 28px;
+  padding: 12px 22px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+  transition: opacity 0.15s;
+}
+
+.ma-signin-cta:active {
+  opacity: 0.85;
+}
+
+.ma-signin-cta:disabled {
+  opacity: 0.5;
+}
+
+/* Section header */
+.ma-section-header {
+  display: flex;
+  align-items: center;
+  padding: 4px 16px 10px;
+}
+
+.ma-section-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Tool grid */
+.ma-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 0 12px 16px;
+}
+
+.ma-tools-grid--padded {
+  padding: 4px 12px 24px;
+}
+
+/* Tool card */
+.ma-tool-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  padding: 18px 8px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  width: 100%;
+}
+
+.ma-tool-card:active {
+  transform: scale(0.94);
+  background: rgba(212, 175, 55, 0.07);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.ma-tool-icon {
+  font-size: 1.9rem;
+  line-height: 1;
+  display: block;
+}
+
+.ma-tool-name {
+  font-size: 0.67rem;
+  color: rgba(255, 255, 255, 0.82);
+  text-align: center;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+/* ── Tools Tab ───────────────────────────────────────────────────── */
+.ma-tools-tab {
+  display: flex;
+  flex-direction: column;
+}
+
+.ma-tools-tab-header {
+  padding: 32px 16px 16px;
+}
+
+.ma-tab-title {
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #D4AF37;
+  margin: 0 0 4px;
+  letter-spacing: 0.04em;
+}
+
+.ma-tab-subtitle {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
+
+/* ── Account Tab ─────────────────────────────────────────────────── */
+.ma-account {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 16px 24px;
+  gap: 20px;
+}
+
+.ma-account-loading {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 60px 0;
+  font-size: 0.9rem;
+}
+
+/* Signed-out state */
+.ma-account-signed-out {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 40px 0;
+}
+
+.ma-account-avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.ma-account-prompt {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.88rem;
+  text-align: center;
+  margin: 0;
+  max-width: 240px;
+  line-height: 1.5;
+}
+
+.ma-account-signin-btn {
+  background: linear-gradient(135deg, #D4AF37 0%, #B8960C 100%);
+  border: none;
+  color: #0a0a0a;
+  border-radius: 28px;
+  padding: 13px 32px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+}
+
+/* Profile section */
+.ma-account-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.ma-account-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(212, 175, 55, 0.4);
+}
+
+.ma-account-avatar-fallback {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.06));
+  border: 2px solid rgba(212, 175, 55, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #D4AF37;
+}
+
+.ma-account-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+}
+
+.ma-account-email {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+  text-align: center;
+}
+
+/* Credits card */
+.ma-account-credits-card {
+  background: rgba(212, 175, 55, 0.07);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 18px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ma-account-credits-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ma-account-credits-label {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.ma-account-credits-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #D4AF37;
+  line-height: 1;
+}
+
+.ma-account-buy-btn {
+  background: linear-gradient(135deg, #D4AF37 0%, #B8960C 100%);
+  border: none;
+  color: #0a0a0a;
+  border-radius: 22px;
+  padding: 10px 18px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Links list */
+.ma-account-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.ma-account-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.9rem;
+  background: transparent;
+  transition: background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ma-account-link + .ma-account-link {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ma-account-link:active {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ma-link-arrow {
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 1.1rem;
+}
+
+/* Sign out */
+.ma-signout-btn {
+  background: rgba(255, 59, 48, 0.1);
+  border: 1px solid rgba(255, 59, 48, 0.2);
+  color: #ff6b6b;
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s;
+}
+
+.ma-signout-btn:active {
+  background: rgba(255, 59, 48, 0.18);
+}
+
+/* ── Bottom Navigation ───────────────────────────────────────────── */
+.ma-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(62px + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  background: #0e0e0e;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: stretch;
+  z-index: 100;
+}
+
+.ma-nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.32);
+  transition: color 0.18s;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  position: relative;
+}
+
+.ma-nav-btn.ma-nav-active {
+  color: #D4AF37;
+}
+
+.ma-nav-btn.ma-nav-active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 2px;
+  background: #D4AF37;
+  border-radius: 0 0 2px 2px;
+}
+
+.ma-nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ma-nav-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+}
+
+.ma-nav-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
