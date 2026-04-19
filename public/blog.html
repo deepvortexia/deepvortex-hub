@@ -830,7 +830,8 @@ const posts = [
     date: "Apr 14, 2026",
     readTime: "7 min read",
     thumb: "thumb-bg-1",
-    thumbLabel: "AI image generation samples"
+    thumbLabel: "AI image generation samples",
+    slug: "/blog/best-ai-image-generator-2026/"
   },
   {
     id: 2,
@@ -840,7 +841,8 @@ const posts = [
     date: "Apr 11, 2026",
     readTime: "9 min read",
     thumb: "thumb-bg-2",
-    thumbLabel: "before / after background removal"
+    thumbLabel: "before / after background removal",
+    slug: "/blog/how-to-remove-image-background-with-ai/"
   },
   {
     id: 3,
@@ -850,7 +852,8 @@ const posts = [
     date: "Apr 8, 2026",
     readTime: "5 min read",
     thumb: "thumb-bg-3",
-    thumbLabel: "voice waveform visualization"
+    thumbLabel: "voice waveform visualization",
+    slug: "/blog/voice-cloner-3-richer-tone-2026/"
   },
   {
     id: 4,
@@ -860,7 +863,8 @@ const posts = [
     date: "Apr 5, 2026",
     readTime: "6 min read",
     thumb: "thumb-bg-4",
-    thumbLabel: "avatar style consistency grid"
+    thumbLabel: "avatar style consistency grid",
+    slug: "/blog/ai-avatar-consistency-tips-2026/"
   },
   {
     id: 5,
@@ -870,7 +874,8 @@ const posts = [
     date: "Apr 2, 2026",
     readTime: "8 min read",
     thumb: "thumb-bg-5",
-    thumbLabel: "3D model wireframe render"
+    thumbLabel: "3D model wireframe render",
+    slug: "/blog/best-free-ai-3d-model-generator-2026/"
   },
   {
     id: 6,
@@ -880,7 +885,8 @@ const posts = [
     date: "Mar 29, 2026",
     readTime: "12 min read",
     thumb: "thumb-bg-6",
-    thumbLabel: "tool pipeline flow diagram"
+    thumbLabel: "tool pipeline flow diagram",
+    slug: "/blog/deep-vortex-ai-content-pipeline-guide/"
   }
 ];
 
@@ -1065,11 +1071,13 @@ function App() {
           {/* Grid */}
           <div className="blog-grid" style={{gridTemplateColumns: `repeat(${cols}, 1fr)`}}>
             {filtered.map(post => (
-              <article
+              <a
                 key={post.id}
+                href={post.slug}
                 className={`blog-card ${tweaks.cardStyle === 'minimal' ? 'card-minimal' : ''}`}
                 onMouseEnter={() => setHoveredCard(post.id)}
                 onMouseLeave={() => setHoveredCard(null)}
+                style={{textDecoration: 'none', color: 'inherit', display: 'block'}}
               >
                 <div className="card-thumb">
                   <div className={`card-thumb-inner ${post.thumb}`}>
@@ -1089,7 +1097,7 @@ function App() {
                     <div className="card-arrow">→</div>
                   </div>
                 </div>
-              </article>
+              </a>
             ))}
           </div>
 

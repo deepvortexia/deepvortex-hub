@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building a Full AI Content Pipeline With Deep Vortex Tools | Deep Vortex AI Blog</title>
+  <meta name="description" content="Combine Deep Vortex AI's Image Generator, Background Remover, Avatar Creator, and Voice Cloner in one automated workflow. A practical guide to chaining tools via API.">
+  <meta name="keywords" content="AI content pipeline 2026, deep vortex AI tools guide, automate content creation AI, AI workflow tools, chain AI tools API">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://deepvortexai.com/blog/deep-vortex-ai-content-pipeline-guide/">
+  <meta property="og:title" content="Building a Full AI Content Pipeline With Deep Vortex Tools">
+  <meta property="og:description" content="Combine Deep Vortex AI's Image Generator, Background Remover, Avatar Creator, and Voice Cloner in one automated workflow. A practical guide to chaining tools via API.">
+  <meta property="og:url" content="https://deepvortexai.com/blog/deep-vortex-ai-content-pipeline-guide/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://deepvortexai.com/og-image.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Building a Full AI Content Pipeline With Deep Vortex Tools">
+  <meta name="twitter:description" content="Combine Deep Vortex AI's Image Generator, Background Remover, Avatar Creator, and Voice Cloner in one automated workflow. A practical guide to chaining tools via API.">
+  <meta name="twitter:image" content="https://deepvortexai.com/og-image.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Building a Full AI Content Pipeline With Deep Vortex Tools",
+    "description": "Combine Deep Vortex AI's Image Generator, Background Remover, Avatar Creator, and Voice Cloner in one automated workflow. A practical guide to chaining tools via API.",
+    "datePublished": "2026-03-29",
+    "dateModified": "2026-03-29",
+    "author": { "@type": "Organization", "name": "Deep Vortex AI", "url": "https://deepvortexai.com" },
+    "publisher": { "@type": "Organization", "name": "Deep Vortex AI", "url": "https://deepvortexai.com", "logo": { "@type": "ImageObject", "url": "https://deepvortexai.com/logotinyreal.webp" } },
+    "image": "https://deepvortexai.com/og-image.webp",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://deepvortexai.com/blog/deep-vortex-ai-content-pipeline-guide/" }
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --gold: #D4AF37; --gold-light: #E8C87C; --bg: #0a0a0a; --bg-card: #141414; --border: rgba(212,175,55,0.2); --text: #ffffff; --text-dim: #aaaaaa; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; }
+    a { color: var(--gold); text-decoration: none; } a:hover { opacity: 0.8; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(10,10,10,0.96); backdrop-filter: blur(8px); z-index: 100; }
+    .nav-brand { font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--gold); font-size: 1.1rem; }
+    .nav-links { display: flex; gap: 1.5rem; font-size: 0.9rem; align-items: center; }
+    .nav-cta { background: var(--gold); color: #0a0a0a; padding: 0.5rem 1.25rem; border-radius: 6px; font-weight: 700; font-size: 0.9rem; }
+    .article-hero { text-align: center; padding: 5rem 1.5rem 3rem; max-width: 860px; margin: 0 auto; }
+    .article-badge { display: inline-block; border: 1px solid var(--border); color: var(--gold); font-size: 0.8rem; padding: 0.3rem 0.9rem; border-radius: 20px; margin-bottom: 1.5rem; letter-spacing: 0.08em; }
+    .article-hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.2; margin-bottom: 1.25rem; }
+    .article-hero h1 span { color: var(--gold); }
+    .article-hero .meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem; }
+    .article-hero .lead { font-size: 1.1rem; color: var(--text-dim); max-width: 680px; margin: 0 auto 2rem; }
+    .btn { display: inline-block; padding: 0.85rem 2rem; border-radius: 8px; font-weight: 700; font-size: 1rem; transition: opacity 0.2s; }
+    .btn-primary { background: var(--gold); color: #0a0a0a; }
+    .btn-primary:hover { opacity: 0.85; }
+    .article-body { max-width: 780px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .article-body h2 { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: var(--gold); margin: 2.5rem 0 1rem; }
+    .article-body p { color: var(--text-dim); margin-bottom: 1.2rem; }
+    .article-body ul, .article-body ol { color: var(--text-dim); padding-left: 1.5rem; margin-bottom: 1.2rem; }
+    .article-body li { margin-bottom: 0.4rem; }
+    .article-body strong { color: var(--text); }
+    .back-link { display: inline-block; color: var(--text-dim); font-size: 0.9rem; margin-bottom: 2rem; }
+    .pipeline-step { display: flex; gap: 1.25rem; margin-bottom: 1rem; }
+    .pipeline-step:last-child { margin-bottom: 0; }
+    .pipeline-connector { display: flex; flex-direction: column; align-items: center; min-width: 2.5rem; }
+    .pipeline-dot { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: rgba(212,175,55,0.15); border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 900; color: var(--gold); flex-shrink: 0; }
+    .pipeline-line { width: 1px; flex: 1; background: rgba(212,175,55,0.2); margin: 4px 0; min-height: 1.5rem; }
+    .pipeline-content { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; flex: 1; margin-bottom: 1rem; }
+    .pipeline-content h3 { font-size: 1rem; font-weight: 700; color: var(--gold-light); margin-bottom: 0.4rem; }
+    .pipeline-content p { color: var(--text-dim); margin: 0; font-size: 0.95rem; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .feature-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--gold-light); }
+    .feature-card p { font-size: 0.9rem; color: var(--text-dim); margin: 0; }
+    .code-block { background: #0f0f0f; border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin: 1.25rem 0; overflow-x: auto; }
+    .code-block pre { font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; color: #ccc; line-height: 1.6; margin: 0; }
+    .code-block .comment { color: #555; }
+    .code-block .key { color: var(--gold-light); }
+    .code-block .value { color: #90caf9; }
+    .faq { margin: 1.5rem 0; }
+    .faq details { border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 0.75rem; background: var(--bg-card); }
+    .faq summary { font-weight: 700; cursor: pointer; color: var(--text); list-style: none; }
+    .faq summary::after { content: ' +'; color: var(--gold); }
+    .faq details[open] summary::after { content: ' −'; }
+    .faq details p { color: var(--text-dim); margin: 0.75rem 0 0; font-size: 0.95rem; }
+    .cta-banner { text-align: center; background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(212,175,55,0.04)); border: 1px solid var(--border); border-radius: 16px; padding: 3rem 2rem; margin: 3rem 0; max-width: 780px; margin-left: auto; margin-right: auto; }
+    .cta-banner h2 { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; margin-bottom: 1rem; }
+    .cta-banner p { color: var(--text-dim); margin-bottom: 1.75rem; }
+    footer { border-top: 1px solid var(--border); padding: 3rem 2rem 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+    .footer-brand { font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--gold); font-size: 1rem; margin-bottom: 1.5rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .footer-copy { font-size: 0.8rem; color: var(--text-dim); }
+    @media (max-width: 600px) { nav { padding: 1rem; } .nav-links { gap: 1rem; } .article-hero { padding: 3rem 1rem 2rem; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://deepvortexai.com" class="nav-brand">DEEP VORTEX AI</a>
+  <div class="nav-links">
+    <a href="https://deepvortexai.com/blog/">Blog</a>
+    <a href="https://deepvortexai.com" class="nav-cta">Try All Tools Free →</a>
+  </div>
+</nav>
+
+<div class="article-hero">
+  <span class="article-badge">TUTORIALS · MARCH 2026</span>
+  <h1>Building a Full <span>AI Content Pipeline</span> With Deep Vortex Tools</h1>
+  <p class="meta">By Deep Vortex AI &nbsp;·&nbsp; March 29, 2026 &nbsp;·&nbsp; 12 min read</p>
+  <p class="lead">Combine the Image Generator, Background Remover, Avatar Creator, and Voice Cloner in a single automated workflow. A practical guide to chaining Deep Vortex tools via API for end-to-end content production.</p>
+  <a href="https://deepvortexai.com" class="btn btn-primary">Explore All Tools Free →</a>
+</div>
+
+<div class="article-body">
+  <a class="back-link" href="/blog/">← Back to Blog</a>
+
+  <h2>Why a Multi-Tool Pipeline Changes Everything</h2>
+  <p>Each Deep Vortex AI tool is powerful in isolation. The Image Generator produces professional visuals from text. The Background Remover cleanly isolates subjects. The Avatar Creator builds consistent brand characters. The Voice Cloner synthesizes natural narration. But the compounding effect of chaining these tools in a coordinated workflow is what unlocks genuinely transformative content production capacity.</p>
+  <p>A content team that used to take two to three days to produce a polished social video — photography, background removal, graphic design, voiceover recording, video editing — can now produce the same output in under an hour using a well-designed pipeline. A solo creator with no professional creative skills can build a production-quality content operation by orchestrating the right tools in the right sequence.</p>
+  <p>This guide walks through three practical pipeline patterns — a social content pipeline, a product marketing pipeline, and a narrated video pipeline — and shows exactly how to connect the tools, what to pass between steps, and how to automate the handoffs via the Deep Vortex API.</p>
+
+  <h2>Pipeline Pattern 1: Social Content at Scale</h2>
+  <p>This pipeline is designed for social media managers and content creators who need to produce high volumes of consistent, on-brand visual content for Instagram, LinkedIn, TikTok, and YouTube Shorts.</p>
+
+  <div class="pipeline-step">
+    <div class="pipeline-connector">
+      <div class="pipeline-dot">1</div>
+      <div class="pipeline-line"></div>
+    </div>
+    <div class="pipeline-content">
+      <h3>Image Generator → Batch Visual Production</h3>
+      <p>Use the Image Generator API to produce a batch of scene images from a content calendar. Each post concept becomes a prompt: "product lifestyle shot in sunlit kitchen, minimal, warm" or "fitness motivation graphic, dark background, gold accent text area". Generate all weekly images in one batch call, specifying consistent style parameters across the batch for visual cohesion.</p>
+    </div>
+  </div>
+  <div class="pipeline-step">
+    <div class="pipeline-connector">
+      <div class="pipeline-dot">2</div>
+      <div class="pipeline-line"></div>
+    </div>
+    <div class="pipeline-content">
+      <h3>Background Remover → Subject Isolation</h3>
+      <p>Pass generated images containing products or subjects directly to the Background Remover API. The output is a clean PNG with transparent background — ready to composite onto branded templates, different background colors, or platform-specific layouts without manual masking.</p>
+    </div>
+  </div>
+  <div class="pipeline-step">
+    <div class="pipeline-connector">
+      <div class="pipeline-dot">3</div>
+      <div class="pipeline-line"></div>
+    </div>
+    <div class="pipeline-content">
+      <h3>Image to Video → Motion for Social</h3>
+      <p>Feed the finished images into the Image to Video API with motion prompts tuned for each platform. Instagram Reels benefit from subtle parallax and zoom. TikTok content performs with more dynamic motion. LinkedIn video works best with slow, confident pan and professional atmosphere. The motion layer transforms static graphics into feed-stopping video content automatically.</p>
+    </div>
+  </div>
+  <div class="pipeline-step">
+    <div class="pipeline-connector">
+      <div class="pipeline-dot">4</div>
+    </div>
+    <div class="pipeline-content">
+      <h3>Voice Cloner → Optional Narration Layer</h3>
+      <p>For content formats that benefit from voiceover — explainer posts, tutorial clips, brand story videos — chain the Voice Cloner as a final step. Generate narration audio from the post copy using a consistent brand voice model, then combine with the video output in your delivery step.</p>
+    </div>
+  </div>
+
+  <h2>Pipeline Pattern 2: Product Marketing Assets</h2>
+  <p>This pipeline is designed for e-commerce brands and product marketers who need to produce professional marketing assets from product photography — without a studio, photographer, or design team.</p>
+
+  <div class="pipeline-step">
+    <div class="pipeline-connector">
+      <div class="pipeline-dot">1</div>
+      <div class="pipeline-line"></div>
+    </div>
+    <div class="pipeline-content">
+      <h3>Background Remover → Clean Product Cutout</h3>
+      <p>Start with your existing product photography. Run each product image through the Background Remover to produce a clean, white-background cutout. This is the neutral asset that feeds every subsequent pipeline step — it can be composited into any scene without background conflict.</p>
+    </div>
+  </div>
+  <div class="pipeline-step">
+    <div class="pipeline-connector">
+      <div class="pipeline-dot">2</div>
+      <div class="pipeline-line"></div>
+    </div>
+    <div class="pipeline-content">
+      <h3>Image Generator → Lifestyle Scene Production</h3>
+      <p>Generate lifestyle scenes that match your product's use context — a skincare product on a marble bathroom shelf, a coffee mug on a rustic kitchen table, sports equipment in a gym environment. These AI-generated scenes serve as backgrounds for product compositing, eliminating the need for studio lifestyle photography entirely.</p>
+    </div>
+  </div>
+  <div class="pipeline-step">
+    <div class="pipeline-connector">
+      <div class="pipeline-dot">3</div>
+      <div class="pipeline-line"></div>
+    </div>
+    <div class="pipeline-content">
+      <h3>Image Upscaler → Print-Ready Resolution</h3>
+      <p>Run composited product images through the Image Upscaler before delivery to ensure they meet print and large-format display requirements. The AI upscaler preserves sharp product edges and texture detail at 2× or 4× resolution — output suitable for packaging, point-of-sale displays, and full-page advertising.</p>
+    </div>
+  </div>
+  <div class="pipeline-step">
+    <div class="pipeline-connector">
+      <div class="pipeline-dot">4</div>
+    </div>
+    <div class="pipeline-content">
+      <h3>Image to Video → Product Demo Clips</h3>
+      <p>Convert your best product composites into video clips with product-appropriate motion — slow rotation, gentle zoom-in highlighting features, environmental atmospheric motion. These clips become product page hero videos, ad creative, and social content simultaneously.</p>
+    </div>
+  </div>
+
+  <h2>Pipeline Pattern 3: Narrated Video Content</h2>
+  <p>This pipeline is designed for educators, YouTubers, course creators, and brand storytellers who need to produce professional narrated video content without on-camera talent or a recording studio.</p>
+
+  <div class="pipeline-step">
+    <div class="pipeline-connector">
+      <div class="pipeline-dot">1</div>
+      <div class="pipeline-line"></div>
+    </div>
+    <div class="pipeline-content">
+      <h3>Avatar Creator → Consistent Presenter Character</h3>
+      <p>Create a consistent AI avatar character to serve as the video's presenter. Use the seed and style-lock techniques to generate a full set of avatar variations — neutral, gesturing, different expressions — from the same base character for use as visual anchors throughout the video.</p>
+    </div>
+  </div>
+  <div class="pipeline-step">
+    <div class="pipeline-connector">
+      <div class="pipeline-dot">2</div>
+      <div class="pipeline-line"></div>
+    </div>
+    <div class="pipeline-content">
+      <h3>Image Generator → Supporting Visual Content</h3>
+      <p>Generate all supporting visuals — diagrams, scene illustrations, concept images, background plates — using the Image Generator. Produce these as a batch, maintaining a consistent visual style across all assets by using a shared style preset and color palette specification in each prompt.</p>
+    </div>
+  </div>
+  <div class="pipeline-step">
+    <div class="pipeline-connector">
+      <div class="pipeline-dot">3</div>
+      <div class="pipeline-line"></div>
+    </div>
+    <div class="pipeline-content">
+      <h3>Voice Cloner → Narration Audio</h3>
+      <p>Synthesize the full script using Voice Cloner with a consistent voice model. For long-form narration, use the Voice Consistency Lock seed to maintain identical voice character across all generated segments. Generate per-section rather than as one long request to allow easier re-recording of specific segments without re-generating the entire narration.</p>
+    </div>
+  </div>
+  <div class="pipeline-step">
+    <div class="pipeline-connector">
+      <div class="pipeline-dot">4</div>
+    </div>
+    <div class="pipeline-content">
+      <h3>Image to Video → Animate Static Assets</h3>
+      <p>Run your supporting visuals through Image to Video to add motion — subtle zoom on diagrams as they're discussed, environmental motion in scene illustrations, avatar animations synchronized to narration sections. Combined with the Voice Cloner audio, these animated assets form the visual track of a fully produced video without any manual video editing.</p>
+    </div>
+  </div>
+
+  <h2>API Chaining: The Technical Pattern</h2>
+  <p>All Deep Vortex AI tools expose REST APIs that accept and return standardized JSON payloads. Chaining them follows a consistent pattern: the output URL from one API call becomes the input for the next. Here is the general structure:</p>
+
+  <div class="code-block">
+    <pre><span class="comment"># Step 1: Generate image</span>
+<span class="key">POST</span> /v1/image/generate
+<span class="value">{ "prompt": "...", "style": "photorealistic", "size": "1024x1024" }</span>
+<span class="comment">→ returns: { "image_url": "https://cdn.deepvortexai.com/..." }</span>
+
+<span class="comment"># Step 2: Remove background (pass previous output URL)</span>
+<span class="key">POST</span> /v1/background/remove
+<span class="value">{ "image_url": "[output from step 1]" }</span>
+<span class="comment">→ returns: { "image_url": "https://cdn.deepvortexai.com/...removed.png" }</span>
+
+<span class="comment"># Step 3: Animate (pass previous output URL)</span>
+<span class="key">POST</span> /v1/video/generate
+<span class="value">{ "image_url": "[output from step 2]", "motion_prompt": "gentle zoom in" }</span>
+<span class="comment">→ returns: { "video_url": "https://cdn.deepvortexai.com/....mp4" }</span></pre>
+  </div>
+
+  <p>This chaining pattern works for any combination of tools. Outputs are stored at CDN URLs for 24 hours after generation, giving your pipeline scripts ample time to pass assets between steps. For production pipelines with longer processing requirements, use the webhook callback parameter to receive completion notifications rather than polling.</p>
+
+  <h2>Pipeline Use Cases by Industry</h2>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <h3>E-commerce</h3>
+      <p>Remove backgrounds → composite onto lifestyle scenes → upscale for print → animate for ads. Full product asset suite from a single product photo.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Content Creators</h3>
+      <p>Generate visuals → animate for Reels → add voice narration. Complete social video content from a single brief, no camera required.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Education</h3>
+      <p>Generate diagrams and scenes → synthesize narration → animate assets. Full course video content without recording studio or on-camera talent.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Marketing Agencies</h3>
+      <p>Automate client asset production across multiple accounts. Batch-generate, brand-customize, and deliver complete campaign asset sets via API.</p>
+    </div>
+  </div>
+
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq">
+    <details>
+      <summary>Do I need coding experience to use the API pipeline?</summary>
+      <p>Basic API familiarity (understanding REST requests and JSON) is sufficient. The Deep Vortex API documentation includes example code in Python, JavaScript, and curl for every endpoint. No-code integrations via Zapier and Make are also available for common pipeline patterns.</p>
+    </details>
+    <details>
+      <summary>Are there rate limits on API calls for pipeline use?</summary>
+      <p>Rate limits apply per API key and vary by plan tier. For high-volume pipeline use, the Pro and Business plans offer significantly higher rate limits and dedicated throughput allocation. Contact the Deep Vortex team for enterprise pipeline requirements.</p>
+    </details>
+    <details>
+      <summary>Can I build pipelines that run on a schedule?</summary>
+      <p>Yes. The API supports webhook callbacks for async generation, making it straightforward to build scheduled pipeline jobs that run daily, weekly, or triggered by external events like a content calendar update or a new product upload.</p>
+    </details>
+    <details>
+      <summary>How long are generated asset URLs valid?</summary>
+      <p>Generated assets are stored at CDN URLs for 24 hours after creation. For permanent storage, download and host the assets in your own storage (S3, GCS, Cloudflare R2) immediately after generation. The API response includes both the CDN URL and the raw binary for direct upload to your storage.</p>
+    </details>
+    <details>
+      <summary>Can the pipeline handle multiple languages for global campaigns?</summary>
+      <p>Yes. Voice Cloner 3.0 supports 40+ languages, and the Image Generator handles multilingual text prompts. A global pipeline can generate localized visual assets and narration for each target market in a single orchestrated batch.</p>
+    </details>
+  </div>
+</div>
+
+<div class="cta-banner">
+  <h2>Build Your AI Content Pipeline Today</h2>
+  <p>All Deep Vortex tools are free to try — explore the full suite and start automating.</p>
+  <a href="https://deepvortexai.com" class="btn btn-primary">Explore All Tools Free →</a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <p class="footer-brand">DEEP VORTEX AI</p>
+    <div class="footer-links">
+      <a href="https://deepvortexai.com">Hub</a>
+      <a href="https://deepvortexai.com/blog/">Blog</a>
+      <a href="https://images.deepvortexai.com">Image Generator</a>
+      <a href="https://bgremover.deepvortexai.com">Background Remover</a>
+      <a href="https://upscaler.deepvortexai.com">Image Upscaler</a>
+      <a href="https://avatar.deepvortexai.com">Avatar Generator</a>
+      <a href="https://3d.deepvortexai.com">3D Generator</a>
+      <a href="https://voice.deepvortexai.com">Voice Generator</a>
+      <a href="https://video.deepvortexai.com">Image to Video</a>
+      <a href="https://logo.deepvortexai.com">Logo Generator</a>
+    </div>
+    <p class="footer-copy">© 2026 Deep Vortex AI. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
