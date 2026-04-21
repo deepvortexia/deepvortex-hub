@@ -399,8 +399,24 @@
     gap: 24px;
   }
 
-  @media (max-width: 1024px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 640px) { .blog-grid { grid-template-columns: 1fr; } }
+  .blog-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .blog-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+  @media (max-width: 1024px) {
+    .blog-grid,
+    .blog-grid.cols-2,
+    .blog-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .blog-grid,
+    .blog-grid.cols-2,
+    .blog-grid.cols-4 { grid-template-columns: 1fr; }
+    .container { padding: 0 16px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-image { display: none; }
+    .hero-content { padding: 60px 16px; }
+  }
 
   .blog-card {
     background: var(--card-bg);
@@ -422,6 +438,7 @@
     aspect-ratio: 16/9;
     position: relative;
     overflow: hidden;
+    width: 100%;
   }
 
   .card-thumb-inner {
@@ -492,7 +509,8 @@
     letter-spacing: 0.02em;
     color: var(--white);
     text-wrap: pretty;
-    flex: 1;
+    overflow-wrap: break-word;
+    white-space: normal;
   }
 
   .card-excerpt {
@@ -1069,7 +1087,7 @@ function App() {
           </div>
 
           {/* Grid */}
-          <div className="blog-grid" style={{gridTemplateColumns: `repeat(${cols}, 1fr)`}}>
+          <div className={`blog-grid${cols === 2 ? ' cols-2' : cols === 4 ? ' cols-4' : ''}`}>
             {filtered.map(post => (
               <a
                 key={post.id}
