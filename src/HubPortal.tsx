@@ -320,49 +320,6 @@ const HubPortal = () => {
 
       </header>
 
-      {/* ── Featured Chat Card ──────────────────────────────────────── */}
-      <section className="chat-feature-section">
-        <a href="https://chat.deepvortexai.com" className="chat-feature-card">
-          <div className="chat-feature-glow" />
-          <div className="chat-feature-new">✦ NEW</div>
-          <div className="chat-feature-left">
-            <div className="chat-feature-icon">💬</div>
-            <h3 className="chat-feature-title">AI Chat Suite — $9.99/mo</h3>
-            <p className="chat-feature-subtitle">Unlimited messages · 4 frontier models</p>
-            <span className="chat-feature-price-badge">ONLY $9.99/mo</span>
-            <div className="chat-model-tabs">
-              <div className="chat-model-tab" style={{ borderColor: 'rgba(249,115,22,0.35)', background: 'rgba(249,115,22,0.08)' }}>
-                <span className="tab-name" style={{ color: '#f97316' }}>◆ GPT-5</span>
-                <span className="tab-skill">Frontier reasoning</span>
-              </div>
-              <div className="chat-model-tab" style={{ borderColor: 'rgba(168,85,247,0.35)', background: 'rgba(168,85,247,0.08)' }}>
-                <span className="tab-name" style={{ color: '#a855f7' }}>✦ Claude 4.5</span>
-                <span className="tab-skill">Writing &amp; analysis</span>
-              </div>
-              <div className="chat-model-tab" style={{ borderColor: 'rgba(6,182,212,0.35)', background: 'rgba(6,182,212,0.08)' }}>
-                <span className="tab-name" style={{ color: '#06b6d4' }}>⚡ Gemini 2.5</span>
-                <span className="tab-skill">Fast &amp; multimodal</span>
-              </div>
-              <div className="chat-model-tab" style={{ borderColor: 'rgba(16,185,129,0.35)', background: 'rgba(16,185,129,0.08)' }}>
-                <span className="tab-name" style={{ color: '#10b981' }}>🧠 DeepSeek v3</span>
-                <span className="tab-skill">Cost-efficient</span>
-              </div>
-            </div>
-            <span className="chat-feature-cta">Start chatting →</span>
-          </div>
-          <div className="chat-feature-right">
-            <div className="chat-feature-preview">
-              <div className="cfp-msg cfp-msg-user">What's happening in the world right now?</div>
-              <div className="cfp-msg cfp-msg-ai"><span className="cfp-ai-dot" style={{ background: '#06b6d4' }} />Gemini 2.5 is typing…</div>
-              <div className="cfp-msg cfp-msg-user">Will Bitcoin rise this week?</div>
-              <div className="cfp-msg cfp-msg-user">Write me a killer sales pitch</div>
-              <div className="cfp-msg cfp-msg-ai"><span className="cfp-ai-dot" style={{ background: '#a855f7' }} />Claude 4.5 is typing…</div>
-              <div className="cfp-msg cfp-msg-user">Explain quantum AI simply</div>
-            </div>
-          </div>
-        </a>
-      </section>
-
       <section className="preview-tools-section">
         <h2 className="section-heading">Complete AI Ecosystem</h2>
         <div className="preview-tools-grid">
