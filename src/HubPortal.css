@@ -822,6 +822,40 @@
   border-color: var(--dark-gold);
 }
 
+.footer-bottom-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.footer-solar-link {
+  position: absolute;
+  right: 0;
+  color: #9ec8ff;
+  font-size: 0.85rem;
+  text-decoration: none;
+  text-shadow: 0 0 10px rgba(110, 170, 255, 0.5);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.footer-solar-link:hover {
+  color: #c6e0ff;
+  text-shadow: 0 0 16px rgba(140, 190, 255, 0.85);
+}
+
+@media (max-width: 768px) {
+  .footer-bottom-row {
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .footer-solar-link {
+    position: static;
+  }
+}
+
 @media (max-width: 768px) {
   .hub-portal-container {
     padding: 2rem 1rem;
