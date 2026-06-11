@@ -471,6 +471,7 @@ const HubPortal = () => {
           <a href="mailto:admin@deepvortexai.com" className="footer-contact-btn">Contact Us</a>
         </div>
         <a href="/ai" style={{ color: '#888', fontSize: '13px' }}>All AI Tools — Complete Platform Guide</a>
+        <a href="https://solar-system-kappa-seven.vercel.app" target="_blank" rel="noopener noreferrer" style={{ color: '#666', fontSize: '11px', opacity: 0.7 }}>✦ Visit a future project</a>
       </footer>
 
       <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
