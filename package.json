@@ -17,16 +17,17 @@
     "@capacitor/android": "^7.0.0",
     "@capacitor/core": "^7.0.0",
     "@supabase/supabase-js": "^2.95.3",
+    "@vercel/analytics": "^2.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "stripe": "^14.17.0"
   },
   "devDependencies": {
+    "@capacitor/cli": "^7.0.0",
     "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
-    "@capacitor/cli": "^7.0.0",
     "@vercel/node": "^3.0.12",
     "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^9.39.1",

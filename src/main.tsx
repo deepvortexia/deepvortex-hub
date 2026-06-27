@@ -1,7 +1,10 @@
 // src/main.tsx  (Hub)
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { inject } from '@vercel/analytics'
 import './index.css'
+
+inject()
 import HubPortal from './HubPortal'
 import { AuthCallback } from './pages/AuthCallback'
 import { Game } from './pages/Game'
